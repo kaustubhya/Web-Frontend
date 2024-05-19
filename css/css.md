@@ -216,3 +216,95 @@ padding-right
 also.
 
 ---
+
+L - 7 CSS Box model 2
+
+Padding: If we give the div element a background color, that color applies to the padding area too.
+
+🛑 Border color by default is the color of the text, to make it visible, we will give it a solid property.
+eg,
+`border 10px solid`
+
+To override the default border color, mention the color after the solid property
+`border 10px solid red`
+
+Now we know that in a box model of css, the structure from inside to outside is as follows:
+
+content > padding > border
+
+now say we give width (of content) = 300 px
+padding on all sides = 25 px
+border on all sides = 50 px
+
+hence, total width on all sides is -> 300 + 2 x 25 + 2 x 50 => 450px
+
+Now this this called `box-sizing: content-box` and this is the default property.
+
+Now if we give `box-sizing: border-box` our total box width will be 300 (px) original, but our content , padding and border width will all reduce and adjust according to this property to accomodate 300px width.
+
+Suppose you increase the border or padding when the `box-sizing: border-box`, in this case, it will first increase its size by consuming the width of the content. It will keep taking the width until the content width becomes 0. Then if we still increase the border or padding (when border or padding value is more than the overall box width), then our overall box size will increase.
+
+Suppose you increase the border or padding when the `box-sizing: content-box`, in this case, our overall box size will increase from the starting only (no reduction in content width in this case).
+
+So in css we do:
+
+```
+* {
+  box-sizing: border-box;
+}
+```
+
+This makes `box-sizing: border-box` to all elements in our css code.
+
+`*` -> This is called Universal CSS Selector (very low specificity (0,0,0))
+
+## Margin
+
+Margin size and width are generally not included in our css box sizing and width (this box includes padding, content and border)
+
+Giving margins does not affect our box's height and width.
+
+By default, there is a bit of a margin by default when we write css code.
+
+To remove this effect do:
+
+```
+body {
+  margin: 0;
+}
+```
+
+A good practice is to give body margin = 0 and then we give our own margin to tags.
+
+`border-radius` -> Used to give rounded corners / borders
+
+Ellipse => width and height different -> border radius = 50%
+
+Circle => width and height same -> border radius = 50%
+
+When we give width in %, the inner elements compare it to their parent (here if parent has content width, border, padding and margin -> % width only considers the content width as its parent element and resizes according to that.)
+
+🛑If we have a very large image, whose height and width are even greater than the browser width, we can do: width = 100% or any other %. This will make the image smaller and allow it to resize according to their 🛑🛑 Parent element.
+
+Sometimes the image goes out of its parent, i.e. it has some overflow. For that purpose, we do `overflow: hidden;` in the parent element to fit the image element inside of it.
+
+We can also give margins in -ve.
+
+eg. margin-top: 10px -> go 10 px down away from top of parent element.
+
+margin-top: -10px -> go 10 px up towards top of parent element.
+
+🛑Outline - This is same as border and it comes after border and before margin.
+
+Unlike border it does not affect the box sizing when increased or decreased.
+
+Outline syntax is same as the border syntax:
+
+eg.
+`outline 5px solid blue`
+
+This will create an outline just after the border.
+
+🛑 Negatives: Sometimes the outline overflows into the other elements when its size becomes too big, i.e. it invades and overlaps with other elements box space.
+
+This was the box model for block level elements like div.
