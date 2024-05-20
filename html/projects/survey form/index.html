@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Survey Form</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <h1 id="title">Survey Form</h1>
+    <p id="description">This is a short form Description text</p>
+
+    <main>
+      <form id="survey-form">
+        <fieldset>
+          <label id="name-label">Name </label
+          ><input type="text" id="name" placeholder="name" required />
+        </fieldset>
+
+        <fieldset>
+          <label id="email-label">Email</label>
+          <input type="email" id="email" placeholder="Email" required />
+        </fieldset>
+
+        <fieldset>
+          <label id="number-label">Number </label>
+          <input
+            type="number"
+            id="number"
+            placeholder="number"
+            min="10"
+            max="11"
+          />
+        </fieldset>
+
+        <fieldset>
+          <label for="cars">Choose a car:</label>
+          <select name="cars" id="dropdown">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+          </select>
+        </fieldset>
+
+        <br />
+        <label for="radio"
+          >Choose 1:<input
+            type="radio"
+            id="radio"
+            name="radio-name"
+            value="value"
+        /></label>
+        <label for="radio"
+          >Choose 2:<input type="radio" name="radio-name" value="value"
+        /></label>
+
+        <br />
+        <label for="checkbox"
+          >Choose 1:<input
+            type="checkbox"
+            id="checkbox"
+            name="ch-name"
+            value="1"
+        /></label>
+        <label for="checkbox"
+          >Choose 2:<input
+            type="checkbox"
+            id="checkbox"
+            name="ch-name"
+            value="2"
+        /></label>
+
+        <textarea
+          id="textarea"
+          name="textarea"
+          rows="2"
+          cols="40"
+          placeholder="Additional Comments"
+        >
+At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.</textarea
+        >
+        <button id="submit">Submit</button>
+      </form>
+    </main>
+  </body>
+</html>
