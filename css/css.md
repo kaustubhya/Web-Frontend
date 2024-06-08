@@ -12,7 +12,7 @@ attribute -> []
 
 eg. (p class='hi')
 
-in css file:
+attribute selector in css file:
 [class] {
 color: red;
 }
@@ -44,7 +44,7 @@ css tag {
 css property
 }
 
-All this, tag + { property } is called "css rule"
+All this, tag + { property } is called "🛑 css rule"
 
 Inside a rule, only a property is overridden and not the whole rule if the selectors are same.
 
@@ -153,7 +153,7 @@ Their height and width alters depending on the screen size.
 
 This causes the content to overflow and we get scroll bars in width.
 
-To prevent this overflow, use `max-width`
+To prevent this overflow, use `max-width`, it will be same in large screen but reduce in small screens.
 
 eg.
 `max-width: 500px`
@@ -308,3 +308,101 @@ This will create an outline just after the border.
 🛑 Negatives: Sometimes the outline overflows into the other elements when its size becomes too big, i.e. it invades and overlaps with other elements box space.
 
 This was the box model for block level elements like div.
+
+---
+
+L-8 (Box Model 3)
+
+Box model with inline elements
+
+By default, the width and height of span tags is auto, it keeps gradually increasing as we start to fit content inside of it.
+
+In span width and height do not work.
+
+But `padding` works in span as it increases the width and height of the container.
+
+Now the difference between div and span padding is,
+
+- If we give padding to span and we write a div, below it, the span padding will envelop(cover) the div content.
+
+- If we give padding to div and we write a span, below it, the div padding will not envelop(cover), but rather push down the span content.
+
+This is because div is a box and span is not. Div follows box model.
+
+Similar tags that behave just like span tag, like (a).
+
+If we do `border` instead of padding, we will see a similar behaviour in 🛑🛑inline elements.
+
+If we see `margin`, it will only work properly for left and right margins. It will not work properly for top and bottom margins for inline elements.
+
+`outline` also works in a similar manner.
+
+🛑🛑 Now to set the height and width of this, we can use the `display` property.
+
+🛑 use `display: block` to make the span element as a block level element.
+
+This will apply all the height, width, margin, padding etc. to the span element as the block level element.
+
+It will also push the elements down below it instead of covering it.
+
+Say we have 5 span elements and we want to treat it as a block level element, if we do `display: block`, all 5 span elements will come one below the other, behaving like a div.
+
+To make it behave like a span, while we retain the div qualities, do `display: inline-block`
+
+We can now set width, height, margin, border, padding etc. all to these spans.
+
+🛑 Replaced and Non Replaced elements
+
+🛑 Inline tags are of 2 types: Replaced and Non Replaced
+
+Replaced - It has no content in it, the content inside of it has been replaced by some data, eg, image in img tag.
+
+🛑 For img, give either width or height, donot give both to it.
+
+Non Replaced - Those tags which have content inside of them are called Non Replaced elements. like anchor, bold, span, strong, em, i tags.
+
+These behave in span like the cases of a typical span i.e. margin, padding will cover the content below it, width and height do not work.
+
+🛑 Curious case of image, though we can use it as a span but we see that for this all properties work like width, height, margin, padding, border.
+
+It will push the content and not cover it, when used as a span. Hence it is a replaced inline.
+
+Another example of inline replaced is `i-frame`
+
+Eg. to copy any youtube video, right click > copy embed code, (see the pasted result below):
+
+```html
+<iframe
+  width="750"
+  height="480"
+  src="https://www.youtube.com/embed/VZuWORIAt9Q"
+  title="Summer Internship 2024 | Python &amp; MySQL Training | Day 05 #python  #mysql #training #internship"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+>
+</iframe>
+```
+
+This way we can play any YT video in our website.
+
+To alter its height and width, do it in css, rather than doing it inside the `iframe` tag.
+
+Another eg of inline replaced is `video` tag
+
+[All Egs](https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element)
+
+We can also embed a whole website inside an iframe tag, provided that website has no restrictions.
+
+🛑 Ultimately box model works with inline non replaced elements in a pretty weird way, so we can use display property to fix it partially.
+
+`display: none` this hides all the content inside the tag. Same as giving `hidden` attribute in any html tag to hide its contents. All its height width and space also goes away.
+
+🛑 HTML tag attributes have lower specificity than CSS code, so display: none > hidden.
+
+🛑🛑 Display Properties:
+diplay: block
+diplay: inline
+diplay: inline-block
+diplay: none
