@@ -112,3 +112,13 @@ Use `video` tag to play any video in our html, eg.
 ```html
 <video src="" controls></video>
 ```
+
+---
+
+Block and inline elements
+
+By default, the width of the block elements is 100%. It doesn't matter how much content is present in it.
+
+Inline element's width depends on the content it has inside of it.
+
+egs of inline -> img, b, i, a, sp an
