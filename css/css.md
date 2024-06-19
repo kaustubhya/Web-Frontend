@@ -406,3 +406,644 @@ diplay: block
 diplay: inline
 diplay: inline-block
 diplay: none
+
+---
+
+L - 9 Percentage: The Underestimated CSS Unit | Frontend Bootcamp Hindi | Ep.16
+
+Try not to give width in pixels, always give max-width in pixels else we will get scrollbars.
+
+Or give width in %. It will take width from its parent.
+
+🛑 To give % width to the child, make sure you give parent width in px.
+
+Just like width, padding also takes its values from the parent when given in %.
+
+But it is recommended to give padding in px.
+
+% does not work with borders.
+
+🛑🛑 1em = 16px;
+
+Font size in %, looks for its parent's font size.
+
+🛑 % is a relative property.
+
+🛑 % is related to width when we work with width, margin and padding.
+
+% is related to height when working with height.
+
+🛑 DEFAULT FONT SIZE of tags => 16px / 1em;
+
+When using font-size in %, its font will not go below 6px, when using font-size in px, it can go down to any value. (This is when parent is the body or html tag)
+
+6px is the browser's minimum font size.
+
+Please try it in chrome devtools.
+
+To go below 6px in %, donot let body tag be your parent, let us set or make a parent which has font size in px, say div or section wrapper.
+
+Then we can use % in child and go below 6px.
+
+---
+
+Viewport Height (vh) and ViewPort Width (vw)
+
+[What is The Viewport?](https://www.w3schools.com/css/css_rwd_viewport.asp)
+The viewport is the user's visible area of a web page.
+
+The viewport varies with the device, and will be smaller on a mobile phone than on a computer screen.
+
+Before tablets and mobile phones, web pages were designed only for computer screens, and it was common for web pages to have a static design and a fixed size.
+
+Then, when we started surfing the internet using tablets and mobile phones, fixed size web pages were too large to fit the viewport. To fix this, browsers on those devices scaled down the entire web page to fit the screen.
+
+This was not perfect!! But a quick fix.
+
+Setting The Viewport
+HTML5 introduced a method to let web designers take control over the viewport, through the <meta> tag.
+
+You should include the following <meta> viewport element in all your web pages:
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+This gives the browser instructions on how to control the page's dimensions and scaling.
+
+The width=device-width part sets the width of the page to follow the screen-width of the device (which will vary depending on the device).
+
+The initial-scale=1.0 part sets the initial zoom level when the page is first loaded by the browser.
+
+Here is an example of a web page without the viewport meta tag, and the same web page with the viewport meta tag:
+
+Tip: If you are browsing this page with a phone or a tablet, you can click on the two links above to see the difference.
+
+Size Content to The Viewport
+Users are used to scroll websites vertically on both desktop and mobile devices - but not horizontally!
+
+So, if the user is forced to scroll horizontally, or zoom out, to see the whole web page it results in a poor user experience.
+
+Some additional rules to follow:
+
+1. Do NOT use large fixed width elements - For example, if an image is displayed at a width wider than the viewport it can cause the viewport to scroll horizontally. Remember to adjust this content to fit within the width of the viewport.
+
+2. Do NOT let the content rely on a particular viewport width to render well - Since screen dimensions and width in CSS pixels vary widely between devices, content should not rely on a particular viewport width to render well.
+
+3. Use CSS media queries to apply different styling for small and large screens - Setting large absolute CSS widths for page elements will cause the element to be too wide for the viewport on a smaller device. Instead, consider using relative width values, such as width: 100%. Also, be careful of using large absolute positioning values. It may cause the element to fall outside the viewport on small devices.
+
+- 100vw => full device screen width cover
+
+- 50vw => half device screen width cover
+
+🛑🛑 vw and vh does not depend on parent width and height, it takes the height and width directly from the viewport(device screen) width and height.
+
+It is also responsive.
+
+🛑🛑 Try to use min-height for most cases.
+
+---
+
+You'll NEVER Get Confused Again | rem and em Explained in Depth | Frontend Bootcamp Hindi | Ep.17
+
+em -> It gets worked up like this: 1 em = parent font size
+
+Say in parent you gave font size = 3em (48 px)
+
+And in child you gave 2 em, then in child the font size is (2em) (🛑🛑🛑 but in child here 1em of child = 3em of parent(48px))
+
+🛑 So total em of child = 2em (48 px * 2 = 96px or 2*3em = 6em)
+
+We can use em with width also.
+
+🛑🛑 1em = 64px (in width)
+
+This is when parent is the body, to further enhance the em effect, we can put another parent between the body and child and give it an em property.
+
+🛑🛑🛑 When we give font size, it looks up to its parent for em. When we give padding, it looks up to its neighbouring childs elements only for em.
+
+🛑🛑🛑🛑 rem -> This only checks the font size of the root i.e. html.
+
+If we change the html font size, 1 rem = html font size given.
+
+:root and html is same in css
+
+rem related to root.
+
+em related to parent.
+
+---
+
+CSS Positions: Static, Relative, Absolute, Fixed, Sticky Explained | Frontend Bootcamp Hindi | Ep.18
+
+Static is the default position in CSS.
+
+---
+
+position: relative
+
+top 50 -> 50 away from top 0 in downward direction
+
+top -50 -> 50 away from top 0 in upward direction or comes towards top.
+
+top -50px is same as bottom 50px
+
+left +ve => goes rightwards (away from) left
+left -ve => comes leftwards (towards) left
+
+right +ve => goes leftwards (away from) right
+right -ve => comes rightwards (towards) right
+
+bottom +ve => goes upwards (away from) bottom
+bottom -ve => comes downwards (towards) bottom
+
+Now say we encounter such scenario where:
+
+position: relative;
+top: 10px;
+bottom: 10px;
+left: 5px;
+right: 5px;
+
+here top and bottom are giving force in equal and opposite direction
+
+here left and right are giving force in equal and opposite direction
+
+So in such case only one of top/bottom and one out of left/right is executed.
+
+---
+
+to apply this feature :
+
+```css
+position: relative;
+top: 10px;
+bottom: 10px;
+left: 10px;
+right: 10px;
+```
+
+use
+
+```css
+position: relative;
+inset: 5px;
+/* Equal spacing */
+```
+
+this is same as:
+
+```css
+position: relative;
+top: 10px;
+bottom: 10px;
+left: 10px;
+right: 10px;
+```
+
+---
+
+Here position: static
+Nothing (no movement) will happen here
+
+```css
+position: static;
+top: 10px;
+bottom: 10px;
+left: 10px;
+right: 10px;
+```
+
+---
+
+🛑🛑🛑🛑 Position Absolute
+
+When we give an element a position of absolute, whatever space that element was occupying, "vanishes".
+
+That space is then taken by the surrounding elements, due to which we may see overlapping of content.
+
+Basically the absolute element is there but it tells the other people that I am not here, so you can come and occupy my space.
+
+🛑🛑 It is advisable to not set the height of a wrapper container having many elements, we should leave it to the browser.
+
+Now when you give it top: 0px in position absolute, it will stick to the top of the screen (viewport).
+
+Now when top: 50px; -> it comes down 50px from the top of viewport.
+
+Now when left: 50px; -> it goes right 50px from the left edge of viewport.
+
+position: absolute
+top: 5px;
+left: 5px;
+
+It is 5px down and 5px right from the topleft corner of viewport (0,0)
+
+the right and bottom values are automatically given in by the browser.
+
+if you manually enter the right value (as seen in box model in browser in your code), there will be no change
+
+left 5px is same as right 606.525 px
+
+So now if
+top: 5px
+left: 5px
+right: 5px
+
+then our element will stretch out in left-right direction, being only 5px away from both left and right edge of the viewport.
+
+```css
+position: absolute;
+top: 5px;
+left: 5px;
+right: 5px;
+bottom: 5px;
+```
+
+this is same as
+
+```css
+position: absolute;
+inset: 5px;
+```
+
+Let us see a general layout
+
+```html
+<ul>
+  <li class="html-element">HTML</li>
+  <li class="css-element">CSS</li>
+  <li class="js-element">JavaScript</li>
+</ul>
+```
+
+and
+
+```css
+ul {
+  position: relative;
+}
+
+.css-element {
+  background-color: aquamarine;
+  position: absolute;
+  top: 56px;
+  /* bottom: 5px; */
+}
+```
+
+🛑🛑 Normally css would adjust according to the viewport (this was because viewport position was static) and we did not give any other positions to css's parents
+
+But now ul, a parent of css has a position of relative (anything other than static), so css will now adjust its absolute position, according to the ul (container box). It is now attached to ul box.
+
+If the ul (relative parent) moves top, left, ... etc. All contents inside of it will now move along with it too!!
+
+🛑🛑 Now if
+
+- body position: relative
+- ul (no position)
+- css position: absolute
+
+so css will now attach itself to the body container as body is parent of ul (grandparent of css).
+
+CSS will now move along with body.
+
+🛑🛑 Now if
+
+- body position: relative
+- ul position: relative
+- css position: absolute
+
+so css will now attach itself to the ul container.
+
+CSS will now move along with ul.
+
+🛑 Basically CSS (position absolute) will attach itself to the closest(immediate) parent which has position other than static (default).
+
+🛑 If it finds no such parent with a position other than static, it will attach itself to the viewport.
+
+🛑Now if ul container width = 50px but li is asked to go down by giving top: 150px;
+
+Then it can go out of the ul container (it just takes ul container top as a reference (top: 0px;))
+
+---
+
+position fixed
+
+Here an element works just like position absolute but
+
+"It will always be connected to the viewport container top (vh) (as a reference)"
+
+say JS -> position: fixed;
+
+then the JS element is there but it tells the other people that I am not here, so you can come and occupy my space.
+
+🛑🛑🛑 Basically, position absolute and position sticky makes the element go out of the document flow.
+
+---
+
+Position sticky
+
+Position sticky behaves like position relative
+
+Sticky position needs the following 2 properties to work:
+
+- When it is moved top, left, right, bottom. It will not move unless the parent container is big enough for it to move and the parent container should have a scrollbar.
+
+- Child will always be inside the parent in sticky (in relative, child can go outside of the parent).
+
+To give scrollbars:
+
+use: `overflow: scroll`
+
+overflow: scroll has:
+
+- overflow-x: scroll (horizontal motion)
+- overflow-y: scroll (vertical motion)
+  in it.
+
+overflow-y: scroll (vertical motion) -> priority is given to this since moving vertical is more imp.
+
+This sticky look for overflow: scroll in its parent, if not found then looks to its parent's parent. It keeps doing this until it founds no overflow: scroll in any parent. Finally it goes up and attaches itself to the viewport if no overflow: scroll is found.
+
+eg. sticky is used in making headers which stick to the top even when we scroll down.
+
+just do position: sticky; top: 0 in header.
+
+---
+
+Transform, Translate, Transition, Shadows, Opacity, Alpha Channel | Frontend Bootcamp Hindi | Ep.19
+
+Normally when we use `transform: scale` we are not changing an object's height and width, we are only changing the way we see it. It's like looking through a lens.
+
+Scale increases from the center, it covers the other elements.
+
+To make it grow from any other point, use `transform-origin: 0 0` (it starts growing from 0, 0 -> top left corner of the box)
+
+`transform-origin: 100% 100%` (it starts growing from 100, 100 -> lower right corener of box)
+
+The `a` in rgba is the alpha channel, use it to give the color transparency, 1 -> least transparent 0 -> most transparent
+
+We can also use this for opacity:
+`opacity : 1` -> Most opaque
+`opacity : 0` -> Least opaque
+
+`alpha channel` makes only background transparent
+
+`opacity` makes both the background and the content inside of it as transparent.
+
+eg. #00802510 -> 10 at end is alpha channel
+
+---
+
+transform: rotate(45deg)
+
+transform: translateX(100px) -> moves 100 px towards right
+transform: translateY(100px) -> moves 100 px towards down
+
+It will not push the other contents below, it will only move up, down, left, right
+
+left, -100px -> X
+up, -100px -> Y
+
+translateX(100%) -> if box size is 200X300 px, then it will move 200 px (100%) (width) towards right
+
+---
+
+center a div
+
+position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%)
+
+---
+
+Giving multiple transform properties at once:
+
+transform: translate(50%, -50%) rotate(45deg) scale(1.5);
+
+---
+
+background : url(image url)
+
+background-size: contain (fits the image according to the div, but if div is larger than image, image may start to repeat)
+
+To stop this, use background-repeat: no-repeat -> This makes the image occur only once but it may leave out some div space if used with contain
+
+🛑🛑 background-size: cover -> This will cover the entire background with image, no spaces left.
+
+We can also give background size in px and %.
+
+background-position-x -> moves image in x direction
+background-position-y -> moves image in y direction
+background-position: 5px 10px (5 in x & 10 in y)
+
+---
+
+transition: all 500ms;
+
+all -> all properties (not used commonly)
+
+transform: translate(-50%, -50%) rotate(45deg)
+
+hover:
+transition: transform 500ms;
+
+transition: transform 500ms scale(1.4)
+
+---
+
+Flexbox: The Inside Story | Flexbox Explained in Depth | Frontend Bootcamp Hindi | Ep.22
+
+When we give content in a div, there are 2 properties:
+
+`width: max-content` - Tries to put all contents in 1 line (width of one line = content width).
+`width: min-content` - Tries to put all contents in minimum possible width (width of longest word = 1 line).
+
+To make a flexbox: use `display: flex`
+
+🛑🛑🛑 When we use `display: flex` in inline elements, all of our inline elements become block level elements, and when we use display: flex on block level elements, they stay the same.
+
+🛑🛑 But these block level elements inside the flexbox will occur in a single line. These are now `flex-items` inside the `flex-container`.
+
+Now when we do `display: flex`, we can use height and width on even inline elements such as span as these are now block level flex items.
+
+---
+
+`span p` (span will target all children and grandchilren (nested inside childern) p tags).
+
+`span > p` (span will DIRECTLY target ONLY its children p tags (no grandchildren p tags)).
+
+---
+
+For CSS, use mozilla firefox devtools as they are much better than chrome.
+
+For JS, chrome is good.
+
+Just paste the live server url in the browser.
+
+---
+
+Growing and Shrinking in flexbox => If we have available empty then we can say that the flex-items can grow(when content is added to them).
+
+If no available space then we say that ALL the flex items will shrink in equal proportions (i.e. larger items shrink more fastly than thinner items)
+
+---
+
+Flex Shrink
+
+Now say we have a flexbox and in that flexbox are 3 flex-items A, B, C. Now if we donot want flex-item A to shrink when we reduce the width of the flexbox, we can use:
+
+`flex-shrink: 0` -> This will bring the contents of A in a single straight line and it prevents the flex box from shrinking further.
+
+B and C will keep on shrinking but A does not shrink now.
+
+`flex-shrink: 0.5` if B and C are shrinking by 10%, shrink A by 5% only.
+
+default: `flex-shrink: 1` -> No shrinking
+
+---
+
+`flex-grow` -> This has default value of 0 (no growing)
+
+This works just as opposite of flex-shrink (it will grow those flex items which have this property set).
+
+For A:
+
+`flex-grow: 0` -> This will bring the contents of A in a single straight line, and it tries to grow more by taking up the extra space.
+
+🛑🛑🛑 Flex grow will work only if there is some extra space available.
+
+`flex-grow: 0.5` if B and C are growing by 10%, grow A by 5% only.
+
+Sometimes when the space is available, we can give flex grow 1 to both elements and tell them to distribute the spaces equally among themselves.
+
+💡 Prefer giving flex-shrink over min-width while re-sizing elements.
+
+💡💡 align-items: stretch (Flex items cover the whole height of the flex-container)
+
+Else their height is same as the content height inside of them.
+
+💡💡 Padding and border are included outside of the flex-box.
+
+---
+
+Flexbox: The Missing Pieces | Advance Flexbox Properties Explained | Frontend Bootcamp Hindi | Ep.23
+
+To give equal width to all items in the flexbox, just give width = 100 % to all the flex items.
+
+Or give width = 100% in .parent > \*
+
+eg.
+
+.parent > \* {
+width: 100%;
+
+  <!-- Selecting all properties (direct) inside .parent and giving them width: 100% -->
+
+}
+
+🛑 `flex-basis: 400px`
+
+When we gave no width, flex box took base width from the content (default)
+
+When we gave width, flex box took base width from the width.
+
+When we gave flex basis, flex box took base width from this flex basis. (This is most important now).
+
+🛑 eg. .parent span {
+`flex-basis: 400px`
+}
+
+If we give both width and flex basis, flex basis will get more importance.
+
+If flex-direction: column
+
+Flex basis will now affect the height of the flex item.
+
+(!! Height in % will not work untill its parent has height in some units)
+
+Width vs Flex Basis
+
+The first thing that comes to mind when reading your question is that flex-basis doesn't always apply to width.
+
+When flex-direction is row, flex-basis controls width.
+
+But when flex-direction is column, flex-basis controls height.
+
+Key Differences
+Here are some important differences between flex-basis and width / height:
+
+flex-basis applies only to flex items. Flex containers (that aren't also flex items) will ignore flex-basis but can use width and height.
+
+flex-basis works only on the main axis. For example, if you're in flex-direction: column, the width property would be needed for sizing flex items horizontally.
+
+flex-basis has no effect on absolutely-positioned flex items. width and height properties would be necessary. Absolutely-positioned flex items do not participate in flex layout.
+
+By using the flex property, three properties – flex-grow, flex-shrink and flex-basis – can be neatly combined into one declaration. Using width, the same rule would require multiple lines of code.
+
+Browser Behavior
+In terms of how they are rendered, there should be no difference between flex-basis and width, unless flex-basis is auto or content.
+
+🛑🛑 We can basically control the height and width of our flex items using flex basis.
+
+(flex-shrink, flex-grow, flex-basis -> All these properties are given to flex items).
+
+---
+
+`flex-wrap` (given to parent) like flex direction, align items, justify content
+
+This will bring elements (flex-items) to a new line rather than shrinking them when viewport width decreases.
+
+`gap: 16px` -> Gives some fixed spaces between 2 adjacent flex items. (to parent).
+
+`gap : row-gap column-gap`
+
+Better than margins for flex items spacing.
+
+```css
+.parent > * + * {
+  margin-left: 16px;
+
+  /* Give margin to all except the first element */
+}
+```
+
+---
+
+margin-left: auto - Works well with or without flexbox
+
+margin-right: auto - Works well with or without flexbox
+
+margin-top: auto - Cannot Work well without flexbox
+margin-left: auto - Cannot Work well without flexbox
+
+flexbox here means parent should be flex.
+
+🛑🛑🛑🛑🛑🛑 Blocks like p tags have these following margins:
+
+- margin block start aka margin top
+- margin block end aka margin bottom
+
+default in flex -> align-items: stretch
+
+🛑🛑🛑🛑 New way => Center a div
+
+```css
+.parent {
+  display: flex give some height also if you want to stretch the flexbox;
+}
+
+.children {
+  margin: auto;
+}
+```
+
+---
+
+margin-block: 0 -> Makes margin top and margin bottom = 0
+
+margin-inline: 0 -> Makes margin left and margin right = 0
+
+Prefer these more ↑ ↑
+
+margin: 0 0 (top-bottom = 0   left-right = 0)
+
+---

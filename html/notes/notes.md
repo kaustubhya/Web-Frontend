@@ -60,9 +60,9 @@ It is considered best practice to set a for attribute on the label element, with
 
 We can also nest the input element within the label tags:
 
-```
+```html
 <label for="indoor">
-  <input id="indoor" type="radio" name="indoor-outdoor">Indoor
+  <input id="indoor" type="radio" name="indoor-outdoor" />Indoor
 </label>
 ```
 
@@ -121,4 +121,181 @@ By default, the width of the block elements is 100%. It doesn't matter how much 
 
 Inline element's width depends on the content it has inside of it.
 
-egs of inline -> img, b, i, a, sp an
+egs of inline -> img, b, i, a, span
+
+div -> division . This is a block level element.
+
+more egs of block level elements -> p, h1 to h6, div
+
+---
+
+semantic html tags
+
+semantic means `meaning`
+
+Semantic html tags
+
+```html
+<article>
+  <aside>
+    <details>
+      <figcaption>
+        <figure>
+          <footer>
+            <header>
+              <main>
+                <mark>
+                  <nav>
+                    <section>
+                      <summary>
+                        <time></time>
+                      </summary>
+                    </section></nav
+                ></mark>
+              </main>
+            </header>
+          </footer>
+        </figure>
+      </figcaption>
+    </details>
+  </aside>
+</article>
+```
+
+All these are block level semantic tags.
+
+`<em>` and `<strong>` are inline level semantic tags.
+
+em -> emphasis (like italics)
+
+In i tag, screen readers will read it normally, in em tag, they will read it with some emphasis on it.
+
+strong -> (like bold)
+
+In strong tag, same thing happens.
+
+If possible, use semantic tags more.
+
+---
+
+`<h1></h1>` -> Tags
+
+```html
+<fieldset>
+  <label for="cars">Choose a car:</label>
+  <select name="cars" id="dropdown">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+  </select>
+</fieldset>
+```
+
+This is a fieldset element (it has a lot of content inside of its opening and closing tags).
+
+We have height and width of an element and not a tag.
+
+Tags help us create an element in the browser.
+
+`<hr>` tag creates an hr(horizontal rule/line) element in the browser.
+
+---
+
+Global and Custom Attributes
+
+`<tag attribute='attribute-value'>`
+
+Global Attribute -> Applicable to all html tags. eg. style, class, id, hidden
+
+Custom attribute -> Applicable to specific tags. eg. src, href, alt
+
+We can also give anything as an attribute eg. `<h1 ksd='hi'></h1>`
+
+Title attribute is a global attribute, the value given in this attribute will be shown to you when you hover over the element(tooltip).
+
+---
+
+`<form>` tag creates a URL using the following things: action attribute value + name attribute value + input value given in form(querry or q).
+
+`<input>` is a self closing tag.
+
+Different sites use different name attributes- eg. YT uses name='search_query' and flipkart uses name='q'.
+
+We can also go to other websites from our form, just update the action attribute for this, eg:
+
+```html
+<form action="https://www.youtube.com/results">
+  <input type="text" name="search_query" />
+</form>
+```
+
+```html
+<form action="https://www.flipkart.com/search">
+  <input type="text" name="q" />
+</form>
+```
+
+If we look closely, there is a submit field too in the input field, we can simply do:
+
+```html
+<form action="/">
+  <input type="submit" value="search" />
+  <!-- this will make the text of our submit button from 'submit' to 'search' -->
+</form>
+```
+
+---
+
+Button also has many types, it has a default value of type "submit"
+
+type='button' -> We can specify what action we have to perform when we click on this button.
+eg. We can make a back button out of this.
+
+type='reset' -> This resets our form to the default value when we click on the button.
+
+---
+
+Also some other attributes are:
+
+placeholder
+required
+
+For input text values:
+minlength
+maxlength
+
+For number input values:
+min
+max
+(min and max numbers, value (number given), it should be within the numbers entered).
+
+🛑 To display label above the form input, wrap the label tag inside the div tag. Then use the input tag.
+
+To give spaces between 2 form fields, wrap the input and the label inside the p tag.
+
+---
+
+`<!DOCTYPE html>` this tells the browser that we are using the latest version of HTML i.e. HTML5.
+
+`<html>` This represents an html document.
+
+title -> This value gets shown in the browser tab.
+
+link:favicon -> shortcut for favicon.
+
+lang='en' -> This helps the search engines, browsers and screen readers about what language our html document is in.
+
+UTF-8 -> This includes all text and emojis (latest version)
+
+`<a href='#'>Go to Top</a>`
+This takes us to the top of the page (without loading the page, use #). If we use no #, then our page will reload and then we go to top.
+
+`<big>` this is used to emphasize the text.
+
+`<small>` this is used to keep the text simple
+
+`<pre></pre>` This tag is used to give spaces and line breaks.
+
+target=_blank and target=_main are same
+
