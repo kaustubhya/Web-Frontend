@@ -1044,6 +1044,83 @@ margin-inline: 0 -> Makes margin left and margin right = 0
 
 Prefer these more ↑ ↑
 
-margin: 0 0 (top-bottom = 0   left-right = 0)
+margin: 0 0 (top-bottom = 0 left-right = 0)
 
 ---
+
+`flex-order` -> Used in flex-items to change the order of things.
+
+order:0 (default value)
+order:-1 (first element)
+order: 1 (last element)
+
+play with these values
+
+---
+
+`align-self: auto` (default)
+
+Used with children to align just one element out of a number of elements in a flex-box
+
+To center in x direction, use margin-inline: auto and use margin-block: auto.
+
+🛑🛑🛑 Shortcut Property
+
+`flex: flex-basis flex-grow flex-shrink`
+
+eg. flex: 100px 2 3;
+
+`flex: 1`
+
+flex-basis => 0%
+flex-grow => 1 ✅ (0 => 1)
+flex-shrink => 1 (default)
+
+---
+
+`Align-items: baseline`
+
+This is visible when the 2 elements have different font sizes.
+
+When we use align items baseline, the smaller font gets aligned with the larger font's baseline.
+
+(when we use align-items: flex start then both elements get aligned to the top of the parent)
+
+---
+
+`align-content` -> Used with flex wrap when we have multiple lines of content (elements).
+
+✅✅ Flexbox def. => It is a 1D layout method for arranging items in rows / columns (MDN)
+
+(Grid is 2D).
+
+---
+
+Main and Cross Axis
+
+For Row
+Main Axis <-->
+
+Cross Axis
+↑
+↓
+
+For Column
+
+Main Axis
+↑
+↓
+
+Cross Axis <-->
+
+---
+
+`display: inline-flex`
+
+Unlike flexbox, which covers the whole width of parent, inline flex flexbox parent will only cover the specified width of the children. 
+
+We can also put multiple inline flex parent flexbox in a single line if space is available.
+
+(You can use inline flex in our YT header navbar to place things together.)
+
+This makes our elements behave like an inline flexbox.
