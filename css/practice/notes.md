@@ -827,3 +827,12 @@ Note: The section element is also new with HTML5, and has a slightly different s
 
 <div> - groups content <section> - groups related content <article> - groups independent, self-contained content
 
+---
+
+The flex-basis property specifies the initial size of the item before CSS makes adjustments with flex-shrink or flex-grow.
+
+The units used by the flex-basis property are the same as other size properties (px, em, %, etc.). The value auto sizes items based on the content.
+
+Set the initial size of the boxes using flex-basis. Add the CSS property flex-basis to both #box-1 and #box-2. Give #box-1 a value of 10em and #box-2 a value of 20em.
+
+For example, flex: 1 0 10px; will set the item to flex-grow: 1;, flex-shrink: 0;, and flex-basis: 10px;.

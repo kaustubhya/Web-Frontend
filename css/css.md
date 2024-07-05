@@ -1117,10 +1117,461 @@ Cross Axis <-->
 
 `display: inline-flex`
 
-Unlike flexbox, which covers the whole width of parent, inline flex flexbox parent will only cover the specified width of the children. 
+Unlike flexbox, which covers the whole width of parent, inline flex flexbox parent will only cover the specified width of the children.
 
 We can also put multiple inline flex parent flexbox in a single line if space is available.
 
 (You can use inline flex in our YT header navbar to place things together.)
 
 This makes our elements behave like an inline flexbox.
+
+---
+
+Watch this before learning @media queries | Frontend Bootcamp Hindi | Ep.25
+
+By default, when we print a document, the background color is ignored. This is because a lot of ink is used up for this.
+
+---
+
+Changing Settings during Printouts
+
+```css
+@media print {
+  .class {
+    attributes
+  }
+}
+```
+
+Read & Refer BKL!!
+[Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/@media#media_types)
+
+---
+
+Media Queries in CSS | Most Important for Responsive Websites | Frontend Bootcamp Hindi | Ep.26
+
+Media query has: media type and (media feature)
+
+media types - all, print, screen
+
+default: media type = all
+
+For screen media there are 2 modes of orientation:
+
+laptop : landscape
+mobiles: portrait
+
+media features:
+
+see this:
+
+```css
+@media (orientation: portrait) {
+  .class {
+    properties
+  }
+}
+```
+
+So when we reduce the width of our screen (we go from landscape to portrait), so the above change will show.
+
+---
+
+Combining multiple media features (use `and`):
+
+```css
+@media (orientation: portrait) and (width > 400px) {
+  .class {
+    properties
+  }
+}
+```
+
+---
+
+Latest Style of writing:
+
+```css
+@media (max-width: 700px) {
+  .class {
+    properties
+  }
+}
+```
+
+Apply only when max width is 700 or less
+
+Another ways:
+
+```css
+@media (min-width: 700px) {
+  .class {
+    properties
+  }
+}
+```
+
+```css
+@media (min-height: 500px) {
+  .class {
+    properties
+  }
+}
+```
+
+---
+
+Generally it is not advised to give `overflow: hidden`.
+
+---
+
+Bring Div to Front Without z-index | Stacking Elements and z-index | Frontend Bootcamp Hindi | Ep.29
+
+If we give position property to any element (other than static), it will automatically come on top (irrespective of whether or not you give z index).
+
+If position types are same in all elements, use z index
+
+✅✅✅✅ More z index value => element is more on top
+
+see eg. in 30.00 in video
+
+[HERE IS VIDEO](https://www.youtube.com/watch?v=VDjXE4v-NdQ&list=PLfEr2kn3s-br8gqsHdrIv7F3-AWENtk8m&index=22)
+
+---
+
+Don't use Floats this Way | Floats & Clears Explained in Depth | Frontend Bootcamp Hindi | Ep. 30
+
+`float: left`
+
+Used to place image and wrap text around it.
+
+Float changes almost any element to block elements (given to each child elements).
+
+Float is used with images mostly.
+
+Exceptions:
+
+- flex -> inline-flex (flex)
+- grid -> inline grid (grid)
+
+When using floats with images, the image becomes position absolute and it allows the other elements like p tag get below it and take its space.
+
+Float also works in the same way.
+
+🛑🛑 There is however one difference, in float, the text won't go along with image when using float.
+
+🛑🛑 In absolute, the text also goes off alongside the image.
+
+🛑 `clear: left` -> It tells us that do not go along side any floated content. Start from a fresh space and then align to left.
+
+Not used much today.
+
+Problem with floats: Sometimes when screen and image is too large and is set on float, the image may leave the image area, as it is smaller.
+
+To prevent that from happening i.e. to fix it, we will use `display: flow-root` (give it in parent container).
+
+---
+
+CSS Grid is Much Easier Than You Might Think | CSS Grid in Depth | Frontend Bootcamp Hindi | Ep.31
+
+All grid properties with default values:
+
+```css
+/* Required to Know */
+.container {
+  grid-template-rows: none;
+  grid-template-columns: none;
+  column-gap: normal;
+  row-gap: normal;
+}
+
+.children {
+  grid-column-start: auto;
+  grid-column-end: auto;
+  grid-row-start: auto;
+  grid-row-end: auto;
+}
+
+/* Optional to Know */
+.container {
+  grid-template-areas: none;
+  grid-auto-rows: auto;
+  grid-auto-columns: auto;
+  grid-auto-flow: row;
+}
+```
+
+Container:
+(gave it a min height of 60vh)
+`display: grid`
+
+`grid-template-columns: 100px 100px` => Gives us the number of columns (2 columns of 100px horizontal height each)
+
+`grid-template-rows: 150px 150px 150px` => Gives us the number of rows (3 rows of 150px vertical length each)
+
+Shorter Syntax: `grid-template-columns: repeat(5, 100px)`; => 5 columns of 100px each horizontal height
+
+🛑🛑🛑 REPEAT 3 TIMES 100px (YAAD RAKHO)
+
+Grid Items:
+If we use a span inside of grid (it default display -> inline, will be automatically changed to display -> block).
+
+If we give a grid cell height and width of 100px X 100px and we give a flex item a width and height of 100px X 100px, we will see that the grid cell's height and width will remain the same and the flex item will position itself accordingly inside the grid container.
+
+If we give a grid cell height and width of 100px X 100px and we give a flex item a width and height of 120px X 120px, we will see that the grid cell's height and width will remain the same and the flex item will start to overflow into the next grid item's space (this is normally not preferred).
+
+When the number of items inside the grid exceed the grid cells in total, then the grid automatically creates a new row with height and width = the items's height and width (if there is space available, else those extra items outside of the grid will be squished in to fit the space).
+
+---
+
+Positioning elements in grid:
+
+Positioning via columns =>
+
+If there are 'n' columns, then there will be 'n+1' column lines.
+
+1st column => between lines 1 and 2
+
+So to position an element in the last column, we give it:
+
+`grid-column-start: 4` -> start the element from line 4
+
+default (`grid-column-start: auto` && `grid-column-end: auto`)
+
+---
+
+Positioning via rows =>
+
+If there are 'n' rows, then there will be 'n+1' row lines.
+
+default (`grid-row-start: auto` && `grid-row-end: auto`)
+
+When we have a single cell, we can expand it using the span attribute:
+
+`grid-column-start: span 3` Starting from column 1, span to 2 column blocks
+
+To move it from 1,1 using span, specify its end
+
+---
+
+gap | column-gap and | row-gap (give in parent)
+
+These gives gaps between grid elements (children).
+
+Unlike flexbox elements, the elements inside the grid will overflow if the gap given is too large between them.
+
+Column pushes other elements behind, row or (row + col) does not do like this (try it out).
+
+---
+
+% in grid
+
+`grid-template-columns: 20% 20% 20% 20%`
+
+`grid-template-columns: repeat(5, 20%)`
+
+covers 80% of the screen with 4 columns
+
+`grid-template-columns: 1fr 1fr`
+divide grid into 2 parts (fr -> fractions) (2 columns)
+
+`grid-template-columns: repeat(3, 1fr)`
+divide grid into 3 parts (fr -> fractions)
+(3 columns)
+
+Normally if we have content, no need to give height (rows height -> auto)
+
+`grid-template-columns: 1fr 3fr 2fr 1fr`
+divide grid into 7 parts (fr -> fractions) (4 columns)
+
+Typing both grid-column-start and grid-column-end every time can get tiring. Fortunately, grid-column is a shorthand property that can accept both values at once, separated by a slash.
+
+For example, grid-column: 2 / 4; will set the grid item to start on the 2nd vertical grid line and end on the 4th grid line.
+
+---
+
+Unlock Superpowers of CSS Grid | Frontend Bootcamp Hindi | Ep.33
+
+We know that when we use column start, it pushes the other elements after it backwards.
+
+To prevent this, we can use, `grid-auto-flow: row dense`
+
+This will prevent us from creating any extra space.
+
+---
+
+Now say we have 10 elements and we made a grid of 4 columns each having width of 100px then we see that the first 4 elements will have width of 100px but the rest take up random widths to fit in the available space.
+
+To give everyone, equal width of 100px, use
+
+```css
+grid-auto-flow: column;
+grid-auto-columns: 100px;
+
+/* 10 elements in 1 row (10 columns) each of width 100px */
+```
+
+```css
+grid-auto-flow: row;
+grid-auto-columns: 100px;
+
+/* 10 elements in 1 row (10 columns) each of width 100px */
+```
+
+If there is content inside the grid, the grid column width depends on the width of the content.
+To fix the width of the column in a grid, use `grid-auto-columns: (width)`
+
+If there is content inside the grid, the grid row height depends on the height of the content.
+To fix the height of the row in a grid, use `grid-auto-rows: (height)`
+
+We can use:
+
+`justify-items: center`; and `align-items: center`; to center an element inside a grid cell.
+
+By default, it is `justify-items: stretch(or normal)`.
+
+other options of flex also works on grid like `align-items:flex start`, `align-items:flex end`
+
+and justify items start, end, center etc....
+
+🛑🛑 It is justify items and not justify content
+
+justify => x axis
+align => y axis
+
+---
+
+Using margins to center content now: `margin-left: auto` => brings content to extreme right
+
+`margin-right: auto` => brings content to extreme left
+
+`margin-top: auto` => brings content to extreme bottom
+
+`margin-bottom: auto` => brings content to extreme top
+
+Also there are `margin block auto (stretch content to left-right)` and `margin inline auto (stretch content to top-bottom)`
+
+`grid column: start / end`
+
+If end value is more than last column, then an extra column is created to fit those contents.
+
+🛑🛑 Creating grid beforehand then giving start and end values => Explicit grid creation.
+
+🛑🛑 Giving start and end values first, and then the grid is created automatically by the browser => Implicit grid creation.
+
+`grid-template: grid-template-rows / grid-template-columns`
+
+try to give both values, if giving only one value, give other value as `none` (default value)
+
+`grid-template-columns: repeat(auto-fill, 100px)`
+
+Creting infinite columns of 100px width till there is space available in the parent.
+
+`grid-template-columns: repeat(5, minmax(100px, 200px)`
+
+creates flexible sized grids where min width => 100px and max width => 200px.
+
+try to combine various properties like auto-fill, minmax, etc...
+
+1fr, tries to divide all elements inside the grid equally, giving each element equal width
+
+---
+
+---
+
+Grid Areas Explained in Depth | Frontend Bootcamp Hindi | Ep.34
+
+`grid-template-area` -> The grid-template-areas CSS property specifies named grid areas, establishing the cells in the grid and assigning them names.
+
+```css
+.parent-container {
+  grid-template-areas:
+    "Bangalore Bangalore Delhi"
+    "Mumbai Mumbai Delhi"
+    "Pune Pune Delhi";
+  /* in quotes */
+}
+
+.box-1 {
+  background-color: green;
+
+  grid-area: Bangalore;
+  /* no quotes */
+}
+```
+
+🛑🛑 Try to make grid template areas values in the shape of square or rectangle, other shapes will be considered as invalid. (see above eg.)
+
+`grid-area` -> When you need to combine, grid row start, grid row end, grid column start and grid column end, we use grid area.
+(kya kya area create karna hai)
+
+`grid-area: row-start / column-start / row-end / column-end`
+(kis area mein usko(child ko) reside karwana hai)
+
+eg. grid-area: 2 / 1 / 2 / 4;
+
+Here if columns and rows are not specified during creation using grid-template rows and columns then browser creates them implicitly.
+
+shortcut:
+
+grid-auto-columns: 150px; (width of each column) (creates columns automatically based on our content)
+grid-auto-rows: 250px; (height of each row) (creates rows automatically based on our content)
+
+🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑 TBC
+
+---
+
+# CSS Variables Explained in Depth | Last CSS Video | Frontend Bootcamp Hindi | Ep.35
+
+---
+
+`<code></code>` This tag is like span but is helpful in declaring code bits in html
+
+When there is one property multiple times and we have to change all of them, we can store that property in a CSS variable, then change that variable's value to change the property everywhere where it is defined.
+
+CSS variables are also called `custom properties`.
+
+eg.
+
+```css
+body {
+  --color-variable: white;
+}
+
+/* Now use this `--color-variable` whereever we want to give text-color white */
+
+p {
+  color: var(--color-variable);
+}
+```
+
+We can store any property in a CSS variable.
+
+Try to define variables in `:root`, even above body (and html) to give them access globally for all CSS properties and containers.
+
+We can also override the CSS variables by redefining them in the class containers.
+
+---
+
+Fallback:
+
+p {
+var(--color-variable, yellow);
+}
+
+Let us say that for some reason, the --color-variable property is not available, then in that case, we can use a `fallback` color here (backup color).
+Its value will be shown when the variable color property does not work out.
+
+🛑🛑 If neither of the colors are available, then CSS looks for colors from the parent, grandparent and so on until it finds a color. If nothing is found, it applies the default color black.
+
+Same thing happens when we give it a variable having values other than color
+
+eg.
+
+--rounded: 24px
+
+p {
+  color: var(--rounded);
+}
+
+Now here color has a variable with value in pixel (not in colors), so it is nullified and color property goes on looking for colors in its parent, grandparent and so on....
