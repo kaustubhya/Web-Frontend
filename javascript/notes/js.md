@@ -277,16 +277,772 @@ This is only related to let and const.
 
 ---
 
-
-
 Dialog Boxes in JavaScript | Alert, Confirm, & Prompt | The Complete JavaScript Course | Ep.06
 
 There are 3 types of dialog boxes:
+
 - alert('message')
-(gives only ok button. Ok -> undefined)
+  (gives only ok button. Ok -> undefined)
 - confirm('message')
-(gives ok and cancel button. OK -> True, Cancel -> False)
+  (gives ok and cancel button. OK -> True, Cancel -> False)
 - prompt('message')
-(works like alert but gives us an input field and an OK and cancel button returns the input value as the result).
+  (works like alert but gives us an input field and an OK and cancel button returns the input value as the result).
 
 This dialog box works in a particular tab in a particular browser. Different tabs have different environments in a browser.
+
+---
+
+[Template Literals | String Methods & Properties | The Complete JavaScript Course | Ep.07](https://www.youtube.com/watch?v=Z4x2EgRkJ1g&list=PLfEr2kn3s-br9ZFmejfLhAgMbGgbpdof8&index=53)
+
+String Methods and Properties
+Before starting string methods and properties we need know that strings are indexed. So basically we can access any single character of a string by doing something like this.
+
+Indexing starts from 0.
+
+Expression: 'Hello World'[1]
+
+Result: 'e'
+
+If we entered, 'Hello World[28] then result would have been 'undefined' as there is no char at position 28.
+
+There is only one property that exists.
+
+Property
+
+- length
+
+Methods (Without Argument)
+
+- .toUpperCase()
+- .toLowerCase()
+- .trim() (Removes all the extra space from start and end)
+- .trimStart() (Removes all the extra space from start)
+- trimEnd() (Removes all the extra space from end)
+
+Methods (With Argument)
+
+- includes() (is the argument string present inside the main string)
+- indexOf() (gives index of the argument char in the main string)
+- replace() (replace (first) string part (argument) with another string (also in argument))
+- replaceAll() (replace (all) string part (argument) with another string (also in argument))
+- concat() (combines 2 strings, this can also be used with + sign)
+- padStart() (used for masking with chars at start)
+- padEnd() (used for masking with chars at end)
+- charAt() (Returns char at a certain index) (same as char[3])
+- charCodeAt() (Returns Ascii value of a char at a certain index)
+- split() (splits a main string into many substrings based on the argument value)
+
+chaining (putting method after method):
+
+```js
+const faltu = "Gannu Bhai     Zinda  hai      ";
+-> undefined
+
+faltu.trim
+-> trim() { [native code] }
+
+faltu.trim()
+-> 'Gannu Bhai     Zinda  hai'
+
+faltu.trim().toLowerCase() // chaining lowercase to trim
+-> 'gannu bhai     zinda  hai'
+
+faltu.trim().toUpperCase()
+-> 'GANNU BHAI     ZINDA  HAI'
+
+faltu.includes('ai')
+-> true // this is case sensitive and checks for each char including spaces and symbols from start to end
+
+faltu.indexOf('Z')
+-> 15
+faltu.indexOf('i')
+-> 9
+faltu.indexOf('I')
+-> -1 // char not found in main string
+
+faltu.indexOf('ha')
+-> 7 // ha starts from 7 (in Bhai)
+
+const faltu = "Gannu Bhai     Zinda  hai      ";
+-> undefined
+
+faltu.replace('Bhai', 'Bhabhi')
+-> 'Gannu Bhabhi     Zinda  hai      '
+
+faltu.replace('Mummy', 'Bhabhi')
+-> 'Gannu Bhai     Zinda  hai       '  // no change
+
+const faltu = "Gannu Bhai     Zinda  hai      ";
+-> undefined
+faltu.replace('i', 'I')
+-> 'Gannu BhaI     Zinda  hai      '
+// Replaces only the first i
+
+// to replace all i's use replaceAll
+const faltu = "Gannu Bhai     Zinda  hai      ";
+-> undefined
+
+faltu.replaceAll('i', 'I')
+-> 'Gannu BhaI     ZInda  haI      '
+// Replaces only the first i
+
+const faltu = "Gannu Bhai     Zinda  hai      ";
+-> undefined
+
+faltu + 'Right!!'
+-> 'Gannu Bhai     Zinda  hai      Right!!'
+
+faltu.concat('right')
+-> 'Gannu Bhai     Zinda  hai      right'
+
+// Concat multiple Strings
+const faltu = "Gannu Bhai     Zinda  hai";
+-> undefined
+
+faltu.concat(', ' , 'right')
+-> 'Gannu Bhai     Zinda  hai, right'
+
+faltu.concat(', ' , 'right ', 'bruv')
+-> 'Gannu Bhai     Zinda  hai, right bruv'
+
+let lastFourDigits = '4567';
+-> undefined
+
+lastFourDigits.padStart(14, '*')
+-> '**********4567'
+
+let firstFourDigits = '4567';
+-> undefined
+
+lastFourDigits.padEnd(14, '/')
+-> '4567//////////'
+// 14 is the final string length, i.e. 14 + 10 /'s
+
+let firstFourDigits = '4567';
+-> undefined
+
+firstFourDigits.charAt(2);
+-> '6'
+
+firstFourDigits.charCodeAt(2);
+-> 54 // (Ascii of '6')
+
+firstFourDigits.charCodeAt(); // default firstFourDigits[0]
+-> 52 // (Ascii of '4')
+
+const string = 'Hi there all okayish'
+undefined
+string.split('i')
+(3) ['H', ' there all okay', 'sh'] // i vanishes and becomes the breaking point
+```
+
+see more methods in docs
+
+---
+
+`` -> Template Literals
+
+```js
+const name = 'Hari';
+-> undefined
+
+`Hi my name is ` + name
+-> 'Hi my name is Hari'
+
+`Hi my name is `.concat(name)
+-> 'Hi my name is Hari'
+
+`Hi my name is ${name}`
+-> 'Hi my name is Hari'
+// used template literals
+
+
+
+const name = 'Hari';
+-> undefined
+
+`Hi my name is ${name.toUpperCase()}`
+-> 'Hi my name is HARI'
+
+`Hi my name is ${'$' + name.toUpperCase()}`
+->'Hi my name is $HARI'
+
+const amount = 4587;;
+-> undefined
+
+`Hi I have ₹${amount}`
+-> 'Hi I have ₹4587'
+
+`Hi I have $${amount}`
+-> 'Hi I have $4587'
+```
+
+---
+
+[Math Object in JavaScript | The Complete JavaScript Course | Ep.08](https://www.youtube.com/watch?v=H3-1EQW2evA&list=PLfEr2kn3s-br9ZFmejfLhAgMbGgbpdof8&index=49)
+
+Operators:
+
+- - (Addition Operator)
+- - (Subtraction Operator)
+- - (Multiplication Operator)
+- / (Division Operator)
+- % (Remainder Operator)
+- ** (Exponential Operator) (eg. 5 ** 3 => 5 _ 5 _ 5 = 125)
+  (came in ES7)
+
+### Math Object in JavaScript
+
+Properties on Math Object: (no brackets)
+
+- Math.PI => 3.14.......
+- Math.SQRT2 => 1.414.....
+- Math.E => 2.7..... (Euler's Number)
+
+Methods on Math Object: (Need brackets)
+
+- Math.pow(25, 2) => 25 \* 25 => 125 (old way)
+- Math.sqrt(25) => 5
+- Math.floor(6.1245) => 6
+- Math.floor(6.999999999999999999999999) => 7 (number too large to be 6)
+- Math.floor(-6.1245) => -7
+- Math.ceil(6.2145) => 7
+- Math.ceil(3.999999999999999999) => 4
+- Math.ceil(3.000000000000000000000000001) => 3
+- Math.ceil(-3.54) => -3
+- Math.round(2.5) => 3
+- Math.round(2.15) => 2
+- Math.round(2.815) => 3
+- Math.round(4.49999999999999999) => 5
+- Math.random() -> gives numbers from [0 to 1] (1 is non inclusive)
+- Math.random() -> 0.01814084155878959
+- Math.random() -> 0.39936340140630944
+- Math.random() => 0.03222613532767116
+- Math.random() => 0.6275536784164206
+- Math.random() => 0.5038095900697319
+
+// give numbers between 0 to 19
+
+- Math.floor(Math.random() \* 20) // 20 is not included
+
+// give numbers between 0 to 20
+
+- Math.floor(Math.random() \* 21)
+
+// give numbers between 10 to 20
+10 + Math.floor(Math.random() _ 11)
+basic formula `Math.floor(Math.random() _ (max - min + 1) + min);`
+
+min -> 10
+max -> 20
+max - min + 1 -> 11
+
+follow the flow: + min is the last thing to be added
+
+---
+
+Infinity and NaN
+
+- 8 / 0
+  => Infinity
+
+- typeof (Infinity)
+  => 'number'
+
+- 0 / 0
+  => NaN
+
+- typeof (NaN)
+  => 'number'
+
+- -5 / 0
+  => -Infinity
+
+- -0 / 0
+  => NaN
+
+Area of a Rectangle
+
+```js
+const width = +prompt("Enter width");
+// String input converted to int, via +prompt
+const length = +prompt("Enter length");
+
+width;
+length;
+
+const area = width * length;
+area;
+```
+
+In console
+
+```js
+const width = +prompt("Enter width");
+undefined;
+
+const length = +prompt("Enter length");
+undefined;
+
+width;
+4;
+
+length;
+5;
+
+const area = width * length;
+undefined;
+
+area;
+20;
+
+// displaying area in webpage
+document.write(`Rectangle Area: ${area}`); // ans => 20
+// remove defer in html for this and place script tag at the bottom
+```
+
+---
+
+# [Truthy and Falsy](https://www.youtube.com/watch?v=UPARgGhfb5E&list=PLfEr2kn3s-br9ZFmejfLhAgMbGgbpdof8)
+
+Which values are false in JS:
+
+Falsy values in JS
+
+Numbers -> 0, -0 and NaN
+Strings -> ''
+undefined
+null
+
+check via: Boolean(values)
+
+eg. `Boolean(0) -> false`
+
+rest all are truthy (true in js)
+
+We can use `!` (NOT operator) to convert from truthy to falsy and vice versa.
+
+!0 -> true
+!!0 -> false (!! = original number)
+
+---
+
+[Comparison Operators](https://www.youtube.com/watch?v=HVhD13U5Bh0&list=PLfEr2kn3s-br9ZFmejfLhAgMbGgbpdof8&index=51)
+
+- `==` equal value
+- `===` equal value and equal datatype (strict equality, we have to do explicit(manual) conversion to compare different data types) (use === more than ==)
+- `!=` not equal value
+- `!==` not equal value or not equal datatype
+- `>` greater than
+- `<` less than
+- `>=` greater than or equal to
+- `<=` less than or equal to
+
+all of them give true / false
+
+used mostly with numbers
+
+---
+
+'20' == 20 (true as it implicitly converts string '20' to 20)
+
+'20' === 20 (false)
+
++'20' === 20 (true)
+parseInt('20') === 20 (true)
+24 > 27 (false)
+24 < 27 (true)
+24 >= 27 (false)
+24 <= 27 (true)
+25 >= 25 (true)
+25 <= 25 (true)
+
+🛑🛑 For comparing, first convert it to number manually then compare.
+
+---
+
+[Logical Operators in JavaScript | And, Or, Not, Operators | The Complete JavaScript Course | Ep.11](https://www.youtube.com/watch?v=hjSSoCRU_nc&list=PLfEr2kn3s-bo4LwlbyZugHPavhcdW8YMC&index=12)
+
+Logical Operators:
+
+- AND (&&)
+- OR (||)
+- NOT (!)
+
+🛑🛑 Logical Operators always return truthy and falsy values and not true and false values.
+
+so let us see some egs.
+
+```js
+0 && 2 => 0 (falsy) as 0 is falsy and 2 is truthy
+
+0 || 2 => 2 (truthy) as 0 is falsy and 2 is truthy
+
+'' && 'Hello' => '' (falsy)
+
+'' || 'Hello' => 'Hello' (truthy)
+
+// AND checks for falsy values and returns the first value if both are falsy, it returns the second value if both are truthy and returns the falsy value if one is truthy and the other is falsy.
+
+// eg.
+0 || '' => 0
+
+'' || 0 => ''
+
+// OR on the other hand checks for both values and returns the later value if both are falsy and the first value if both are truthy and the truthy value if one is truthy and other is falsy.
+
+```
+
+some more egs.
+
+```js
+0 && ''
+0
+
+'' || 0
+0
+
+'' && 0
+''
+
+11 || 5
+11
+
+'' || 5
+5
+
+'' || 0
+0
+
+'' || -0
+-0
+
+47 || 8
+47
+
+45 || NaN
+45
+
+14 && 5
+5
+
+77 && 4
+4
+
+77 && 1454
+1454
+
+'hi' && undefined
+undefined
+
+'hi' || null
+'hi'
+
+null || null
+null
+
+null ||  null
+null
+
+null &&  null
+null
+
+45 && NaN
+NaN
+
+'hi' && 1 + 3
+4
+
+'hi' || 1 + 3
+'hi'
+
+'jio' && console.log('Hi')
+Output -> Hi
+result -> undefined
+
+'jio' || console.log('Hi')
+result -> 'jio'
+
+undefined || console.log('Hi')
+Output -> Hi
+result -> undefined
+```
+
+use `!` to make truthy to false and falsy to true.
+
+eg. !0 -> true
+
+!'ji' => false
+
+!!0 => false
+!!!0 -> true
+
+---
+
+[Decision Making in JavaScript Using IF Statement | The Complete JavaScript Course | Ep.12](https://www.youtube.com/watch?v=6-dv7UETgJg&list=PLfEr2kn3s-bo4LwlbyZugHPavhcdW8YMC&index=16)
+
+Simple if-else program
+
+```js
+const userName = prompt("Please Enter your name");
+const userAge = +prompt("Please Enter your age");
+// converted age to a number
+// better way:
+// const userAge = parseInt(prompt("Please Enter your age"));
+
+if (userAge >= 22 && userAge <= 60) {
+  console.log(`${userName} is a Working Professional`);
+} else {
+  console.log(`${userName} is NOT a Working Professional`);
+}
+
+console.log(`His age is ${userAge}`);
+```
+
+One drawback of parseInt:
+🛑 parseInt(null) = NaN (cannot convert null to a number)
+🛑 +null = 0
+
+Task
+
+```js
+const userName = prompt("Please Enter your name") || "Procodrr";
+const userAge = parseInt(prompt("Please Enter your age")) || 22;
+
+console.log(userName);
+console.log(`Age is ${userAge}`);
+```
+
+---
+
+[Optimize Decision Making Using Else If and Else | The Complete JavaScript Course | Ep.13](https://www.youtube.com/watch?v=7lld3Xk5usQ&list=PLfEr2kn3s-bo4LwlbyZugHPavhcdW8YMC&index=14)
+
+Some more examples
+
+```js
+const userName = prompt("Please Enter your name");
+const userAge = parseInt(prompt("Please Enter your age"));
+const gender = prompt("Enter your gender");
+
+if (userName == null) {
+  console.log("Procodrr is my name");
+} else {
+  console.log(userName);
+}
+
+if (userAge == NaN) {
+  console.log("Age is 22");
+} else {
+  console.log(`Age is ${userAge}`);
+}
+
+if (gender == "male") {
+  console.log("He reads a mail");
+} else if (gender == "female") {
+  console.log("She reads a mail");
+} else {
+  console.log("They read a mail");
+}
+```
+
+🛑🛑🛑 if and else if cases can also get executed if the values inside them are truthy
+
+eg.
+
+```js
+if (12) {
+  console.log("Hey boy");
+  // This will run as 12 is truthy
+}
+
+if (0) {
+  console.log("Hey girl");
+  // This will NOT run as 0 is falsy
+}
+
+/*
+Output
+'Hey boy'
+*/
+```
+
+---
+
+[Switch Statement in JavaScript | Switch Case | The Complete JavaScript Course | Ep.15](https://www.youtube.com/watch?v=ebJVbq6BDFI&list=PLfEr2kn3s-bo4LwlbyZugHPavhcdW8YMC&index=17)
+
+```js
+const grade = "A";
+
+// 🛑🛑🛑 If the initialized value matches with the case, then the code statement inside the case will be executed.
+
+// case can be ANYTHING and in any order
+
+switch (grade.toLocaleLowerCase()) {
+  // 'A' -> 'a'
+
+  case "a":
+    // 🛑 value matches with case, hence execute the code for this case
+    console.log("Your score is between 85% to 100%.");
+    break;
+  case 1:
+    // No match
+    console.log("Your score is between 75% to 85%");
+    break;
+  case "c":
+    // no match
+    console.log("Your score is between 60% to 75%");
+    break;
+  case false:
+    // no match
+    console.log("Your score is between 50% to 60%");
+    break;
+  case "e":
+    // no match
+    console.log("Your score is between 30% to 50%");
+    break;
+  default:
+    // match already found, so no need to execute the default code
+    console.log("Sorry, you failed.");
+}
+
+console.log("Program Ended!");
+
+// For case checking, it uses strict equality === (both values and datatypes)
+// so 1 === '1' will be false in switch
+```
+
+### Switch case with multiple conditions to check:
+
+```js
+const username = "KSD";
+const userAge = 24;
+
+// 🛑🛑 Here since there are multiple conditions to match, we can just use true to go inside the switch statement code and then check the case there.
+
+// 🛑 Because in normal cases, the case code will run when both conditions inside the case are true
+switch (true) {
+  case userAge >= 0 && userAge <= 4:
+    // we can either use () or not. It is optional here. Using {} is also optional here.
+    // case conditions are false
+    console.log(`${username} is a kid.`);
+    break;
+  case userAge >= 5 && userAge <= 17:
+    // case conditions are false
+
+    console.log(`${username} is a school student.`);
+    break;
+  case userAge >= 18 && userAge <= 24:
+    // case conditions are true, hence code of this case executes
+
+    console.log(`${username} is a college student.`);
+    break;
+  // Break out of switch now. Fuck the other cases below
+  case true:
+    console.log(`${username} is a working professional.`);
+    break;
+  // case can be anything
+  case userAge > 45 && userAge < 121:
+    console.log(`${username} is retired.`);
+    break;
+  default:
+    console.log("Please Enter a Valid Age");
+}
+```
+
+🛑🛑 Now if two or more cases are same, then the topmost case will be executed as code executes from top to bottom, goes to that case, executes that code and then breaks out of the switch loop
+
+---
+
+Here is the same code via if-else
+
+```js
+const username = "KSD";
+const userAge = 24;
+
+if (userAge >= 0 && userAge <= 4) {
+  console.log(`${username} is a kid.`);
+  console.log("And he/she is playing.");
+} else if (userAge >= 5 && userAge <= 17) {
+  console.log(`${username} is a school student.`);
+  console.log("And he/she is learning science and maths.");
+} else if (userAge >= 18 && userAge <= 24) {
+  console.log(`${username} is a college student.`);
+  console.log("And he/she is learning computer science.");
+} else if (userAge >= 25 && userAge <= 45) {
+  console.log(`${username} is a working professional.`);
+  console.log("And he/she is a web developer.");
+} else if (userAge > 45 && userAge < 121) {
+  console.log(`${username} is retired.`);
+  console.log("And he/she reads newspaper.");
+} else if (userAge >= 121) {
+  console.log(`${username} is immortal.`);
+  console.log("And he/she reads newspaper.");
+} else {
+  console.log("Please Enter a Valid Age");
+}
+```
+
+---
+
+```js
+// Basic Ternary Operator Example
+const username = 5 > 2 ? "KSD" : "Procodrr";
+// here 5 > 2 is true so we will get 'KSD' as output.
+
+const gender = "F";
+
+// debugger
+const userMessage = `${
+  gender.toLocaleLowerCase() === "f" ? "She" : "He"
+} is a college student.`;
+// Here we used toLocaleLowerCase to make 'F' and 'f' same as both can work as female gender.
+
+// Also we used template literals here to mix String with JS. See the use of `` in outer cases and '' inside the js logic to insert strings
+
+// console.log(userMessage);
+```
+
+Using truthy and falsy with ternary operator
+
+```js
+const userMessage = `${12 ? "He" : "She"} is a person.`;
+
+// here 12 is a truthy hence we get 'He is a person.' as output
+
+const userMessage2 = `${null ? "He" : "She"} is a person.`;
+
+// here null is a falsy hence we get 'She is a person.' as output
+```
+
+Chaining in ternary operators
+
+```js
+const result = null ? "Anurag" : "" ? "12" : 0;
+
+console.log(result);
+
+// Here null is falsy so this -> ('' ? '12' : 0) statement is executed. Now first it will check if '' is truthy or falsy, since '' is falsy, then we get 0 as the final output displayed in the console
+```
+
+Another example (from mdn)
+
+```js
+const result = () => {
+  condition1 ? value1 : condition2 ? value2 : condition3 ? value3 : value4;
+};
+
+// this code if written in if-else format
+
+const result = () => {
+  if (condition1) {
+    return value1;
+  } else if (condition2) {
+    return value2;
+  } else if (condition3) {
+    return value3;
+  } else {
+    return value4;
+  }
+};
+```
+This is pretty advance so look closely!!!
