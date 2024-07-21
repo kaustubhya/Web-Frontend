@@ -1045,4 +1045,82 @@ const result = () => {
   }
 };
 ```
+
 This is pretty advance so look closely!!!
+
+---
+
+[How to See Variable Address in Dev Tools? | Memory Location | The Complete JavaScript Course | Ep.17](https://www.youtube.com/watch?v=Gqlv6inCZqI&list=PLfEr2kn3s-bo4LwlbyZugHPavhcdW8YMC&index=18)
+
+![](./images/JavaScript%20Memory%20Addresses%20and%20Variables.png)
+
+In JS variables are created differently (we store undefined value in each variable) and and their values and addresses are stored differently, this is the first ORIGINAL step of memory creation.
+
+In second step, we join the variable block (blue) and address-value block (red). This is the second step of JS -> Code Execution.
+
+See address in memory tab in dev tools (use ctrl + f to get search bar, type akash, locate its address (starts with @), then type this address in search bar and then finally see all variables address there in the search execution context option).
+
+```js
+const firstName = 'Akash'
+const lastName = 'Singh'
+const userAge = 15
+const birthYear = 2000
+const isGraduate = false
+const hasJob = true
+```
+
+Variables having similar values are stored in same addresses 
+(eg. 
+```js
+const firstName = 'Akash'; 
+const lastName = 'Akash';
+// both will have same addresses
+```
+).
+
+(eg2. 
+```js
+const firstName = 'Akash'; 
+const lastName = 'Aka' + 'sh';
+// both will have different addresses, though both will give same output but the way of creating them is different
+```
+).
+
+Falsy values all have fixed addresses in the dev tools
+
+eg.
+
+false -> @75
+true -> @73
+null -> @71
+undefined -> @67
+'' -> @77
+
+This may differ in different machines,
+
+If we use let and var to re-assign the values, the addresses will also change, for that we need to take the snip again in memory to see the updated address changes.
+
+## Do JS have pointers?
+
+JavaScript does not have pointers in the same way languages like C or C++ do. However, JavaScript handles references to objects and arrays in a way that is conceptually similar to pointers. Here are some key points:
+
+References vs. Pointers: In JavaScript, variables that store objects or arrays do not hold the actual object or array data but rather a reference to it. This is similar to how pointers work in other languages, but without direct memory address manipulation.
+
+No Direct Memory Access: JavaScript does not allow direct manipulation of memory addresses. You cannot perform pointer arithmetic or access memory locations directly.
+
+Object and Array References: When you assign an object or an array to a variable, the variable holds a reference to the actual object or array in memory. If you assign this variable to another variable, both variables will reference the same object or array.
+
+```javascript
+let obj1 = { name: "Alice" };
+let obj2 = obj1; // obj2 references the same object as obj1
+obj2.name = "Bob";
+console.log(obj1.name); // Outputs "Bob"
+```
+
+Primitive Values: For primitive values (such as numbers, strings, and booleans), JavaScript handles them directly rather than through references.
+
+Overall, while JavaScript manages references to objects and arrays in a way that shares some conceptual similarities with pointers, it abstracts away direct memory management and manipulation, providing a higher-level, safer environment for developers.
+
+---
+
+(JS Part 1 Over)
