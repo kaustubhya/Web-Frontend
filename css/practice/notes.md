@@ -840,3 +840,7 @@ For example, flex: 1 0 10px; will set the item to flex-grow: 1;, flex-shrink: 0;
 ---
 
 auto-fit works almost identically to auto-fill. The only difference is that when the container's size exceeds the size of all the items combined, auto-fill keeps inserting empty rows or columns and pushes your items to the side, while auto-fit collapses those empty rows or columns and stretches your items to fit the size of the container.
+
+The `transform-origin` property is used to set the point around which a CSS transformation is applied. For example, when performing a rotate (which you will do later in this project), the transform-origin determines around which point the element is rotated.
+
+Give the .line selector a transform-origin property of 0% 0%. This will offset the origin point by 0% from the left and 0% from the top, setting it to the top left corner of the element.

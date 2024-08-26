@@ -1,3 +1,5 @@
+# Intro to JS
+
 Originally JS was made for Netscape browser.
 
 Originally JS was called "Mocha" then called "LiveScript" and finally called "JavaScript".
@@ -30,15 +32,17 @@ Ryan Dahl took out the V8 Engine out of Chrome and put it in node.js (he created
 
 JS was an `interpreted language` earlier. After the V8 engine, it became a `mixture of interpreted and compiled language`.
 
+### The purpose of creating JS was originally for netscape browser and to create dynamic content for the websites.
+
 ---
 
-Introduction to JavaScript | The Complete JavaScript Course | Ep.02
+# Introduction to JavaScript | The Complete JavaScript Course | Ep.02
 
 JavaScript console is called REPL (Read Eval (Evaluate) Print Loop)
 
 In basically means read our code, evaluate it (calculate it), print it and then loop back to the original position (starting position).
 
-In JS, the BODMAS rule is not applied (here \* and / are given equal importance and whichever comes first is given more importance).
+In JS, the BODMAS rule is not applied (here `*` and `/` are given equal importance and whichever comes first is given more importance).
 
 Same with + and -
 
@@ -46,7 +50,7 @@ We can run JS directly inside script tag, but it is normally not preferred. Writ
 
 ---
 
-Data Types in JavaScript | Primitive Data Types Explained | The Complete JavaScript Course | Ep.03
+# Data Types in JavaScript | Primitive Data Types Explained | The Complete JavaScript Course | Ep.03
 
 In JS 3, 3.56 etc. all are of datatype numbers
 
@@ -83,7 +87,7 @@ you' => Error
 
 ---
 
-String to int conversions:
+## String to int conversions:
 
 ```js
 typeof 100;
@@ -203,7 +207,7 @@ step 2 => The value undefined is replaced by 'ajay'
 
 ---
 
-🛑 Why do we use defer after src in script tag in head.
+## Why do we use defer after src in script tag in head.
 
 We use defer with src in script tag in head because it gives us an edge when the network connection is slow.
 
@@ -277,7 +281,7 @@ This is only related to let and const.
 
 ---
 
-Dialog Boxes in JavaScript | Alert, Confirm, & Prompt | The Complete JavaScript Course | Ep.06
+# Dialog Boxes in JavaScript | Alert, Confirm, & Prompt | The Complete JavaScript Course | Ep.06
 
 There are 3 types of dialog boxes:
 
@@ -521,17 +525,17 @@ Methods on Math Object: (Need brackets)
 - Math.random() => 0.6275536784164206
 - Math.random() => 0.5038095900697319
 
-// give numbers between 0 to 19
+## give numbers between 0 to 19
 
-- Math.floor(Math.random() \* 20) // 20 is not included
+-  `Math.floor(Math.random() * 20)` // 20 is not included
 
-// give numbers between 0 to 20
+## give numbers between 0 to 20
 
-- Math.floor(Math.random() \* 21)
+- `Math.floor(Math.random() * 21)`
 
-// give numbers between 10 to 20
-10 + Math.floor(Math.random() _ 11)
-basic formula `Math.floor(Math.random() _ (max - min + 1) + min);`
+## give numbers between 10 to 20
+`10 + Math.floor(Math.random() * 11)`
+basic formula `Math.floor(Math.random() * (max - min + 1) + min);`
 
 min -> 10
 max -> 20
@@ -609,10 +613,10 @@ Which values are false in JS:
 
 Falsy values in JS
 
-Numbers -> 0, -0 and NaN
-Strings -> ''
-undefined
-null
+Numbers -> 0, -0 and NaN  
+Strings -> ''  
+undefined  
+null  
 
 check via: Boolean(values)
 
@@ -779,7 +783,7 @@ eg. !0 -> true
 
 ---
 
-[Decision Making in JavaScript Using IF Statement | The Complete JavaScript Course | Ep.12](https://www.youtube.com/watch?v=6-dv7UETgJg&list=PLfEr2kn3s-bo4LwlbyZugHPavhcdW8YMC&index=16)
+# [Decision Making in JavaScript Using IF Statement | The Complete JavaScript Course | Ep.12](https://www.youtube.com/watch?v=6-dv7UETgJg&list=PLfEr2kn3s-bo4LwlbyZugHPavhcdW8YMC&index=16)
 
 Simple if-else program
 
@@ -868,7 +872,7 @@ Output
 
 ---
 
-[Switch Statement in JavaScript | Switch Case | The Complete JavaScript Course | Ep.15](https://www.youtube.com/watch?v=ebJVbq6BDFI&list=PLfEr2kn3s-bo4LwlbyZugHPavhcdW8YMC&index=17)
+# [Switch Statement in JavaScript | Switch Case | The Complete JavaScript Course | Ep.15](https://www.youtube.com/watch?v=ebJVbq6BDFI&list=PLfEr2kn3s-bo4LwlbyZugHPavhcdW8YMC&index=17)
 
 ```js
 const grade = "A";
@@ -1061,29 +1065,33 @@ In second step, we join the variable block (blue) and address-value block (red).
 See address in memory tab in dev tools (use ctrl + f to get search bar, type akash, locate its address (starts with @), then type this address in search bar and then finally see all variables address there in the search execution context option).
 
 ```js
-const firstName = 'Akash'
-const lastName = 'Singh'
-const userAge = 15
-const birthYear = 2000
-const isGraduate = false
-const hasJob = true
+const firstName = "Akash";
+const lastName = "Singh";
+const userAge = 15;
+const birthYear = 2000;
+const isGraduate = false;
+const hasJob = true;
 ```
 
-Variables having similar values are stored in same addresses 
-(eg. 
+Variables having similar values are stored in same addresses
+(eg.
+
 ```js
-const firstName = 'Akash'; 
-const lastName = 'Akash';
+const firstName = "Akash";
+const lastName = "Akash";
 // both will have same addresses
 ```
+
 ).
 
-(eg2. 
+(eg2.
+
 ```js
-const firstName = 'Akash'; 
-const lastName = 'Aka' + 'sh';
+const firstName = "Akash";
+const lastName = "Aka" + "sh";
 // both will have different addresses, though both will give same output but the way of creating them is different
 ```
+
 ).
 
 Falsy values all have fixed addresses in the dev tools
