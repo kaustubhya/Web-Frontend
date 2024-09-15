@@ -4,10 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="script.js" defer></script>
   </head>
   <body>
-    <h1>Hello World</h1>
-    <p></p>
+    <div id="myDiv">
+      <p>This is a <strong>paragraph</strong>.</p>
+    </div>
+
+    <script>
+      const div = document.getElementById("myDiv");
+      console.log(div.innerHTML); // Output: <p>This is a <strong>paragraph</strong>.</p>
+
+      // Changing innerHTML
+      div.innerHTML = "<h2>New Heading</h2>";
+      // The content becomes: <div id="myDiv"><h2>New Heading</h2></div>
+    </script>
   </body>
 </html>

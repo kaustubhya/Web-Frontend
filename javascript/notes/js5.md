@@ -216,3 +216,683 @@ DOM is a part of `Web APIs`. These APIs help us in running code from the code fr
 # What is BOM?
 
 Different Browser vendors like Chrome, FireFox, Safari has given us an Object Model called `BOM (Browser Object Model)` to interact with the Browser, we can move it, resize it, scroll it, see its history, locate it etc.. So BOM helps us do all of this and all these functionalities is present in a main object called `WINDOW OBJECT`. 
+
+
+---
+
+# [Number System and Number Object](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=6690e467b3f85c2c29d906ed)
+
+## Number Systems in JS
+- Binary
+- Octal
+- Decimal
+- Hexadecimal
+
+Decimal System: 123, 1.58, 1 etc..
+
+Octal System: 0124, 0o124, 01, 0o1 etc.. 
+
+Use the `0o123` instead of `0123` in VS Code console.
+
+### Octal
+
+Uses numbers from 0 to 7 (8 characters)
+
+```js
+const numOct = 0o15;
+console.log(numOct + 15);
+// numOct = 13, hence 13 + 15(decimal) = 28
+```
+
+Here in `0o15` -> `0o` represents the Number System (octal here) and `15` represents the number `15` in octal. Upon conversion, it will be changed to decimal (13)
+
+- `We cannot write 8 and 9 in octal (only 0 to 7)`
+
+## Binary
+
+`We can only put 0s and 1s here` (2 characters)
+
+```js
+const numB = 0b1100;
+console.log(numB)
+
+// 12 in decimal
+```
+
+`0b` Number System `1100` = binary number -> 12 in decimal
+
+## HexaDecimal 
+
+Uses 16 characters (0 to 9) and (A to F) (10 digits and 6 alphabets => 16 characters).
+
+eg
+```js
+const numH = 0x00AA7C9D;
+console.log(numH)
+
+// 11173021
+```
+
+Here also `0x` => Number System & `00AA7C9D` -> Number (Hexa Decimal)
+
+Upon conversion, we get 11173021 in decimal.
+
+Also here we cannot use any other character apart from `0 to F` else we get error.
+
+## Scientific (Exponential) Notation
+
+```js
+const numSPos = 1.4578e7;
+console.log(numSPos)
+// 1.4578 * (10 ^ 7) = 14578000
+
+const numSNeg = 1.4578e-3;
+console.log(numSNeg)
+// 1.4578 * (10 ^ -3) = 0.0014578
+
+
+```
+
+### Some Conventional Practices
+- The number before e should be from 0.0 to 9.9 i.e. always less than 10, if it is greater than 10, raise the value of the number after e by 1.
+
+```
+1234e4 // this is valid but not the right practice
+```
+
+## Let us now look at some properties in Number
+
+### 1. Number.MIN_SAFE_INTEGER & Number.MAX_SAFE_INTEGER
+
+These give us the maximum and minimum possible value of numbers that are safe to work with in JS.
+
+eg.
+```js
+console.log(Number.MAX_SAFE_INTEGER);
+// 9007199254740991 (2^53 - 1)
+
+console.log(Number.MIN_SAFE_INTEGER);
+// -9007199254740991 (2 ^ -53)
+```
+
+Any number greater than this will make our lives difficult while performing operations,
+
+eg. 
+`9007199254740991 + 4 = 9007199254740996 and not 9007199254740995`
+
+So performing simple operations here becomes difficult
+
+Solution -> Use BigInt for numbers greater than this
+
+`9007199254740991n + 4n = 9007199254740995n`
+
+Big int + big int ✅   
+Big int + int ❌
+
+Hence we did `+ 4n` and not `+ 4`
+
+```js
+const num = Number.MAX_SAFE_INTEGER;
+const ans = BigInt(num) + 4n;
+console.log(ans);
+
+// 9007199254740995n
+```
+
+### 2. Number.MAX_VALUE & Number.MIN_VALUE
+
+These give us the Maximum and Minimum value of number we can store in JS under the Number datatype (big int is separate from this). 
+
+```js
+console.log(Number.MAX_VALUE);
+// 1.7976931348623157e+308
+
+console.log(Number.MIN_VALUE);
+// 5e-324
+```
+
+If we try to add or subtract values from these, there will be no change seen in output as this number is too large to show value changes in the console.
+
+### 3. Number.EPSILON
+
+```js
+console.log(Number.EPSILON);
+// 2.220446049250313e-16
+```
+
+This is a number which is very small and is very close to 0.
+
+It is the difference between 1 and the nearest decimal value greater than 1. Any value smaller than this nearest decimal value will be treated as equal to 1.
+
+#### Where do we use this:
+
+- IN JS when we tend to add small decimal numbers, they are not always giving us the accurate result, so we can use epsilon to add a conditional check and the print the number.
+
+see this eg.
+
+```js
+const result = Math.abs(0.2 - 0.3 + 0.1);
+// result can be a negative number, so we try to make it positive via Math.abs()
+
+console.log(result);
+// Expected output: 2.7755575615628914e-17
+
+
+// We now check if this value is equal to 0 or not by comparing if it is smaller than Epsilon.
+
+// If it is true, then the result is 0
+// If it is false, then the result is not 0
+console.log(result < Number.EPSILON);
+// Expected output: true
+
+
+// Output:
+// 2.7755575615628914e-17 // result
+// true // yes this is equal to 0
+
+```
+
+some more egs
+```js
+1 + Number.EPSILON
+// 1.0000000000000002
+
+// 1 + 1.0000000000000002
+2
+
+1.0000000000000002
+// 1.0000000000000002
+
+1.0000000000000001
+// 1
+
+// This last line means that any number smaller than 1 + Number.Epsilon will be treated as one and not a unique number, this application is shown in the above example where we compare if the result is equal to 0 or not
+```
+### 4. Number.POSITIVE_INFINITY and Number.NEGATIVE_INFINITY
+
+These give us values `Infinity` and `-Infinity`
+
+### 5. Number.NaN
+
+This gives us the value `NaN`
+
+Always remember `NaN === NaN` is always false
+
+## Some Number methods
+
+### 1. Number.isNaN()
+
+Gives a true or false value and checks if a Number is NaN or not
+
+```js
+console.log(Number.isNaN(145));
+console.log(Number.isNaN(NaN));
+console.log(Number.isNaN('l'));
+console.log(Number.isNaN(''));
+
+
+// false
+// true
+// false
+// false
+```
+
+#### There is a `isNaN()` method also which first converts the value into a number and then checks if it is equal to NaN or not, it will give true if it is not able to convert the value into a number and false if it successfully converts the value into a number.
+
+#### But `Number.isNaN()` checks directly if the value is === NaN or not without converting it into a number.
+
+### 2. Number.isFinite()
+
+Tells us true or false if a number is finite or not
+
+```js
+console.log(Number.isFinite('5jklmf5'));
+console.log(Number.isFinite('50'));
+console.log(Number.isFinite(50));
+console.log(Number.isFinite(5000000000000e17));
+console.log(Number.isFinite(Infinity));
+
+
+// false
+// false
+// true
+// true
+// false
+
+```
+
+It will give true till `Number.MAX_VALUE` after that it will give false. 
+
+Same case for -ve numbers.
+
+### 3. Number.isInteger()
+
+Tells us true or false if a number is an integer or not
+
+```js
+console.log(Number.isInteger(-5.40));
+console.log(Number.isInteger('-5.40'));
+console.log(Number.isInteger(Infinity));
+console.log(Number.isInteger(-80));
+console.log(Number.isInteger(0));
+console.log(Number.isInteger(05));
+console.log(Number.isInteger(5.00));
+
+
+// false
+// false
+// false
+// true
+// true
+// true
+// true 
+
+```
+
+### 4. Number.isSafeInteger()
+
+Checks if a number is a `safe integer or not`.
+ 
+It ranges from MIN_SAFE_INTEGER to MAX_SAFE_INTEGER (i.e. returns `true` for all these values). For other values, including non integers and values greater or lesser than MIN_SAFE_INTEGER & MAX_SAFE_INTEGER, it gives `false`
+
+```js
+console.log(Number.isSafeInteger(Number.MAX_SAFE_INTEGER))
+console.log(Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1))
+console.log(Number.isSafeInteger(Number.MIN_SAFE_INTEGER))
+console.log(Number.isSafeInteger(Number.MIN_SAFE_INTEGER - 1))
+console.log(Number.isSafeInteger(3.59856))
+// checks for integer, not float
+
+// true
+// false
+// true
+// false
+// false
+```
+
+### 5. Number.parseInt()
+
+The Number.parseInt() static method parses a string argument and returns an integer of the specified radix or base.
+
+eg
+```js
+function roughScale(x, base) {
+  const parsed = Number.parseInt(x, base);
+  if (Number.isNaN(parsed)) {
+    return 0;
+  }
+  return parsed * 100;
+}
+
+console.log(roughScale(' 0xF', 16));
+// Expected output: 1500 as F = 15 and 15 * 100 = 1500
+
+console.log(roughScale('321', 2));
+// Expected output: 0 as 321 is not properly converted to binary, it returns NaN hence we get 0
+
+// Outputs:
+
+// > 1500
+// > 0
+```
+#### Explanation for case 2
+
+`console.log(roughScale('321', 2));`
+
+- The input '321' is interpreted in base 2 (binary).
+- Since 321 is not a valid binary number (binary digits can only be 0 or 1), the parsing fails, resulting in NaN.
+- The Number.isNaN(parsed) condition is true, so the function returns 0.
+
+#### Radix or Base
+An integer between 2 and 36 that represents the radix (the base in mathematical numeral systems) of the string.
+
+If radix is undefined or 0, it is assumed to be 10 except when the number begins with the code unit pairs 0x or 0X, in which case a radix of 16 is assumed.
+
+
+### 6. Number.parseFloat()
+
+The Number.parseFloat() static method parses an argument and returns a floating point number. If a number cannot be parsed from the argument, it returns NaN.
+
+```js
+function circumference(r) {
+  if (Number.isNaN(Number.parseFloat(r))) {
+    return 0;
+  }
+  return parseFloat(r) * 2.0 * Math.PI;
+}
+
+console.log(circumference('4.567abcdefgh'));
+// Expected output: 28.695307297889173
+
+console.log(circumference('abcdefgh'));
+// Expected output: 0
+
+
+// Outputs: 
+// > 28.695307297889173
+// > 0
+```
+
+---
+
+# [Introduction to DOM | Document Object Model](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=66337697e26226a2de07a9d1)
+
+Now this `document` inside Window Object is an object, so to see all its properties clearly, do 
+`console.dir(document)`
+
+This document has many properties: One of them is children. This children has HTML inside it.
+
+Inside this html children, we get another children property, this children has head and body as properties.
+
+Inside head children, we have, meta, title, etc...
+
+So this parent and its children keeps going on like a tree, this is called `DOM TREE`.
+
+`Every HTML element (tags + content) is an object behind the scenes.`
+
+So there is a thing in HTML called `HTML Parser`, this HTML parser reads all the HTML lines one by one and then converts each element into an object and then establishes a parent-child relation between different elements and thus makes a DOM Tree.
+
+![](./images/dom-tree-example.png)
+
+Also every attribute that we give to an element (which is an object), becomes that object's property where attribute name becomes the key and the attribute value becomes the value of that key.
+
+```js
+document.children
+
+// HTMLCollection [html]
+```
+This HTML Collection is an object, not an array as we can not use array methods with it, but to access its values i.e. children inside it, we will need to use (.) or ([]) notation.
+
+```js
+document.children[0]
+
+/*
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Front-End-Roadmap</title>
+  </head>
+  <body style="font-family: sans-serif">
+    <h1>Frontend Development for KSD</h1>
+    <hr />
+    <p>
+      <strong> Frontend development </strong> is the development of the
+      <a href="https://en.wikipedia.org/wiki/Graphical_user_interface">
+        graphical user interface
+      </a>
+      of a website, through the use of
+      <a href="https://en.wikipedia.org/wiki/HTML" target="_blank"> HTML,</a>
+
+      <a href="https://en.wikipedia.org/wiki/CSS" target="_blank">CSS,</a>
+      and
+      <a href="https://en.wikipedia.org/wiki/JavaScript">JavaScript,</a>
+      so that users can view and interact with that website.
+    </p>
+    <img
+      src="./assets/assets/images/html-css-javascript.png"
+      alt="html-css-javascript image"
+      style="width: 100%; max-width: 600px"
+    />
+
+    <ul>
+      <li>
+        <b><big>HTML</big>: </b>
+        HTML: The <big>HyperText Markup Language</big> or <em>HTML</em> is the
+        <small>standard</small>
+        markup language for documents designed to be displayed in a web browser.
+      </li>
+      <br />
+      <br />
+      <li>
+        <b>CSS: </b>
+        CSS: Cascading
+        <pre>            Style Sheets       </pre>
+        <i>(CSS)</i> is a style sheet language used for describing the
+        presentation of a document written in a markup language such as HTML or
+        XML
+      </li>
+
+      <br />
+      <img
+        src="./assets/assets/images/css.png"
+        alt="css-image"
+        style="width: 100%; max-width: 600px"
+        title="CSS Image"
+      />
+
+      <!-- <ol type="1" start="6"> -->
+      <ol>
+        <li>Pure CSS</li>
+        <br />
+
+        <li>Bootstrap <i>(Framework)</i></li>
+        <p></p>
+        <!-- 🛑 Also used for spaces -->
+        <li>Tailwind <i>(Framework)</i></li>
+        <br />
+
+        <li>SASS <i>(Preprocessor)</i></li>
+        <br />
+      </ol>
+
+      <br />
+      <br />
+
+      <li>
+        <b>JavaScript: </b>
+        JavaScript often abbreviated JS, is a programming language that is one
+        of the core technologies of the World Wide Web, alongside HTML and CSS.
+        It is use to add functionality in the website.
+      </li>
+      <br />
+      <img
+        src="./assets/assets/images/javascript.png"
+        alt="javascript-image"
+        style="width: 100%; max-width: 600px"
+      />
+      <br />
+      <br />
+      <ol type="a">
+        <li>Vanilla JS</li>
+        <br />
+
+        <li>jQuery <i>(Library)</i></li>
+        <br />
+
+        <li>React <i>(Framework)</i></li>
+        <br />
+
+        <li>Angular <em>(Framework)</em></li>
+        <br />
+
+        <li>Vue <i>(Framework)</i></li>
+        <br />
+
+        <li>Typescript <i>(Preprocessor)</i></li>
+        <br />
+      </ol>
+    </ul>
+    <p style="text-align: center">All copyrights &copy; reserved</p>
+  </body>
+</html>
+
+<!-- Html Entities: &copy; (copyright) -->
+
+<!-- &times; => X -->
+
+*/
+```
+
+But this is a long method, so we can directly access the body via `document.body`
+
+```js
+document.body
+// HTMLCollection(7) [h1, hr, p, img, ul, p, script]
+
+document.body.children[4]
+// <ul>...</ul> (full code inside <ul></ul>)
+```
+
+Now if we do:
+
+```js
+console.dir(document.body.children[4])
+```
+
+We will get ul in an object form, with many properties, some of them are:
+
+innerHTML and innerText
+
+let us see some examples:
+```js
+document.body.children
+// HTMLCollection(7) [h1, hr, p, img, ul, p, script]
+
+document.body.children[0].innerHTML
+// 'Frontend Development for KSD'
+
+document.body.children[0].innerHTML = 'I am a new heading'
+// 'I am a new heading'
+```
+
+So we can temporarily change this innerHTML in DOM and we will be able to see these changes too in the screen, but when we reload the page, the changes go away as this is only temporary and the old values come back.
+
+## innerHTML vs innerText vs textContent
+
+The properties innerHTML, innerText, and textContent are used in JavaScript to interact with the content of HTML elements, but they have important differences. Here's an explanation with examples for each:
+
+### 1. innerHTML
+Purpose: Used to get or set the HTML content inside an element.
+
+Behavior: It returns the element’s HTML, including tags. If you set it, any HTML code inside the string will be parsed and rendered as part of the document.
+
+Use Case: When you need to include HTML tags in your manipulation.
+
+Example:
+
+```html
+<div id="myDiv"><p>This is a <strong>paragraph</strong>.</p></div>
+
+<script>
+   const div = document.getElementById("myDiv");
+   console.log(div.innerHTML);  // Output: <p>This is a <strong>paragraph</strong>.</p>
+   
+   // Changing innerHTML
+   div.innerHTML = "<h2>New Heading</h2>";
+   // The content becomes: <div id="myDiv"><h2>New Heading</h2></div>
+</script>
+```
+
+#### Advantages: Can be used to dynamically insert HTML.
+
+#### Disadvantages: It's not safe when dealing with user input, as it can introduce XSS vulnerabilities if the input is not properly sanitized.
+
+### 2. innerText
+
+Purpose: Used to get or set the visible text content of an element, as seen by the user.
+
+Behavior: It strips out any HTML tags and returns only the text visible on the page. It respects styles such as display: none and visibility: hidden, so hidden elements are ignored.
+
+Use Case: When you want the user-visible text and ignore the underlying HTML structure.
+
+Example:
+
+```html
+<div id="myDiv"><p>This is a <strong>paragraph</strong>.</p></div>
+
+<script>
+   const div = document.getElementById("myDiv");
+   console.log(div.innerText);  // Output: This is a paragraph.
+   
+   // Changing innerText
+   div.innerText = "New text content";
+   // The content becomes: <div id="myDiv">New text content</div>
+</script>
+```
+
+#### Advantages: Only deals with visible text, ignoring HTML tags and hidden content.
+
+#### Disadvantages: Modifies only the text and can't be used to insert HTML.
+
+### 3. textContent
+
+Purpose: Used to get or set the text content of an element, including all child elements, but without parsing or recognizing HTML tags.
+
+Behavior: It returns all the text within the element, including text inside hidden elements, but it treats HTML tags as plain text.
+
+Use Case: When you want all text (including from hidden elements) but without any concern for HTML.
+
+Example:
+
+```html
+<div id="myDiv"><p>This is a <strong>paragraph</strong>.</p></div>
+
+<script>
+   const div = document.getElementById("myDiv");
+   console.log(div.textContent);  // Output: This is a paragraph.
+   
+   // Changing textContent
+   div.textContent = "Plain text content";
+   // The content becomes: <div id="myDiv">Plain text content</div>
+</script>
+```
+
+#### Advantages: Useful when you want to handle plain text and don’t care about formatting or hidden elements.
+
+#### Disadvantages: Doesn’t recognize HTML, treats everything as text.
+
+### Summary of Differences:
+
+
+| Property | Returns HTML |	Includes Hidden Elements |	Recognizes HTML Tags |
+| ---- | ---- | ---- | ----- | 
+| innerHTML |	Yes |	Yes |	Yes |
+| innerText |	No	| No	| No | 
+| textContent	| No	| Yes |	No |
+
+Each property serves different purposes depending on whether you need to manipulate HTML structure, get user-visible text, or retrieve the full plain-text content.
+
+### So `textContent` returns hidden text also but `innerText` does not return hidden text. Text can be hidden via display: none or visibility: hidden etc.
+---
+
+Some more tasks 
+
+1. Changing the content of h2 from Heading 2 to Hello World
+
+```js
+document.body.children
+// HTMLCollection(8) [h1, h2, hr, p, img, ul, p, script]
+
+document.body.children[1].innerText = 'Hello World'
+// 'Hello World'
+```
+
+2. Changing the image src
+
+```js
+document.body.children[4].src = 'https://cdn.pixabay.com/photo/2015/03/17/02/01/cubes-677092_1280.png'
+```
+
+Similarly we can select the paragraph element
+
+```js
+document.body.children[6]
+```
+
+but doing this again and again is too long, so we store it in a variable. 
+
+How is this possible? This is because all elements are objects, and all objects can be stored in a variable.
+
+```js
+const myPara = document.body.children[6]
+```
+
+now we can make modifications by calling myPara
+
+eg.
+
+```js
+myPara.innerText = 'Hello'
+```
