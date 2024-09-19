@@ -4,19 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
   </head>
-  <body>
-    <div id="myDiv">
-      <p>This is a <strong>paragraph</strong>.</p>
+  <body style="font-family: cursive;">
+    <h1>Append Child and Append</h1>
+    <div class="container">
+      <div class="card">
+        1
+      </div>
     </div>
-
-    <script>
-      const div = document.getElementById("myDiv");
-      console.log(div.innerHTML); // Output: <p>This is a <strong>paragraph</strong>.</p>
-
-      // Changing innerHTML
-      div.innerHTML = "<h2>New Heading</h2>";
-      // The content becomes: <div id="myDiv"><h2>New Heading</h2></div>
-    </script>
   </body>
 </html>

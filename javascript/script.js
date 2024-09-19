@@ -1,9 +1,12 @@
-const myImages = [
-    'https://pbs.twimg.com/profile_images/1249432648684109824/J0k1DN1T_400x400.jpg',
-    'https://thumbs.dreamstime.com/b/man-feeling-suspicious-face-expression-emotion-hesitating-facial-studio-shot-white-isolated-background-copy-space-90927117.jpg',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWCVnMftmnJZ8Nis5HnBeuahDMftylU9guag&s'
-  ]
-  
-  for(let img of allImages) {
-    allImages[num].src = myImages[num];
-  }
+const container = document.querySelector('.container');
+const card = document.querySelector('.card');
+const h1 = document.querySelector('h1')
+
+// Already 1 is created so we do from 2 to 100
+for(let i = 2; i < 101; i++) {
+  const newCard = card.cloneNode();
+  // document mein new card create nahi hua, memory mein copy create hua hai bas
+  newCard.innerText = i;
+  container.appendChild(document.body);
+  // donot do document.appendChild as only one element is allowed on document
+}

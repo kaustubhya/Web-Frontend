@@ -1292,3 +1292,279 @@ remove() -> removes a class
 toggle() -> If there is a class of the same name that matches the class inside (), then remove it, else add that class.
 
 ### With this, we can write the css in styles.css and use the above code to add or remove the class which will apply the css or remove the css from our element in the document.
+
+---
+
+# [DOM Traversal | Access Parent Sibling & Children Elements](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=6634b651d68373dc5ece104b)
+
+### Accessing Parents
+
+
+To access parent element of any element use `.parentElement`
+
+Keep using .parentElement in chain to access parent of parent, parent of that parent and so on.
+
+```js
+const myP = document.querySelector('#mySrc')
+
+myP
+// anchor tag with id='mySrc'
+
+myP.parentElement
+// p tag
+
+myP.parentElement.parentElement
+// body tag
+
+myP.parentElement.parentElement.parentElement
+// html tag
+```
+<br>
+
+
+### Accessing Children
+
+To access the children of any element, use `children`.
+
+```js
+const myP = document.querySelector('body')
+// undefined
+
+myP
+// <body style=​"font-family:​ sans-serif" class=​"vsc-initialized">​…​</body>​
+
+myP.children
+// HTMLCollection(8) [h1, h2, hr, p, img.myImg, ul, p, script]
+
+// chaining
+myP.children[3].children
+// HTMLCollection(5) [strong, a.hi.hi2.hi3, a.h1.h2, a#mySrc.src.src2, a, mySrc: a#mySrc.src.src2]
+```
+
+### Accessing Siblings
+
+Siblings types:
+- next sibling
+- previous sibling
+
+Also chaining is allowed here too!!
+
+
+```js
+const myP = document.querySelector('#mySrc')
+
+myP
+// Css anchor tag
+
+myP.nextElementSibling
+// JS anchor tag
+
+myP.nextElementSibling.nextElementSibling
+// null
+
+myP.previousElementSibling
+// JS anchor tag
+
+myP.previousElementSibling.previousElementSibling
+// CSS anchor tag
+```
+
+Siblings can come inside a parent only
+
+here all `a tags` and a `strong tag` are inside the `p tag` (parent) hence these `a and strong tag are siblings`
+
+```html
+<p>
+      <strong> Frontend development </strong> is the development of the
+      <a class='hi hi2 hi3' href="https://en.wikipedia.org/wiki/Graphical_user_interface">
+        graphical user interface
+      </a>
+      of a website, through the use of
+      <a class='h1 h2' href="https://en.wikipedia.org/wiki/HTML" target="_blank"> HTML,</a>
+
+      <a class="src src2" id="mySrc" href="https://en.wikipedia.org/wiki/CSS" target="_blank">CSS,</a>
+      and
+      <a href="https://en.wikipedia.org/wiki/JavaScript">JavaScript,</a>
+      so that users can view and interact with that website.
+    </p>
+```
+
+`nextSibling, parentNode, childNodes, previousSibling -> All these give nodes not elements.`
+
+---
+
+# [What is the Difference Between Element and Node?](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=6634b7ef34364c5bc1b814ad)
+
+Nodes contain, tags, tag's text content, spaces, comments, new lines and many more things. So they are different from elements.
+
+Use these methods to access parentNode, childNode, and sibling nodes:
+
+```sh
+`nextSibling, parentNode, childNodes, previousSibling` -> All these give nodes not elements.
+```
+
+`Nodes are objects`
+
+### Node name and Node type list
+
+| Name	| Type Value |
+| ---- | ----| 
+| ELEMENT_NODE	| 1 |
+| ATTRIBUTE_NODE |	2 |
+| TEXT_NODE |	3 |
+| CDATA_SECTION_NODE |	4 |
+| PROCESSING_INSTRUCTION_NODE |	7 |
+| COMMENT_NODE |	8 |
+| DOCUMENT_NODE	| 9 |
+| DOCUMENT_TYPE_NODE |	10 |
+| DOCUMENT_FRAGMENT_NODE	| 11 |
+
+### All elements are nodes but all nodes are not elements
+
+
+#### Eg -> Changing the text content of this text node
+```html
+    <h1>Frontend Development for KSD</h1>
+    "Hello There" // a text node
+```
+
+Code
+
+```js
+document.body.childNodes
+// NodeList(19) [text, h1, text, h2, text, hr, text, p, text, img.myImg, text, ul, text, p, text, comment, text, script, text]0: textassignedSlot: nullbaseURI: "http://127.0.0.1:5502/html/projects/front-end-roadmap/index.html"childNodes: NodeList []data: "\n    "firstChild: nullisConnected: truelastChild: nulllength: 5nextElementSibling: h1nextSibling: h1nodeName: "#text"nodeType: 3nodeValue: "\n    "ownerDocument: documentparentElement: body.vsc-initializedparentNode: body.vsc-initializedpreviousElementSibling: nullpreviousSibling: nulltextContent: "\n    "wholeText: "\n    "[[Prototype]]: Text1: h12: text3: h24: text5: hr6: text7: paccessKey: ""align: ""ariaAtomic: nullariaAutoComplete: nullariaBrailleLabel: nullariaBrailleRoleDescription: nullariaBusy: nullariaChecked: nullariaColCount: nullariaColIndex: nullariaColIndexText: nullariaColSpan: nullariaCurrent: nullariaDescription: nullariaDisabled: nullariaExpanded: nullariaHasPopup: nullariaHidden: nullariaInvalid: nullariaKeyShortcuts: nullariaLabel: nullariaLevel: nullariaLive: nullariaModal: nullariaMultiLine: nullariaMultiSelectable: nullariaOrientation: nullariaPlaceholder: nullariaPosInSet: nullariaPressed: nullariaReadOnly: nullariaRelevant: nullariaRequired: nullariaRoleDescription: nullariaRowCount: nullariaRowIndex: nullariaRowIndexText: nullariaRowSpan: nullariaSelected: nullariaSetSize: nullariaSort: nullariaValueMax: nullariaValueMin: nullariaValueNow: nullariaValueText: nullassignedSlot: nullattributeStyleMap: StylePropertyMap {size: 0}attributes: NamedNodeMap {length: 0}autocapitalize: ""autofocus: falsebaseURI: "http://127.0.0.1:5502/html/projects/front-end-roadmap/index.html"childElementCount: 5childNodes: NodeList(11) [text, strong, text, a.hi.hi2.hi3, text, a.h1.h2, text, a#mySrc.src.src2, text, a, text]children: HTMLCollection(5) [strong, a.hi.hi2.hi3, a.h1.h2, a#mySrc.src.src2, a, mySrc: a#mySrc.src.src2]classList: DOMTokenList [value: '']className: ""clientHeight: 37clientLeft: 0clientTop: 0clientWidth: 913contentEditable: "inherit"currentCSSZoom: 1dataset: DOMStringMap {}dir: ""draggable: falseeditContext: nullelementTiming: ""enterKeyHint: ""firstChild: textfirstElementChild: stronghidden: falseid: ""inert: falseinnerHTML: "\n      <strong> Frontend development </strong> is the development of the\n      <a class=\"hi hi2 hi3\" href=\"https://en.wikipedia.org/wiki/Graphical_user_interface\">\n        graphical user interface\n      </a>\n      of a website, through the use of\n      <a class=\"h1 h2\" href=\"https://en.wikipedia.org/wiki/HTML\" target=\"_blank\"> HTML,</a>\n\n      <a class=\"src src2\" id=\"mySrc\" href=\"https://en.wikipedia.org/wiki/CSS\" target=\"_blank\">CSS,</a>\n      and\n      <a href=\"https://en.wikipedia.org/wiki/JavaScript\">JavaScript,</a>\n      so that users can view and interact with that website.\n    "innerText: "Frontend development is the development of the graphical user interface of a website, through the use of HTML, CSS, and JavaScript, so that users can view and interact with that website."inputMode: ""isConnected: trueisContentEditable: falselang: ""lastChild: textlastElementChild: alocalName: "p"namespaceURI: "http://www.w3.org/1999/xhtml"nextElementSibling: img.myImgnextSibling: textnodeName: "P"nodeType: 1nodeValue: nullnonce: ""offsetHeight: 37offsetLeft: 8offsetParent: body.vsc-initializedoffsetTop: 182offsetWidth: 913onabort: nullonanimationend: nullonanimationiteration: nullonanimationstart: nullonauxclick: nullonbeforecopy: nullonbeforecut: nullonbeforeinput: nullonbeforematch: nullonbeforepaste: nullonbeforetoggle: nullonbeforexrselect: nullonblur: nulloncancel: nulloncanplay: nulloncanplaythrough: nullonchange: nullonclick: nullonclose: nulloncontentvisibilityautostatechange: nulloncontextlost: nulloncontextmenu: nulloncontextrestored: nulloncopy: nulloncuechange: nulloncut: nullondblclick: nullondrag: nullondragend: nullondragenter: nullondragleave: nullondragover: nullondragstart: nullondrop: nullondurationchange: nullonemptied: nullonended: nullonerror: nullonfocus: nullonformdata: nullonfullscreenchange: nullonfullscreenerror: nullongotpointercapture: nulloninput: nulloninvalid: nullonkeydown: nullonkeypress: nullonkeyup: nullonload: nullonloadeddata: nullonloadedmetadata: nullonloadstart: nullonlostpointercapture: nullonmousedown: nullonmouseenter: nullonmouseleave: nullonmousemove: nullonmouseout: nullonmouseover: nullonmouseup: nullonmousewheel: nullonpaste: nullonpause: nullonplay: nullonplaying: nullonpointercancel: nullonpointerdown: nullonpointerenter: nullonpointerleave: nullonpointermove: nullonpointerout: nullonpointerover: nullonpointerrawupdate: nullonpointerup: nullonprogress: nullonratechange: nullonreset: nullonresize: nullonscroll: nullonscrollend: nullonsearch: nullonsecuritypolicyviolation: nullonseeked: nullonseeking: nullonselect: nullonselectionchange: nullonselectstart: nullonslotchange: nullonstalled: nullonsubmit: nullonsuspend: nullontimeupdate: nullontoggle: nullontransitioncancel: nullontransitionend: nullontransitionrun: nullontransitionstart: nullonvolumechange: nullonwaiting: nullonwebkitanimationend: nullonwebkitanimationiteration: nullonwebkitanimationstart: nullonwebkitfullscreenchange: nullonwebkitfullscreenerror: nullonwebkittransitionend: nullonwheel: nullouterHTML: "<p>\n      <strong> Frontend development </strong> is the development of the\n      <a class=\"hi hi2 hi3\" href=\"https://en.wikipedia.org/wiki/Graphical_user_interface\">\n        graphical user interface\n      </a>\n      of a website, through the use of\n      <a class=\"h1 h2\" href=\"https://en.wikipedia.org/wiki/HTML\" target=\"_blank\"> HTML,</a>\n\n      <a class=\"src src2\" id=\"mySrc\" href=\"https://en.wikipedia.org/wiki/CSS\" target=\"_blank\">CSS,</a>\n      and\n      <a href=\"https://en.wikipedia.org/wiki/JavaScript\">JavaScript,</a>\n      so that users can view and interact with that website.\n    </p>"outerText: "Frontend development is the development of the graphical user interface of a website, through the use of HTML, CSS, and JavaScript, so that users can view and interact with that website."ownerDocument: documentparentElement: body.vsc-initializedparentNode: body.vsc-initializedpart: DOMTokenList [value: '']popover: nullprefix: nullpreviousElementSibling: hrpreviousSibling: textrole: nullscrollHeight: 37scrollLeft: 0scrollTop: 0scrollWidth: 913shadowRoot: nullslot: ""spellcheck: truestyle: CSSStyleDeclaration {accentColor: '', additiveSymbols: '', alignContent: '', alignItems: '', alignSelf: '', …}tabIndex: -1tagName: "P"textContent: "\n       Frontend development  is the development of the\n      \n        graphical user interface\n      \n      of a website, through the use of\n       HTML,\n\n      CSS,\n      and\n      JavaScript,\n      so that users can view and interact with that website.\n    "title: ""translate: truevirtualKeyboardPolicy: ""writingSuggestions: "true"[[Prototype]]: HTMLParagraphElement(...)8: text9: img.myImg10: text11: ul12: text13: p14: text15: comment16: text17: script18: textlength: 19[[Prototype]]: NodeList
+
+document.body.childNodes[2]
+// " "Hello There" "
+
+console.dir(document.body.childNodes[2])
+// VM6520:1 #textassignedSlot: nullbaseURI: "http://127.0.0.1:5502/html/projects/front-end-roadmap/index.html"childNodes: NodeList []data: "\n    \"Hello There\"\n    "firstChild: nullisConnected: truelastChild: nulllength: 23nextElementSibling: h2nextSibling: h2nodeName: "#text"nodeType: 3nodeValue: "\n    \"Hello There\"\n    "ownerDocument: documentparentElement: body.vsc-initializedparentNode: body.vsc-initializedpreviousElementSibling: h1previousSibling: h1textContent: "\n    \"Hello There\"\n    "wholeText: "\n    \"Hello There\"\n    "[[Prototype]]: Text
+// undefined
+
+document.body.childNodes[2].nodeValue = 'Changed Value'
+// 'Changed Value'
+```
+
+---
+
+# [append and appendChild?](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=6634bc5034364c5bc1b89e4c)
+
+## appendChild()
+appendChild -> Sabse last mein add karna
+
+eg
+```js
+const container = document.querySelector('.container');
+const card = document.querySelector('.card');
+const h1 = document.querySelector('h1')
+
+container.appendChild(h1);
+```
+
+This is `cut and paste` i.e. it cuts the h1 tag from its place and pastes (appends) it after the card element, i.e. at the end of container element.
+
+
+for `copy and paste`, we will use `cloneNode()`
+
+This has the option to make a shallow copy or a deep copy
+
+- Shallow Copy (only the tag) 
+- Deep Copy (tags + text inside tags)
+
+eg
+
+```js
+h1
+// <h1>​Append Child and Append​</h1>​
+
+// Shallow Copy
+h1.cloneNode()
+// <h1>​</h1>​
+
+// Deep Copy -> (deep = true)
+h1.cloneNode(true)
+<h1>​Append Child and Append​</h1>​
+```
+
+Here the copied element h1 will not show any changes,
+
+So to make it show changes
+
+So to do cut (copy and paste)
+
+eg
+
+```js
+const container = document.querySelector('.container');
+const card = document.querySelector('.card');
+const h1 = document.querySelector('h1')
+
+container.appendChild(h1.cloneNode(true));
+```
+
+task -> Copy card inside container 100 times
+
+```js
+const container = document.querySelector('.container');
+const card = document.querySelector('.card');
+const h1 = document.querySelector('h1')
+
+// Already 1 is created so we do from 2 to 100
+for(let i = 2; i < 101; i++) {
+  const newCard = card.cloneNode();
+  // document mein new card create nahi hua, memory mein copy create hua hai bas
+  newCard.innerText = i;
+  container.appendChild(newCard);
+  // donot do document.appendChild as only one element is allowed on document
+}
+```
+
+
+If we need to do same via html
+
+```html
+.card*n{$}
+
+n -> no. of times we need a tag to be duplicated 
+```
+
+`We can not append parents to children using appendChild()`
+
+We can do it with other things like children, siblings etc.
+
+## append()
+
+### This is similar to appendChild() but with a few differences
+
+1. append() does not return any value like appendChild() (appendChild returns us the text node that it has appended)
+
+2. We can append things like strings, using append(), but we cannot do so via appendChild()
+
+`container.append('string')`
+
+we can append textNodes, elements and children and siblings using appendChild()
+
+We can append all these using append() too but we can also append strings too!!
+
+```js
+container.append("Hello World")
+```
+
+To append Strings via appendChild(), we need to first convert it into a text node.
+
+i.e. create a new text node with the string 
+
+```js
+const newTextNode = document.createTextNode('Hello World')
+container.appendChild(newTextNode)
+```
+
+This will work
+
+3. We can also append multiple things at the same time using append()
+
+```js
+container.append(h1, "Hello World", "three")
+```
+
+---
