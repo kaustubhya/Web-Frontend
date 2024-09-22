@@ -1251,37 +1251,36 @@ anchorArr.map((col) => {
 
 Do like this to avoid repetition. `Also use backticks to write code in multiple lines`.
 
-
 ### Selecting Classes using classList
 
 eg
 
 ```js
-document.querySelector('#mySrc')
+document.querySelector("#mySrc");
 // <a class=​"src src2" id=​"mySrc" href=​"https:​/​/​en.wikipedia.org/​wiki/​CSS" target=​"_blank">​CSS,​</a>​
 
-document.querySelector('#mySrc').classList
+document.querySelector("#mySrc").classList;
 // DOMTokenList(2) ['src', 'src2', value: 'src src2']
 
-document.querySelector('#mySrc').classList.add('src3')
+document.querySelector("#mySrc").classList.add("src3");
 // undefined
 
-document.querySelector('#mySrc').classList
+document.querySelector("#mySrc").classList;
 // DOMTokenList(3) ['src', 'src2', 'src3', value: 'src src2 src3']
 
-document.querySelector('#mySrc').classList
+document.querySelector("#mySrc").classList;
 // DOMTokenList(3) ['src', 'src2', 'src3', value: 'src src2 src3']
 
-document.querySelector('#mySrc').classList.remove('src3')
+document.querySelector("#mySrc").classList.remove("src3");
 // undefined
 
-document.querySelector('#mySrc').classList
+document.querySelector("#mySrc").classList;
 // DOMTokenList(2) ['src', 'src2', value: 'src src2']
 
-document.querySelector('#mySrc').classList.toggle('src5')
+document.querySelector("#mySrc").classList.toggle("src5");
 // true
 
-document.querySelector('#mySrc').classList
+document.querySelector("#mySrc").classList;
 // DOMTokenList(3) ['src', 'src2', 'src5', value: 'src src2 src5']
 ```
 
@@ -1299,73 +1298,72 @@ toggle() -> If there is a class of the same name that matches the class inside (
 
 ### Accessing Parents
 
-
 To access parent element of any element use `.parentElement`
 
 Keep using .parentElement in chain to access parent of parent, parent of that parent and so on.
 
 ```js
-const myP = document.querySelector('#mySrc')
+const myP = document.querySelector("#mySrc");
 
-myP
+myP;
 // anchor tag with id='mySrc'
 
-myP.parentElement
+myP.parentElement;
 // p tag
 
-myP.parentElement.parentElement
+myP.parentElement.parentElement;
 // body tag
 
-myP.parentElement.parentElement.parentElement
+myP.parentElement.parentElement.parentElement;
 // html tag
 ```
-<br>
 
+<br>
 
 ### Accessing Children
 
 To access the children of any element, use `children`.
 
 ```js
-const myP = document.querySelector('body')
+const myP = document.querySelector("body");
 // undefined
 
-myP
+myP;
 // <body style=​"font-family:​ sans-serif" class=​"vsc-initialized">​…​</body>​
 
-myP.children
+myP.children;
 // HTMLCollection(8) [h1, h2, hr, p, img.myImg, ul, p, script]
 
 // chaining
-myP.children[3].children
+myP.children[3].children;
 // HTMLCollection(5) [strong, a.hi.hi2.hi3, a.h1.h2, a#mySrc.src.src2, a, mySrc: a#mySrc.src.src2]
 ```
 
 ### Accessing Siblings
 
 Siblings types:
+
 - next sibling
 - previous sibling
 
 Also chaining is allowed here too!!
 
-
 ```js
-const myP = document.querySelector('#mySrc')
+const myP = document.querySelector("#mySrc");
 
-myP
+myP;
 // Css anchor tag
 
-myP.nextElementSibling
+myP.nextElementSibling;
 // JS anchor tag
 
-myP.nextElementSibling.nextElementSibling
+myP.nextElementSibling.nextElementSibling;
 // null
 
-myP.previousElementSibling
+myP.previousElementSibling;
 // JS anchor tag
 
-myP.previousElementSibling.previousElementSibling
+myP.previousElementSibling.previousElementSibling;
 // CSS anchor tag
 ```
 
@@ -1375,18 +1373,29 @@ here all `a tags` and a `strong tag` are inside the `p tag` (parent) hence these
 
 ```html
 <p>
-      <strong> Frontend development </strong> is the development of the
-      <a class='hi hi2 hi3' href="https://en.wikipedia.org/wiki/Graphical_user_interface">
-        graphical user interface
-      </a>
-      of a website, through the use of
-      <a class='h1 h2' href="https://en.wikipedia.org/wiki/HTML" target="_blank"> HTML,</a>
+  <strong> Frontend development </strong> is the development of the
+  <a
+    class="hi hi2 hi3"
+    href="https://en.wikipedia.org/wiki/Graphical_user_interface"
+  >
+    graphical user interface
+  </a>
+  of a website, through the use of
+  <a class="h1 h2" href="https://en.wikipedia.org/wiki/HTML" target="_blank">
+    HTML,</a
+  >
 
-      <a class="src src2" id="mySrc" href="https://en.wikipedia.org/wiki/CSS" target="_blank">CSS,</a>
-      and
-      <a href="https://en.wikipedia.org/wiki/JavaScript">JavaScript,</a>
-      so that users can view and interact with that website.
-    </p>
+  <a
+    class="src src2"
+    id="mySrc"
+    href="https://en.wikipedia.org/wiki/CSS"
+    target="_blank"
+    >CSS,</a
+  >
+  and
+  <a href="https://en.wikipedia.org/wiki/JavaScript">JavaScript,</a>
+  so that users can view and interact with that website.
+</p>
 ```
 
 `nextSibling, parentNode, childNodes, previousSibling -> All these give nodes not elements.`
@@ -1407,41 +1416,41 @@ Use these methods to access parentNode, childNode, and sibling nodes:
 
 ### Node name and Node type list
 
-| Name	| Type Value |
-| ---- | ----| 
-| ELEMENT_NODE	| 1 |
-| ATTRIBUTE_NODE |	2 |
-| TEXT_NODE |	3 |
-| CDATA_SECTION_NODE |	4 |
-| PROCESSING_INSTRUCTION_NODE |	7 |
-| COMMENT_NODE |	8 |
-| DOCUMENT_NODE	| 9 |
-| DOCUMENT_TYPE_NODE |	10 |
-| DOCUMENT_FRAGMENT_NODE	| 11 |
+| Name                        | Type Value |
+| --------------------------- | ---------- |
+| ELEMENT_NODE                | 1          |
+| ATTRIBUTE_NODE              | 2          |
+| TEXT_NODE                   | 3          |
+| CDATA_SECTION_NODE          | 4          |
+| PROCESSING_INSTRUCTION_NODE | 7          |
+| COMMENT_NODE                | 8          |
+| DOCUMENT_NODE               | 9          |
+| DOCUMENT_TYPE_NODE          | 10         |
+| DOCUMENT_FRAGMENT_NODE      | 11         |
 
 ### All elements are nodes but all nodes are not elements
 
-
 #### Eg -> Changing the text content of this text node
+
 ```html
-    <h1>Frontend Development for KSD</h1>
-    "Hello There" // a text node
+<h1>Frontend Development for KSD</h1>
+"Hello There" // a text node
 ```
 
 Code
 
 ```js
-document.body.childNodes
+document.body.childNodes;
 // NodeList(19) [text, h1, text, h2, text, hr, text, p, text, img.myImg, text, ul, text, p, text, comment, text, script, text]0: textassignedSlot: nullbaseURI: "http://127.0.0.1:5502/html/projects/front-end-roadmap/index.html"childNodes: NodeList []data: "\n    "firstChild: nullisConnected: truelastChild: nulllength: 5nextElementSibling: h1nextSibling: h1nodeName: "#text"nodeType: 3nodeValue: "\n    "ownerDocument: documentparentElement: body.vsc-initializedparentNode: body.vsc-initializedpreviousElementSibling: nullpreviousSibling: nulltextContent: "\n    "wholeText: "\n    "[[Prototype]]: Text1: h12: text3: h24: text5: hr6: text7: paccessKey: ""align: ""ariaAtomic: nullariaAutoComplete: nullariaBrailleLabel: nullariaBrailleRoleDescription: nullariaBusy: nullariaChecked: nullariaColCount: nullariaColIndex: nullariaColIndexText: nullariaColSpan: nullariaCurrent: nullariaDescription: nullariaDisabled: nullariaExpanded: nullariaHasPopup: nullariaHidden: nullariaInvalid: nullariaKeyShortcuts: nullariaLabel: nullariaLevel: nullariaLive: nullariaModal: nullariaMultiLine: nullariaMultiSelectable: nullariaOrientation: nullariaPlaceholder: nullariaPosInSet: nullariaPressed: nullariaReadOnly: nullariaRelevant: nullariaRequired: nullariaRoleDescription: nullariaRowCount: nullariaRowIndex: nullariaRowIndexText: nullariaRowSpan: nullariaSelected: nullariaSetSize: nullariaSort: nullariaValueMax: nullariaValueMin: nullariaValueNow: nullariaValueText: nullassignedSlot: nullattributeStyleMap: StylePropertyMap {size: 0}attributes: NamedNodeMap {length: 0}autocapitalize: ""autofocus: falsebaseURI: "http://127.0.0.1:5502/html/projects/front-end-roadmap/index.html"childElementCount: 5childNodes: NodeList(11) [text, strong, text, a.hi.hi2.hi3, text, a.h1.h2, text, a#mySrc.src.src2, text, a, text]children: HTMLCollection(5) [strong, a.hi.hi2.hi3, a.h1.h2, a#mySrc.src.src2, a, mySrc: a#mySrc.src.src2]classList: DOMTokenList [value: '']className: ""clientHeight: 37clientLeft: 0clientTop: 0clientWidth: 913contentEditable: "inherit"currentCSSZoom: 1dataset: DOMStringMap {}dir: ""draggable: falseeditContext: nullelementTiming: ""enterKeyHint: ""firstChild: textfirstElementChild: stronghidden: falseid: ""inert: falseinnerHTML: "\n      <strong> Frontend development </strong> is the development of the\n      <a class=\"hi hi2 hi3\" href=\"https://en.wikipedia.org/wiki/Graphical_user_interface\">\n        graphical user interface\n      </a>\n      of a website, through the use of\n      <a class=\"h1 h2\" href=\"https://en.wikipedia.org/wiki/HTML\" target=\"_blank\"> HTML,</a>\n\n      <a class=\"src src2\" id=\"mySrc\" href=\"https://en.wikipedia.org/wiki/CSS\" target=\"_blank\">CSS,</a>\n      and\n      <a href=\"https://en.wikipedia.org/wiki/JavaScript\">JavaScript,</a>\n      so that users can view and interact with that website.\n    "innerText: "Frontend development is the development of the graphical user interface of a website, through the use of HTML, CSS, and JavaScript, so that users can view and interact with that website."inputMode: ""isConnected: trueisContentEditable: falselang: ""lastChild: textlastElementChild: alocalName: "p"namespaceURI: "http://www.w3.org/1999/xhtml"nextElementSibling: img.myImgnextSibling: textnodeName: "P"nodeType: 1nodeValue: nullnonce: ""offsetHeight: 37offsetLeft: 8offsetParent: body.vsc-initializedoffsetTop: 182offsetWidth: 913onabort: nullonanimationend: nullonanimationiteration: nullonanimationstart: nullonauxclick: nullonbeforecopy: nullonbeforecut: nullonbeforeinput: nullonbeforematch: nullonbeforepaste: nullonbeforetoggle: nullonbeforexrselect: nullonblur: nulloncancel: nulloncanplay: nulloncanplaythrough: nullonchange: nullonclick: nullonclose: nulloncontentvisibilityautostatechange: nulloncontextlost: nulloncontextmenu: nulloncontextrestored: nulloncopy: nulloncuechange: nulloncut: nullondblclick: nullondrag: nullondragend: nullondragenter: nullondragleave: nullondragover: nullondragstart: nullondrop: nullondurationchange: nullonemptied: nullonended: nullonerror: nullonfocus: nullonformdata: nullonfullscreenchange: nullonfullscreenerror: nullongotpointercapture: nulloninput: nulloninvalid: nullonkeydown: nullonkeypress: nullonkeyup: nullonload: nullonloadeddata: nullonloadedmetadata: nullonloadstart: nullonlostpointercapture: nullonmousedown: nullonmouseenter: nullonmouseleave: nullonmousemove: nullonmouseout: nullonmouseover: nullonmouseup: nullonmousewheel: nullonpaste: nullonpause: nullonplay: nullonplaying: nullonpointercancel: nullonpointerdown: nullonpointerenter: nullonpointerleave: nullonpointermove: nullonpointerout: nullonpointerover: nullonpointerrawupdate: nullonpointerup: nullonprogress: nullonratechange: nullonreset: nullonresize: nullonscroll: nullonscrollend: nullonsearch: nullonsecuritypolicyviolation: nullonseeked: nullonseeking: nullonselect: nullonselectionchange: nullonselectstart: nullonslotchange: nullonstalled: nullonsubmit: nullonsuspend: nullontimeupdate: nullontoggle: nullontransitioncancel: nullontransitionend: nullontransitionrun: nullontransitionstart: nullonvolumechange: nullonwaiting: nullonwebkitanimationend: nullonwebkitanimationiteration: nullonwebkitanimationstart: nullonwebkitfullscreenchange: nullonwebkitfullscreenerror: nullonwebkittransitionend: nullonwheel: nullouterHTML: "<p>\n      <strong> Frontend development </strong> is the development of the\n      <a class=\"hi hi2 hi3\" href=\"https://en.wikipedia.org/wiki/Graphical_user_interface\">\n        graphical user interface\n      </a>\n      of a website, through the use of\n      <a class=\"h1 h2\" href=\"https://en.wikipedia.org/wiki/HTML\" target=\"_blank\"> HTML,</a>\n\n      <a class=\"src src2\" id=\"mySrc\" href=\"https://en.wikipedia.org/wiki/CSS\" target=\"_blank\">CSS,</a>\n      and\n      <a href=\"https://en.wikipedia.org/wiki/JavaScript\">JavaScript,</a>\n      so that users can view and interact with that website.\n    </p>"outerText: "Frontend development is the development of the graphical user interface of a website, through the use of HTML, CSS, and JavaScript, so that users can view and interact with that website."ownerDocument: documentparentElement: body.vsc-initializedparentNode: body.vsc-initializedpart: DOMTokenList [value: '']popover: nullprefix: nullpreviousElementSibling: hrpreviousSibling: textrole: nullscrollHeight: 37scrollLeft: 0scrollTop: 0scrollWidth: 913shadowRoot: nullslot: ""spellcheck: truestyle: CSSStyleDeclaration {accentColor: '', additiveSymbols: '', alignContent: '', alignItems: '', alignSelf: '', …}tabIndex: -1tagName: "P"textContent: "\n       Frontend development  is the development of the\n      \n        graphical user interface\n      \n      of a website, through the use of\n       HTML,\n\n      CSS,\n      and\n      JavaScript,\n      so that users can view and interact with that website.\n    "title: ""translate: truevirtualKeyboardPolicy: ""writingSuggestions: "true"[[Prototype]]: HTMLParagraphElement(...)8: text9: img.myImg10: text11: ul12: text13: p14: text15: comment16: text17: script18: textlength: 19[[Prototype]]: NodeList
 
-document.body.childNodes[2]
+document.body.childNodes[2];
 // " "Hello There" "
 
-console.dir(document.body.childNodes[2])
+console.dir(document.body.childNodes[2]);
 // VM6520:1 #textassignedSlot: nullbaseURI: "http://127.0.0.1:5502/html/projects/front-end-roadmap/index.html"childNodes: NodeList []data: "\n    \"Hello There\"\n    "firstChild: nullisConnected: truelastChild: nulllength: 23nextElementSibling: h2nextSibling: h2nodeName: "#text"nodeType: 3nodeValue: "\n    \"Hello There\"\n    "ownerDocument: documentparentElement: body.vsc-initializedparentNode: body.vsc-initializedpreviousElementSibling: h1previousSibling: h1textContent: "\n    \"Hello There\"\n    "wholeText: "\n    \"Hello There\"\n    "[[Prototype]]: Text
 // undefined
 
-document.body.childNodes[2].nodeValue = 'Changed Value'
+document.body.childNodes[2].nodeValue = "Changed Value";
 // 'Changed Value'
 ```
 
@@ -1450,25 +1459,26 @@ document.body.childNodes[2].nodeValue = 'Changed Value'
 # [append and appendChild?](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=6634bc5034364c5bc1b89e4c)
 
 ## appendChild()
+
 appendChild -> Sabse last mein add karna
 
 eg
+
 ```js
-const container = document.querySelector('.container');
-const card = document.querySelector('.card');
-const h1 = document.querySelector('h1')
+const container = document.querySelector(".container");
+const card = document.querySelector(".card");
+const h1 = document.querySelector("h1");
 
 container.appendChild(h1);
 ```
 
 This is `cut and paste` i.e. it cuts the h1 tag from its place and pastes (appends) it after the card element, i.e. at the end of container element.
 
-
 for `copy and paste`, we will use `cloneNode()`
 
 This has the option to make a shallow copy or a deep copy
 
-- Shallow Copy (only the tag) 
+- Shallow Copy (only the tag)
 - Deep Copy (tags + text inside tags)
 
 eg
@@ -1495,9 +1505,9 @@ So to do cut (copy and paste)
 eg
 
 ```js
-const container = document.querySelector('.container');
-const card = document.querySelector('.card');
-const h1 = document.querySelector('h1')
+const container = document.querySelector(".container");
+const card = document.querySelector(".card");
+const h1 = document.querySelector("h1");
 
 container.appendChild(h1.cloneNode(true));
 ```
@@ -1505,12 +1515,12 @@ container.appendChild(h1.cloneNode(true));
 task -> Copy card inside container 100 times
 
 ```js
-const container = document.querySelector('.container');
-const card = document.querySelector('.card');
-const h1 = document.querySelector('h1')
+const container = document.querySelector(".container");
+const card = document.querySelector(".card");
+const h1 = document.querySelector("h1");
 
 // Already 1 is created so we do from 2 to 100
-for(let i = 2; i < 101; i++) {
+for (let i = 2; i < 101; i++) {
   const newCard = card.cloneNode();
   // document mein new card create nahi hua, memory mein copy create hua hai bas
   newCard.innerText = i;
@@ -1519,13 +1529,10 @@ for(let i = 2; i < 101; i++) {
 }
 ```
 
-
 If we need to do same via html
 
 ```html
-.card*n{$}
-
-n -> no. of times we need a tag to be duplicated 
+.card*n{$} n -> no. of times we need a tag to be duplicated
 ```
 
 `We can not append parents to children using appendChild()`
@@ -1547,16 +1554,16 @@ we can append textNodes, elements and children and siblings using appendChild()
 We can append all these using append() too but we can also append strings too!!
 
 ```js
-container.append("Hello World")
+container.append("Hello World");
 ```
 
 To append Strings via appendChild(), we need to first convert it into a text node.
 
-i.e. create a new text node with the string 
+i.e. create a new text node with the string
 
 ```js
-const newTextNode = document.createTextNode('Hello World')
-container.appendChild(newTextNode)
+const newTextNode = document.createTextNode("Hello World");
+container.appendChild(newTextNode);
 ```
 
 This will work
@@ -1564,7 +1571,638 @@ This will work
 3. We can also append multiple things at the same time using append()
 
 ```js
-container.append(h1, "Hello World", "three")
+container.append(h1, "Hello World", "three");
 ```
 
+### Append vs AppendChild
+
+The append method appends elements as the last child of a parent element, while the appendChild method appends elements as the next sibling of the last child of a parent element.
+
 ---
+
+# [Creating Elements using JavaScript](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=6634bf643c8d51c22a7b133e)
+
+Task -> You have an image of a pokemon, clone that image, change the source and make 100s of those images.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body style="font-family: cursive">
+    <h1>Dom.create Element</h1>
+    <div class="container">
+      <img
+        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+        alt="img1"
+      />
+    </div>
+  </body>
+</html>
+```
+
+```css
+.container {
+  color: green;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+```
+
+```js
+const h1 = document.querySelector("h1");
+const container = document.querySelector(".container");
+
+const img = document.querySelector(".container img");
+
+for (let i = 2; i < 1010; i++) {
+  const copy = img.cloneNode(true);
+  copy.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png`;
+  container.appendChild(copy);
+}
+
+// make 100 clones, all with different src and append them all
+```
+
+Now if we did not have an image already, then what?? How would you clone it??
+
+We can use `document.createElement()` for this, using this, we can create any element (this is an object so use console.dir to see its properties)
+
+We can create any element (even custom elements too) using this property.
+
+Custom elements are inline.
+
+Task -> Create a 'p' element and append it:
+
+```js
+const para = document.createElement("p");
+
+document.body.append(para);
+```
+
+Write something in it
+
+```js
+const para = document.createElement("p");
+para.innerText = "Jai HO";
+
+document.body.append(para);
+```
+
+Here we appended para in body so it goes in to the last place (after script, before body)
+
+Alternatively, we can also append first then insert the innerText.
+
+Adding some more things here like className, id, another class via classList
+
+```js
+const h1 = document.querySelector("h1");
+const container = document.querySelector(".container");
+
+const img = document.querySelector(".container img");
+
+const para = document.createElement("p");
+para.innerText = "Jai HO";
+para.id = "my-ID";
+para.className = "ck";
+para.classList.add("my-Class");
+
+document.body.append(para);
+```
+
+Doing the pokemon task with create element
+
+- use a loop
+- create an img element
+- set its source
+- append it in container
+
+```js
+const h1 = document.querySelector("h1");
+const container = document.querySelector(".container");
+
+for (let i = 1; i < 101; i++) {
+  const image = document.createElement("img");
+  image.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png`;
+
+  container.append(image);
+}
+```
+
+Recognized Elements are created with all its attributes (properties).
+
+Unknown elements are created in a different way.
+
+## Task -> From the previous task, we will create the images, and number them, each number below the image
+
+- For this, we create another container, this will have image and text (do it inside loop)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body style="font-family: cursive">
+    <h1>Dom.create Element</h1>
+    <div class="container"></div>
+  </body>
+</html>
+```
+
+```css
+.container {
+  color: green;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.container-inner {
+  display: flex;
+  flex-direction: column;
+}
+```
+
+```js
+const h1 = document.querySelector("h1");
+const container = document.querySelector(".container");
+// const container2 = document.querySelector('.container-inner')
+
+for (let i = 1; i < 101; i++) {
+  const container2 = document.createElement("div");
+  container2.className = "container-inner";
+  const image = document.createElement("img");
+  const number = document.createElement("p");
+  image.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png`;
+  number.innerText = `Image - ${i}`;
+  number.style.color = "#000";
+  number.style.textAlign = "center";
+  container.append(container2);
+  container2.append(image, number);
+}
+```
+
+So when the container2 is created and its class is named, its CSS also becomes active.
+
+We can also use,
+
+```js
+const html = `
+<img src="${i}" />
+<p>${i}</p> 
+`;
+container2.innerHTML = html;
+```
+
+To shorten our work but it is not recommended.
+
+Another way to add 100 pokemons
+
+```js
+const h1 = document.querySelector("h1");
+const container = document.querySelector(".container");
+// const container2 = document.querySelector('.container-inner')
+
+let html = ``;
+
+for (let i = 0; i <= 100; i++) {
+  html += `
+<div class='container-inner'>
+  <img src="${i}" />
+  <p>${i}</p> 
+</div>
+`;
+  container.innerHTML = html;
+}
+```
+
+`This creates a verry long string of html.`
+
+---
+
+# [Removing Elements using JavaScript](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=6634c15234364c5bc1b946f2)
+
+## remove()
+
+Task -> Remove the 100th container from the pokemon code
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body style="font-family: cursive">
+    <h1>Remove</h1>
+    <div class="container"></div>
+  </body>
+</html>
+```
+
+```js
+const h1 = document.querySelector("h1");
+const container = document.querySelector(".container");
+// const container2 = document.querySelector('.container-inner')
+
+for (let i = 1; i < 101; i++) {
+  const container2 = document.createElement("div");
+  container2.className = "container-inner";
+  const image = document.createElement("img");
+  const number = document.createElement("p");
+  image.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png`;
+  number.innerText = `Image - ${i}`;
+  number.style.color = "#000";
+  number.style.textAlign = "center";
+  container.append(container2);
+  container2.append(image, number);
+}
+
+// Remove the 100th pokemon container (image + text)
+const hundPokemon = document.querySelector(".container-inner:nth-child(100)");
+hundPokemon.remove();
+```
+
+## removeChild()
+
+Take the previous example
+
+Syntax -> Go to parent of hundPokemon i.e. main container then remove its child i.e. hundPokemon container
+
+`hundPokemon.parentElement.removeChild(hundPokemon);`
+
+```js
+// Remove the 100th pokemon container (image + text)
+const hundPokemon = document.querySelector(".container-inner:nth-child(100)");
+hundPokemon.parentElement.removeChild(hundPokemon);
+```
+
+use remove() as this removeChild() is tricky
+
+Here the code gets removed from DOM but not JS memory
+
+To remove it from the JS memory, do:
+
+- directly remove it, donot store it in a variable
+- if storing in a variable
+
+  - use `let` keyword then remove it
+  - set the variable value to `null` after removing, this clears the variable and it is only possible when we use let keyword while naming.
+
+  ***
+
+  # [Event Listeners](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=6634c6ce3886426a1c216059)
+
+  ## 1. Mouse Click
+
+  ### a. onClick()
+
+  Event is activated upon mouse click
+
+  egs.
+
+  ```html
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+      <link rel="stylesheet" href="styles.css" />
+      <script src="script.js" defer></script>
+    </head>
+    <body style="font-family: cursive">
+      <div class="container">
+        <div class="card" onclick="console.log('HelloJi')">1</div>
+      </div>
+    </body>
+  </html>
+  ```
+
+eg2
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body style="font-family: cursive">
+    <div class="container">
+      <div class="card" onclick="hello()">1</div>
+    </div>
+  </body>
+</html>
+```
+
+```js
+function hello() {
+    console.log('Function on Click heelo!!')
+}
+```
+
+Here in eg2, we called the function in HTML inside onClick()
+
+### b. ondblclick (On Double Click) 
+
+eg
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body style="font-family: cursive">
+    <div class="container">
+      <div class="card" ondblclick="hello()">1</div>
+    </div>
+  </body>
+</html>
+```
+
+```js
+function hello() {
+    console.log('Function on Double Click heelo!!')
+}
+```
+
+### Method 3 - ALL JS
+
+#### Using methods like onClick() ondblclick()....
+
+Now Earlier we wrote the function code in JS file and called the function in HTML. But by doing this, we were creating a new function when we called the function in HTML and passed the code in it from our JS file as both had same names. So now, we will try to write everything in JS.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body style="font-family: cursive">
+    <div class="container">
+      <div class="card">1</div>
+    </div>
+  </body>
+</html>
+```
+
+```css
+.container {
+    color: green;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.card {
+    width: 100px;
+    height: 120px;
+    background-color: pink;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-size: 36px;
+}
+```
+
+### (CSS is same for all egs)
+
+```js
+const card = document.querySelector('.card');
+
+function hello() {
+    console.log('Function on Double Click heelo!! Method 3')
+}
+
+card.ondblclick = hello;
+```
+
+`card.ondblclick = hello();` If we do this (add ()) then the text inside function will be executed and function is not called when trying to do so in an event.
+
+## addEventListener('event name', 'function name (for calling)')
+
+#### same html & css code
+
+```js
+const card = document.querySelector('.card');
+
+function hello() {
+    console.log('Function on Event Listener -  Click heelo!! Method Latest')
+}
+
+card.addEventListener('click', hello)
+```
+
+#### Using this, we can add multiple event listeners to the same element at once. Also using .addEventListener() we can execute all event code at once.
+
+### In the .onClick() or .ondblclick() method if we try to add multiple event listeners, then only the last one will be executed. 
+
+eg. With Anonymous Functions
+
+#### same html & css code
+
+
+```js
+const card = document.querySelector('.card');
+
+card.addEventListener('click', function() {
+    console.log('Function on Event Listener -  Click heelo!! Method with Anonymous Function')
+});
+```
+
+eg -> 2 event listeners on 1 item
+
+```js
+const card = document.querySelector('.card');
+
+card.addEventListener('click', function() {
+    console.log('Function on Event Listener -  Click heelo!! Method with Anonymous Function')
+});
+
+card.addEventListener('click', function() {
+    console.log('Function on Event Listener -  Click heelo!! Method with Anonymous Function 2nd one')
+});
+```
+
+When 2 event listeners different are used for same element
+
+```js
+const card = document.querySelector('.card');
+
+card.addEventListener('click', function() {
+    console.log('Function on Event Listener -  Click heelo!! Method with Anonymous Function')
+});
+
+card.addEventListener('dblclick', function() {
+    console.log('Function on Event Listener -  Click heelo!! Method with Anonymous Function 2nd one with double click')
+});
+```
+
+Task -> Add empty cards whenever we click on the card
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body style="font-family: cursive">
+    <div class="container">
+      <div class="card">+1</div>
+    </div>
+  </body>
+</html>
+```
+
+```css
+.container {
+    color: green;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.card {
+    width: 100px;
+    height: 120px;
+    background-color: pink;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-size: 36px;
+    cursor: pointer;
+}
+```
+
+```js
+const card = document.querySelector('.card');
+const container = document.querySelector('.container');
+
+card.addEventListener('click', function() {
+const newCard = card.cloneNode();
+container.append(newCard);
+});
+
+```
+
+Another way
+
+```js
+const card = document.querySelector('.card');
+const container = document.querySelector('.container');
+
+card.addEventListener('click', function() {
+const newCard = document.createElement('div')
+newCard.classList.add('card')
+// giving the new div the same css as card by making their classes same
+container.append(newCard);
+});
+``` 
+
+<hr>
+
+Numbering card 
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body style="font-family: cursive">
+    <div class="container">
+      <div class="card" title="Add new card">+</div>
+    </div>
+  </body>
+</html>
+```
+
+task -> Card with numbering incremented
+
+```css
+.container {
+    color: green;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.card {
+    width: 100px;
+    height: 120px;
+    background-color: pink;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-size: 36px;
+    cursor: pointer;
+}
+
+.card:nth-child(1) {
+    width: 50px;
+    height: 50px;
+    background-color: blue;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    border-radius: 50%;
+    text-align: center;
+    color: red;
+    line-height: 104px;
+}
+```
+
+
+```js
+const card = document.querySelector('.card');
+const container = document.querySelector('.container');
+
+let count = 1;
+
+card.addEventListener('click', function() {
+const newCard = document.createElement('div')
+newCard.classList.add('card')
+count++;
+newCard.innerText = count;
+container.append(newCard);
+});
+
+```

@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+header {
+    text-align: center;
+    box-shadow: 0 4px 10px 8px #0000002c;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.container {
+    background-color: transparent;
+    margin-inline: 40px;
+    min-height: 300px;
+}
+
+.counter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.counter-value {
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+.increment-buttons {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.inc, .dec {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.inc {
+    margin-right: 10px;
+    background-color: red;
+
+}
+
+.dec {
+    margin-left: 10px;
+    background-color: forestgreen;
+}
+
+.inc p, .dec p {
+    margin: 0;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.increment-decrement {
+    margin-top: 40px;
+    font-size: large;
+    font-weight: 400;
+}
+
+#myIncDec {
+    max-width: 200px;
+    padding: 8px;
+    margin-left: 15px;
+}
+
+.reset {
+    margin-top: 30px;
+}
+
+.reset button {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+    background-color: royalblue;
+    color: white;
+}
