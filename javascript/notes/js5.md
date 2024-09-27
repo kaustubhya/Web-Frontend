@@ -2206,3 +2206,214 @@ container.append(newCard);
 });
 
 ```
+
+--- 
+
+# [Form Event and Event Object](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=66ca54e8edfc079c65803790)
+
+Now in form inputs, they are handled a bit differently.
+
+## `input` event
+
+Here we have an `input` event listener.
+
+But to access the form input value, we need an `event object (e)`
+
+#### So we pass this `e` as the function parameter inside the addEvent Listener function
+
+eg.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Events</title>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <h1>Form Events</h1>
+  <form>
+    <input type="text" id="myInput" />
+  </form>
+</body>
+</html>
+```
+
+```js
+const textInp = document.querySelector('#myInput');
+
+textInp.addEventListener('input', function(e){
+    console.log(e);
+    console.log('Hello World');
+});
+```
+
+We see that everytime, we type something from our keyboard, this `e` object is fired i.e. console.logged. (Also the Hello World is console.logged).
+
+`We can give it any name other than e but usually people give it, e, evt, or event`
+
+Inside this event object we have a `target` attribute, it means -> Kis cheez ke upar event hua hai (here text input field is the target, and event is being applied to it).
+
+Inside the target, we have a value attribute, this gives us the value entered inside the text input field.
+
+So to access the input text field value, -> Do `e.target.value`
+
+```js
+const textInp = document.querySelector('#myInput');
+
+textInp.addEventListener('input', function(e){
+    // console.log(e);
+    // console.log(e.target);
+    console.log(e.target.value);
+    // console.log('Hello World');
+});
+```
+
+Now we can manipulate this input value. Store it in a variable and do as you please.
+
+
+## `change` event
+
+In this event type when ever we make some changes in the input field and then go out of it, then only we will see the change event firing, unlike the input event which gets fired on every input value entered.
+
+#### Same HTML Code
+
+```js
+const textInp = document.querySelector('#myInput');
+
+textInp.addEventListener('change', function(e){
+    // console.log(e);
+    // console.log(e.target);
+    console.log(e.target.value);
+    // console.log('Hello World');
+});
+```
+
+When we go inside the input field, then the input is in `focus`
+
+When we go out of the input field, then the input is in `blur`
+
+## `focus` event
+
+This event gets fired whenever the input field is `in focus`
+
+
+```js
+const textInp = document.querySelector('#myInput');
+
+textInp.addEventListener('focus', function(e){
+    // console.log(e);
+    // console.log(e.target);
+    console.log(e.target.value);
+    // console.log('Hello World');
+});
+```
+
+eg.
+
+- Empty field (nothing)
+- Click on the input field (we get an empty output printed)
+- Type `apple`
+- Go out
+- Focus it again by clicking on the input field (apple is printed).
+
+
+## `blur` event
+
+Works exactly opposite to focus event
+
+```js
+const textInp = document.querySelector('#myInput');
+
+textInp.addEventListener('blur', function(e){
+    // console.log(e);
+    // console.log(e.target);
+    console.log(e.target.value);
+    // console.log('Hello World');
+});
+```
+
+---
+
+Till now, we were only using the input fields alone. But what if we enclose it in a `<form></form>` tag
+
+### How the form tag works, 
+
+so say if we have a form with 2 inputs (name and email) and a submit button. Every time, you click a submit button, the form will get submitted and the site will reload. Now where do you want to send the form after submitting, depends on the `action` attribute. So it will go to the action attribute value url after submitting. Now there will be search params included, to include those search params, we will use the name attribute and the value of the name attribute will serve as the title and the value of the input field will serve as the content of the search params.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Events</title>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <h1>Form Events</h1>
+  <form action="www.googly.com">
+    <input type="text" id="myInput" name="username" />
+    <input type="email" id="myEmail" name="usermail" />
+    <button type="submit">Click to Submit</button>
+  </form>
+</body>
+</html>
+```
+
+```sh
+http://127.0.0.1:5502/javascript/www.googly.com?username=ll&usermail=op%40gmail.com
+```
+
+By default button inside of a form is of type `submit` which submits the form when we click it.
+
+%40 = @
+
+## `submit` event
+
+Happens when we submit a form
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Events</title>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <h1>Form Events</h1>
+  <form action="www.google.com">
+    <input type="text" id="myInput" name="username" />
+    <input type="email" id="myEmail" name="usermail" />
+    <button type="submit">Click to Submit</button>
+  </form>
+</body>
+</html>
+```
+
+```js
+const textInp = document.querySelector('#myInput');
+const form = document.querySelector('form');
+
+form.addEventListener('submit', function(e){
+    e.preventDefault();
+    console.log(e);
+    console.log(e.target);
+    console.log(e.target.value);
+    console.log('Hello World');
+});
+```
+
+Now to prevent the form from reloading and redirecting us to another site (the form's default behavior), we can do `e.preventDefault()`. This prevents the form's default behavior.
+
+### Event.target value depends on the element on which we fired an event, so if in a form we click the input text, then e.target = input text and not the form.
+
+### Event.currentTarget value does not change in this case and it gives us the value on which the event is started (here we started firing the event on form) but inside form we also fire events, so e.target keeps changing but e.currentTarget is same.
+
+### What is the difference between an event listener and an event handler in JavaScript?
+
+#### An event listener is a function that is called when an event occurs, while an event handler is a function that is called when an event is triggered.

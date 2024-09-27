@@ -1,13 +1,10 @@
-const card = document.querySelector('.card');
-const container = document.querySelector('.container');
+const textInp = document.querySelector('#myInput');
+const form = document.querySelector('form');
 
-let count = 0;
-
-card.addEventListener('click', function() {
-const newCard = document.createElement('div')
-newCard.classList.add('card')
-count++;
-newCard.innerText = count;
-container.append(newCard);
+form.addEventListener('submit', function(e){
+    e.preventDefault();
+    console.log(e);
+    console.log(e.target);
+    console.log(e.target.value);
+    console.log('Hello World');
 });
-
