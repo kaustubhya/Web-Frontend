@@ -1,0 +1,114 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 24px;
+}
+
+.icons-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.icons-container span {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+
+.icons-container span:hover {
+  background-color: aliceblue;
+}
+
+.hands {
+  display: flex;
+  justify-content: center;
+  column-gap: 1rem;
+  overflow: hidden;
+}
+
+.hands > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hand-icon {
+  font-size: 12rem;
+  margin-top: -40px;
+}
+
+.computer-score,
+.user-score {
+  display: inline;
+}
+
+.result {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.shakeUserHands {
+  animation: shakeUserHands 0.6s infinite ease-in-out;
+  /* animation name, animation duration, animation count animation timing function */
+}
+
+.shakeComputerHands {
+  animation: shakeComputerHands 0.5s infinite ease-in-out;
+}
+
+@keyframes shakeUserHands {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(-55deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes shakeComputerHands {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(55deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@media (max-width: 580px) {
+  body {
+    font-size: 16px;
+  }
+
+  .hand-icon {
+    font-size: 8rem;
+  }
+}
+
+@media (max-width: 370px) {
+  .icons-container {
+    gap: 0rem;
+  }
+
+  .hands p {
+    font-size: 14px;
+  }
+
+  .hands {
+    gap: 0;
+  }
+
+  .hand-icon {
+    font-size: 6rem;
+  }
+
+  .result {
+    margin-top: 1rem;
+  }
+}
