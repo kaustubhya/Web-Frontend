@@ -1,0 +1,142 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  max-width: 100%;
+}
+
+
+
+.container {
+  max-width: 100%;
+  margin-top: 50px;
+  margin-inline: 20px;
+  display: grid;
+  grid-template-areas:
+    "one"
+    "two"
+    "three"
+    "four"
+    "five";
+  gap: 25px;
+  margin-bottom: 50px;
+}
+
+.box {
+  width: 100%;
+  font-size: 50px;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.purple {
+  background-color: purple;
+}
+
+.orange {
+  background-color: orange;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.green {
+  background-color: green;
+}
+
+.red {
+  background-color: red;
+}
+
+@media (min-width: 800px) {
+  .container {
+  margin-inline: 40px;
+  display: grid;
+  grid-template-areas:
+    "one one"
+    "two three"
+    "four three"
+    "five five";
+  gap: 25px;
+  margin-bottom: 50px;
+  }
+
+  .purple {
+    background-color: purple;
+    grid-area: one;
+  }
+  
+  .orange {
+    background-color: orange;
+    grid-area: two;
+  }
+  
+  .blue {
+    background-color: blue;
+    grid-area: three;
+  }
+  
+  .green {
+    background-color: green;
+    grid-area: four;
+
+  }
+  
+  .red {
+    background-color: red;
+    grid-area: five;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+  margin-inline: 60px;
+  display: grid;
+  grid-template-areas:
+    "one one two three"
+    "four five five three";
+  gap: 25px;
+  margin-bottom: 50px;
+  }
+
+  .purple {
+    background-color: purple;
+    grid-area: one;
+  }
+  
+  .orange {
+    background-color: orange;
+    grid-area: two;
+  }
+  
+  .blue {
+    background-color: blue;
+    grid-area: three;
+  }
+  
+  .green {
+    background-color: green;
+    grid-area: four;
+
+  }
+  
+  .red {
+    background-color: red;
+    grid-area: five;
+  }
+}
+

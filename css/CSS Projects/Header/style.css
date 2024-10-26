@@ -1,0 +1,83 @@
+body {
+    max-width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: cursive;
+    box-sizing: border-box;
+}
+
+header {
+    overflow: hidden;
+    background-color: #0660d4;
+    color: white;
+    background-image: url(./images/background.png);
+    background-repeat: no-repeat;
+    background-size: 100px;
+    /* 🛑 */
+    background-position-x: 100%;
+    background-position-y: 40%; 
+
+    /* shifitng bg image */
+}
+
+.css {
+    margin-top: 15px;
+    padding-left: 14px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.down-container {
+    /* display: flex;
+    align-items: center; */
+    padding-bottom: 10px;
+    max-width: 50vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.span-text{
+    padding-left: 14px;
+    font-size: 10px;
+}
+
+header .img{
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-top: 1px;
+    border: 2px solid white;
+    /* making text and image aligned */
+    vertical-align: text-top;
+
+    /* Now we make all images like the pattern */
+
+}
+
+h2 {
+    /* By default, h2 has a margin */
+    margin: 0;
+}
+
+.image-container {
+    display: flex;
+    flex-direction: row-reverse;
+    padding-left: 14px;
+}
+
+/* 🛑🛑🛑🛑🛑🛑  + => Adjacent Sibling Selector -> Selects all the images except for the first one */
+/* img + img  {
+    margin-left: -7px;
+} */
+
+img  {
+    margin-left: -7px;
+}
+
+
+
+
