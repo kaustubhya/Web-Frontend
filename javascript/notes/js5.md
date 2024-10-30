@@ -2417,3 +2417,90 @@ Now to prevent the form from reloading and redirecting us to another site (the f
 ### What is the difference between an event listener and an event handler in JavaScript?
 
 #### An event listener is a function that is called when an event occurs, while an event handler is a function that is called when an event is triggered.
+
+---
+
+# [Keyboard events in JavaScript](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=66360a1de9e02f7e46705d24)
+
+Keyboard Events: 
+
+- Key Up
+- Key Down 
+- Key Press
+
+### Key Press
+
+We can put a keyboard event on any element, but it has to be in focus.
+
+Some eleemnts are automatically in focus like `<input>` but for non-focusable elements, to get them in focus, we can do in html is add a `tabindex = '0'` attribute to the non focusable element.
+
+Then click that element in window to get them in focus and then start pressing the keys.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keyboard Events</title>
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <h1 tabindex="0">Keyboard Events</h1>
+</body>
+</html>
+```
+
+```js
+const h1 = document.querySelector('h1');
+
+h1.addEventListener('keypress', (e) => {
+    console.log(e.key);
+    console.log(e.code);
+})
+```
+
+#### e.key: Whenever we need the value of a key, when we do keypress, we use `e.key`
+
+#### e.value: Whenever we need the code of a key, when we do keypress, we use `e.code`
+
+
+### keyup
+
+Works when we lift a pressed key.
+
+same html
+
+```js
+const h1 = document.querySelector('h1');
+
+h1.addEventListener('keyup', (e) => {
+    console.log(e.key);
+    console.log(e.code);
+})
+```
+
+In keyup, keys such as shift, alt, ctrl, and arrow keys work but in keypress, they donot work.
+
+### keydown
+
+Works when we press a key down.
+
+```js
+const h1 = document.querySelector('h1');
+
+h1.addEventListener('keydown', (e) => {
+    console.log(e.key);
+    console.log(e.code);
+})
+```
+
+### keydown vs keypress
+
+- In keydown, keys such as shift, alt, ctrl, and arrow keys work but in keypress, they donot work.
+
+- In keypress, it takes both keydown + keyup but in keydown it takes only keydown.
+
+If the keyboard language changes, then the key value also changes.
+
+# [Mouse Events in JavaScript](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=66360e9b913efdb33fcc563d)
