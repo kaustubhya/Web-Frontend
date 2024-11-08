@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bill Splitter</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <main class="main-container">
+      <div class="left-container">
+        <p>Bill</p>
+        <div class="bill-container">
+          <span class="rs">₹</span>
+          <input type="number" id="bill-amount" />
+        </div>
+
+        <div class="st">
+          <p>Select Tip</p>
+        </div>
+
+        <div class="tip-container">
+          <button class="tip-1 tip" disabled>5%</button>
+          <button class="tip-2 tip" disabled>10%</button>
+          <button class="tip-3 tip" disabled>15%</button>
+          <button class="tip-4 tip" disabled>25%</button>
+          <button class="tip-5 tip" disabled>50%</button>
+          <button class="tip-6 tip" disabled>75%</button>
+        </div>
+
+        <div class="custom-tip-container">
+          <input type="text" placeholder="Custom Tip in Percentage" class="custom-tip" disabled />
+        </div>
+
+        <div class="people">
+          <p>Number of People</p>
+        </div>
+
+        <div class="people-container">
+          <input type="text" placeholder="Enter no. of people" class="peopleInput" disabled />
+        </div>
+
+        <div class="button-container">
+          <button class="generate" disabled>Generate Bill</button>
+        </div>
+      </div>
+
+      <div class="right-container">
+        <div class="rcont-a">
+          <span>Tip Amount:</span>
+          <span class="tip-amount output"></span>
+        </div>
+        <div class="rcont-b">
+          <span>Total:</span>
+          <span class="total-amount output"></span>
+        </div>
+        <div class="rcont-c">
+          <span>Each Person Bill:</span>
+          <span class="each-person-bill output"></span>
+        </div>
+        <div class="reset-container">
+          <button class="reset" disabled>Reset</button>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
