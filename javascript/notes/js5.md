@@ -1915,13 +1915,13 @@ eg2
 
 ```js
 function hello() {
-    console.log('Function on Click heelo!!')
+  console.log("Function on Click heelo!!");
 }
 ```
 
 Here in eg2, we called the function in HTML inside onClick()
 
-### b. ondblclick (On Double Click) 
+### b. ondblclick (On Double Click)
 
 eg
 
@@ -1945,7 +1945,7 @@ eg
 
 ```js
 function hello() {
-    console.log('Function on Double Click heelo!!')
+  console.log("Function on Double Click heelo!!");
 }
 ```
 
@@ -1975,31 +1975,31 @@ Now Earlier we wrote the function code in JS file and called the function in HTM
 
 ```css
 .container {
-    color: green;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+  color: green;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .card {
-    width: 100px;
-    height: 120px;
-    background-color: pink;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    font-size: 36px;
+  width: 100px;
+  height: 120px;
+  background-color: pink;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 36px;
 }
 ```
 
 ### (CSS is same for all egs)
 
 ```js
-const card = document.querySelector('.card');
+const card = document.querySelector(".card");
 
 function hello() {
-    console.log('Function on Double Click heelo!! Method 3')
+  console.log("Function on Double Click heelo!! Method 3");
 }
 
 card.ondblclick = hello;
@@ -2012,57 +2012,66 @@ card.ondblclick = hello;
 #### same html & css code
 
 ```js
-const card = document.querySelector('.card');
+const card = document.querySelector(".card");
 
 function hello() {
-    console.log('Function on Event Listener -  Click heelo!! Method Latest')
+  console.log("Function on Event Listener -  Click heelo!! Method Latest");
 }
 
-card.addEventListener('click', hello)
+card.addEventListener("click", hello);
 ```
 
 #### Using this, we can add multiple event listeners to the same element at once. Also using .addEventListener() we can execute all event code at once.
 
-### In the .onClick() or .ondblclick() method if we try to add multiple event listeners, then only the last one will be executed. 
+### In the .onClick() or .ondblclick() method if we try to add multiple event listeners, then only the last one will be executed.
 
 eg. With Anonymous Functions
 
 #### same html & css code
 
-
 ```js
-const card = document.querySelector('.card');
+const card = document.querySelector(".card");
 
-card.addEventListener('click', function() {
-    console.log('Function on Event Listener -  Click heelo!! Method with Anonymous Function')
+card.addEventListener("click", function () {
+  console.log(
+    "Function on Event Listener -  Click heelo!! Method with Anonymous Function"
+  );
 });
 ```
 
 eg -> 2 event listeners on 1 item
 
 ```js
-const card = document.querySelector('.card');
+const card = document.querySelector(".card");
 
-card.addEventListener('click', function() {
-    console.log('Function on Event Listener -  Click heelo!! Method with Anonymous Function')
+card.addEventListener("click", function () {
+  console.log(
+    "Function on Event Listener -  Click heelo!! Method with Anonymous Function"
+  );
 });
 
-card.addEventListener('click', function() {
-    console.log('Function on Event Listener -  Click heelo!! Method with Anonymous Function 2nd one')
+card.addEventListener("click", function () {
+  console.log(
+    "Function on Event Listener -  Click heelo!! Method with Anonymous Function 2nd one"
+  );
 });
 ```
 
 When 2 event listeners different are used for same element
 
 ```js
-const card = document.querySelector('.card');
+const card = document.querySelector(".card");
 
-card.addEventListener('click', function() {
-    console.log('Function on Event Listener -  Click heelo!! Method with Anonymous Function')
+card.addEventListener("click", function () {
+  console.log(
+    "Function on Event Listener -  Click heelo!! Method with Anonymous Function"
+  );
 });
 
-card.addEventListener('dblclick', function() {
-    console.log('Function on Event Listener -  Click heelo!! Method with Anonymous Function 2nd one with double click')
+card.addEventListener("dblclick", function () {
+  console.log(
+    "Function on Event Listener -  Click heelo!! Method with Anonymous Function 2nd one with double click"
+  );
 });
 ```
 
@@ -2088,53 +2097,52 @@ Task -> Add empty cards whenever we click on the card
 
 ```css
 .container {
-    color: green;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+  color: green;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .card {
-    width: 100px;
-    height: 120px;
-    background-color: pink;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    font-size: 36px;
-    cursor: pointer;
+  width: 100px;
+  height: 120px;
+  background-color: pink;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 36px;
+  cursor: pointer;
 }
 ```
 
 ```js
-const card = document.querySelector('.card');
-const container = document.querySelector('.container');
+const card = document.querySelector(".card");
+const container = document.querySelector(".container");
 
-card.addEventListener('click', function() {
-const newCard = card.cloneNode();
-container.append(newCard);
+card.addEventListener("click", function () {
+  const newCard = card.cloneNode();
+  container.append(newCard);
 });
-
 ```
 
 Another way
 
 ```js
-const card = document.querySelector('.card');
-const container = document.querySelector('.container');
+const card = document.querySelector(".card");
+const container = document.querySelector(".container");
 
-card.addEventListener('click', function() {
-const newCard = document.createElement('div')
-newCard.classList.add('card')
-// giving the new div the same css as card by making their classes same
-container.append(newCard);
+card.addEventListener("click", function () {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  // giving the new div the same css as card by making their classes same
+  container.append(newCard);
 });
-``` 
+```
 
 <hr>
 
-Numbering card 
+Numbering card
 
 ```html
 <!DOCTYPE html>
@@ -2158,56 +2166,54 @@ task -> Card with numbering incremented
 
 ```css
 .container {
-    color: green;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+  color: green;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .card {
-    width: 100px;
-    height: 120px;
-    background-color: pink;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    font-size: 36px;
-    cursor: pointer;
+  width: 100px;
+  height: 120px;
+  background-color: pink;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 36px;
+  cursor: pointer;
 }
 
 .card:nth-child(1) {
-    width: 50px;
-    height: 50px;
-    background-color: blue;
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    border-radius: 50%;
-    text-align: center;
-    color: red;
-    line-height: 104px;
+  width: 50px;
+  height: 50px;
+  background-color: blue;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  border-radius: 50%;
+  text-align: center;
+  color: red;
+  line-height: 104px;
 }
 ```
 
-
 ```js
-const card = document.querySelector('.card');
-const container = document.querySelector('.container');
+const card = document.querySelector(".card");
+const container = document.querySelector(".container");
 
 let count = 1;
 
-card.addEventListener('click', function() {
-const newCard = document.createElement('div')
-newCard.classList.add('card')
-count++;
-newCard.innerText = count;
-container.append(newCard);
+card.addEventListener("click", function () {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  count++;
+  newCard.innerText = count;
+  container.append(newCard);
 });
-
 ```
 
---- 
+---
 
 # [Form Event and Event Object](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=66ca54e8edfc079c65803790)
 
@@ -2226,27 +2232,27 @@ eg.
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Form Events</title>
-  <script src="script.js" defer></script>
-</head>
-<body>
-  <h1>Form Events</h1>
-  <form>
-    <input type="text" id="myInput" />
-  </form>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Events</title>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <h1>Form Events</h1>
+    <form>
+      <input type="text" id="myInput" />
+    </form>
+  </body>
 </html>
 ```
 
 ```js
-const textInp = document.querySelector('#myInput');
+const textInp = document.querySelector("#myInput");
 
-textInp.addEventListener('input', function(e){
-    console.log(e);
-    console.log('Hello World');
+textInp.addEventListener("input", function (e) {
+  console.log(e);
+  console.log("Hello World");
 });
 ```
 
@@ -2261,18 +2267,17 @@ Inside the target, we have a value attribute, this gives us the value entered in
 So to access the input text field value, -> Do `e.target.value`
 
 ```js
-const textInp = document.querySelector('#myInput');
+const textInp = document.querySelector("#myInput");
 
-textInp.addEventListener('input', function(e){
-    // console.log(e);
-    // console.log(e.target);
-    console.log(e.target.value);
-    // console.log('Hello World');
+textInp.addEventListener("input", function (e) {
+  // console.log(e);
+  // console.log(e.target);
+  console.log(e.target.value);
+  // console.log('Hello World');
 });
 ```
 
 Now we can manipulate this input value. Store it in a variable and do as you please.
-
 
 ## `change` event
 
@@ -2281,13 +2286,13 @@ In this event type when ever we make some changes in the input field and then go
 #### Same HTML Code
 
 ```js
-const textInp = document.querySelector('#myInput');
+const textInp = document.querySelector("#myInput");
 
-textInp.addEventListener('change', function(e){
-    // console.log(e);
-    // console.log(e.target);
-    console.log(e.target.value);
-    // console.log('Hello World');
+textInp.addEventListener("change", function (e) {
+  // console.log(e);
+  // console.log(e.target);
+  console.log(e.target.value);
+  // console.log('Hello World');
 });
 ```
 
@@ -2299,15 +2304,14 @@ When we go out of the input field, then the input is in `blur`
 
 This event gets fired whenever the input field is `in focus`
 
-
 ```js
-const textInp = document.querySelector('#myInput');
+const textInp = document.querySelector("#myInput");
 
-textInp.addEventListener('focus', function(e){
-    // console.log(e);
-    // console.log(e.target);
-    console.log(e.target.value);
-    // console.log('Hello World');
+textInp.addEventListener("focus", function (e) {
+  // console.log(e);
+  // console.log(e.target);
+  console.log(e.target.value);
+  // console.log('Hello World');
 });
 ```
 
@@ -2319,19 +2323,18 @@ eg.
 - Go out
 - Focus it again by clicking on the input field (apple is printed).
 
-
 ## `blur` event
 
 Works exactly opposite to focus event
 
 ```js
-const textInp = document.querySelector('#myInput');
+const textInp = document.querySelector("#myInput");
 
-textInp.addEventListener('blur', function(e){
-    // console.log(e);
-    // console.log(e.target);
-    console.log(e.target.value);
-    // console.log('Hello World');
+textInp.addEventListener("blur", function (e) {
+  // console.log(e);
+  // console.log(e.target);
+  console.log(e.target.value);
+  // console.log('Hello World');
 });
 ```
 
@@ -2339,27 +2342,27 @@ textInp.addEventListener('blur', function(e){
 
 Till now, we were only using the input fields alone. But what if we enclose it in a `<form></form>` tag
 
-### How the form tag works, 
+### How the form tag works,
 
 so say if we have a form with 2 inputs (name and email) and a submit button. Every time, you click a submit button, the form will get submitted and the site will reload. Now where do you want to send the form after submitting, depends on the `action` attribute. So it will go to the action attribute value url after submitting. Now there will be search params included, to include those search params, we will use the name attribute and the value of the name attribute will serve as the title and the value of the input field will serve as the content of the search params.
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Form Events</title>
-  <script src="script.js" defer></script>
-</head>
-<body>
-  <h1>Form Events</h1>
-  <form action="www.googly.com">
-    <input type="text" id="myInput" name="username" />
-    <input type="email" id="myEmail" name="usermail" />
-    <button type="submit">Click to Submit</button>
-  </form>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Events</title>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <h1>Form Events</h1>
+    <form action="www.googly.com">
+      <input type="text" id="myInput" name="username" />
+      <input type="email" id="myEmail" name="usermail" />
+      <button type="submit">Click to Submit</button>
+    </form>
+  </body>
 </html>
 ```
 
@@ -2378,33 +2381,33 @@ Happens when we submit a form
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Form Events</title>
-  <script src="script.js" defer></script>
-</head>
-<body>
-  <h1>Form Events</h1>
-  <form action="www.google.com">
-    <input type="text" id="myInput" name="username" />
-    <input type="email" id="myEmail" name="usermail" />
-    <button type="submit">Click to Submit</button>
-  </form>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Events</title>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <h1>Form Events</h1>
+    <form action="www.google.com">
+      <input type="text" id="myInput" name="username" />
+      <input type="email" id="myEmail" name="usermail" />
+      <button type="submit">Click to Submit</button>
+    </form>
+  </body>
 </html>
 ```
 
 ```js
-const textInp = document.querySelector('#myInput');
-const form = document.querySelector('form');
+const textInp = document.querySelector("#myInput");
+const form = document.querySelector("form");
 
-form.addEventListener('submit', function(e){
-    e.preventDefault();
-    console.log(e);
-    console.log(e.target);
-    console.log(e.target.value);
-    console.log('Hello World');
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  console.log(e);
+  console.log(e.target);
+  console.log(e.target.value);
+  console.log("Hello World");
 });
 ```
 
@@ -2422,10 +2425,10 @@ Now to prevent the form from reloading and redirecting us to another site (the f
 
 # [Keyboard events in JavaScript](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=66360a1de9e02f7e46705d24)
 
-Keyboard Events: 
+Keyboard Events:
 
 - Key Up
-- Key Down 
+- Key Down
 - Key Press
 
 ### Key Press
@@ -2439,31 +2442,30 @@ Then click that element in window to get them in focus and then start pressing t
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Keyboard Events</title>
-  <script src="./script.js" defer></script>
-</head>
-<body>
-  <h1 tabindex="0">Keyboard Events</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keyboard Events</title>
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <h1 tabindex="0">Keyboard Events</h1>
+  </body>
 </html>
 ```
 
 ```js
-const h1 = document.querySelector('h1');
+const h1 = document.querySelector("h1");
 
-h1.addEventListener('keypress', (e) => {
-    console.log(e.key);
-    console.log(e.code);
-})
+h1.addEventListener("keypress", (e) => {
+  console.log(e.key);
+  console.log(e.code);
+});
 ```
 
 #### e.key: Whenever we need the value of a key, when we do keypress, we use `e.key`
 
 #### e.value: Whenever we need the code of a key, when we do keypress, we use `e.code`
-
 
 ### keyup
 
@@ -2472,12 +2474,12 @@ Works when we lift a pressed key.
 same html
 
 ```js
-const h1 = document.querySelector('h1');
+const h1 = document.querySelector("h1");
 
-h1.addEventListener('keyup', (e) => {
-    console.log(e.key);
-    console.log(e.code);
-})
+h1.addEventListener("keyup", (e) => {
+  console.log(e.key);
+  console.log(e.code);
+});
 ```
 
 In keyup, keys such as shift, alt, ctrl, and arrow keys work but in keypress, they donot work.
@@ -2487,12 +2489,12 @@ In keyup, keys such as shift, alt, ctrl, and arrow keys work but in keypress, th
 Works when we press a key down.
 
 ```js
-const h1 = document.querySelector('h1');
+const h1 = document.querySelector("h1");
 
-h1.addEventListener('keydown', (e) => {
-    console.log(e.key);
-    console.log(e.code);
-})
+h1.addEventListener("keydown", (e) => {
+  console.log(e.key);
+  console.log(e.code);
+});
 ```
 
 ### keydown vs keypress
@@ -2504,3 +2506,1297 @@ h1.addEventListener('keydown', (e) => {
 If the keyboard language changes, then the key value also changes.
 
 # [Mouse Events in JavaScript](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=66360e9b913efdb33fcc563d)
+
+We have already seen `click` and `dblclick` event for mouse events
+
+Let us see some more
+
+### 1. mousedown
+
+Mouse has a button inside it so, when that button is pressed down, we see this event get fired.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add cards</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body style="font-family: cursive">
+    <div class="container">
+      <div class="card" title="Add new card">+</div>
+    </div>
+  </body>
+</html>
+```
+
+```css
+.container {
+  color: green;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.card {
+  width: 100px;
+  height: 120px;
+  background-color: pink;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 36px;
+  cursor: pointer;
+}
+
+.card:nth-child(1) {
+  width: 50px;
+  height: 50px;
+  background-color: blue;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  border-radius: 50%;
+  text-align: center;
+  color: red;
+  line-height: 104px;
+}
+```
+
+```js
+const addCardBtn = document.querySelector(".card");
+const container = document.querySelector(".container");
+
+let count = 1;
+
+addCardBtn.addEventListener("mousedown", function () {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  newCard.innerText = count;
+  count++;
+  container.append(newCard);
+});
+```
+
+### 2. mouseup
+
+This event is triggered when the pressed mouse button is gone up.
+
+```js
+const addCardBtn = document.querySelector(".card");
+const container = document.querySelector(".container");
+
+let count = 1;
+
+addCardBtn.addEventListener("mouseup", function () {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  newCard.innerText = count;
+  count++;
+  container.append(newCard);
+});
+```
+
+### 3. mouseenter
+
+Gets triggered when we hover in over the target element
+
+```js
+const addCardBtn = document.querySelector(".card");
+const container = document.querySelector(".container");
+
+let count = 1;
+
+addCardBtn.addEventListener("mouseenter", function () {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  newCard.innerText = count;
+  count++;
+  container.append(newCard);
+});
+```
+
+### 4. mouseleave
+
+Gets triggered when we hover out of over the target element
+
+```js
+const addCardBtn = document.querySelector(".card");
+const container = document.querySelector(".container");
+
+let count = 1;
+
+addCardBtn.addEventListener("mouseleave", function () {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  newCard.innerText = count;
+  count++;
+  container.append(newCard);
+});
+```
+
+### 5. mousemove
+
+Whenever we move our mouse inside the target element, this event will get triggered.
+
+```js
+const addCardBtn = document.querySelector(".card");
+const container = document.querySelector(".container");
+
+let count = 1;
+
+addCardBtn.addEventListener("mousemove", function () {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  newCard.innerText = count;
+  count++;
+  container.append(newCard);
+});
+```
+
+### 6. mouseout
+
+More sensitive than mouseleave
+
+#### Difference between mouseout and mouseleave
+
+In JavaScript, both `mouseout` and `mouseleave` events are used to detect when the mouse pointer leaves an element, but there are key differences between them:
+
+#### Bubbling:
+
+- mouseout: This event bubbles up through the DOM. When the pointer moves from an element to a child element or a different element within the same parent, it triggers a mouseout event on the element and then bubbles up to its ancestors.
+
+- mouseleave: This event does not bubble. It only fires when the mouse leaves the boundary of the element itself, not when moving between child elements within it.
+
+#### Triggering:
+
+- mouseout: Fires when the mouse leaves the element or any of its children. This means if the cursor moves from a parent element to a child element, a mouseout event is triggered on the parent.
+
+- mouseleave: Fires only when the mouse leaves the element entirely, regardless of child elements. Moving to a child element does not trigger this event on the parent.
+
+Example
+Consider this structure:
+
+```html
+<div class="parent">
+  <div class="child">Child Element</div>
+</div>
+```
+
+If you attach a mouseout event listener to .parent, moving from .parent to .child will trigger the mouseout event on .parent.
+
+If you attach a mouseleave event listener to .parent, it will only fire if you move the mouse entirely out of .parent, not when moving to .child.
+
+#### When to Use Each
+
+Use mouseout if you need to detect when the mouse moves to any other element, including child elements.
+
+Use mouseleave if you only want to detect when the mouse has left the element entirely, ignoring any movements to child elements.
+
+This distinction can help manage events more precisely, especially in nested or complex UI components.
+
+```js
+const addCardBtn = document.querySelector(".card");
+const container = document.querySelector(".container");
+
+let count = 1;
+
+addCardBtn.addEventListener("mouseout", function () {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  newCard.innerText = count;
+  count++;
+  container.append(newCard);
+});
+```
+
+### 7. mouseover
+
+Same as mouseenter but with some key differences
+
+```js
+const addCardBtn = document.querySelector(".card");
+const container = document.querySelector(".container");
+
+let count = 1;
+
+addCardBtn.addEventListener("mouseover", function () {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  newCard.innerText = count;
+  count++;
+  container.append(newCard);
+});
+```
+
+#### Differences
+
+The `mouseover` and `mouseenter` events in JavaScript are similar to mouseout and mouseleave, with key differences mainly related to event bubbling and triggering:
+
+#### Bubbling:
+
+- mouseover: This event bubbles up through the DOM. When the mouse enters an element or any of its children, the mouseover event triggers on that element and bubbles up to its ancestors.
+
+- mouseenter: This event does not bubble. It triggers only when the mouse enters the element itself, not when entering any child elements.
+
+#### Triggering:
+
+- mouseover: Fires when the mouse enters an element or any of its child elements. Moving the mouse from the parent to a child element will trigger a mouseover event on the parent.
+- mouseenter: Only fires when the mouse enters the boundary of the element itself, ignoring any child elements. Moving the mouse into a child element will not re-trigger mouseenter on the parent.
+
+#### Example
+
+Consider this HTML structure:
+
+```html
+<div class="parent">
+  <div class="child">Child Element</div>
+</div>
+```
+
+- If you attach a mouseover event listener to .parent, moving the mouse from .parent to .child will trigger the mouseover event on .parent.
+- If you attach a mouseenter event listener to .parent, it will only fire the first time the mouse enters .parent itself, not when moving into .child.
+
+#### When to Use Each
+
+Use mouseover if you want to detect when the mouse enters an element or any of its child elements.
+
+Use mouseenter if you want to detect when the mouse enters only the specific element, ignoring any children.
+
+In summary, mouseover and mouseenter are useful for different cases, depending on whether child elements should trigger the event or not.
+
+### 8. wheel
+
+Works when we scroll up or down inside the target element.
+
+```js
+const addCardBtn = document.querySelector(".card");
+const container = document.querySelector(".container");
+
+let count = 1;
+
+addCardBtn.addEventListener("wheel", function () {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  newCard.innerText = count;
+  count++;
+  container.append(newCard);
+});
+```
+
+### 9. Scroll Event
+
+Happens in the window object, see the difference between wheel and scroll more clearly below.
+
+In JavaScript, both scroll and wheel events are related to detecting scroll behavior, but they have distinct purposes and use cases:
+
+#### 1. scroll
+
+- Description: The scroll event fires when an element or the document itself is scrolled, regardless of the method used to scroll (e.g., mouse wheel, trackpad, keyboard arrows, dragging scrollbars, or programmatically).
+
+- Trigger: Occurs whenever scrolling happens within an element (like a div with overflow: auto;) or the entire page.
+
+- Applicable To: Elements that are scrollable, including window (for the entire page).
+
+- Typical Usage: Used for actions that depend on scroll position, such as lazy loading, infinite scrolling, or updating a scroll-based animation.
+
+Example:
+
+```javascript
+window.addEventListener("scroll", () => {
+  console.log("The page was scrolled.");
+});
+```
+
+#### 2. wheel
+
+- Description: The wheel event specifically detects the use of a mouse wheel or a similar input device (e.g., a touchpad with a two-finger scroll gesture) to scroll within an element or the page. It provides additional details like the amount of scroll (delta values) and the direction.
+
+- Trigger: Fires when the mouse wheel or similar scroll gesture is used. This event is granular and fires for each step or unit of scroll input.
+
+- Applicable To: Any scrollable element or the window object, but it only fires if scroll input comes from a wheel or trackpad gesture, not keyboard or other scroll methods.
+
+- Typical Usage: Used for custom scroll behaviors, fine control over scroll speed, or when you need detailed scroll information. The wheel event provides deltaX, deltaY, and deltaZ values, which give the exact amount and direction of scroll input, enabling more precise adjustments.
+
+Example:
+
+```javascript
+window.addEventListener("wheel", (event) => {
+  console.log(`Scroll amount - X: ${event.deltaX}, Y: ${event.deltaY}`);
+});
+```
+
+- Key Differences
+
+| Feature          | scroll                                                                                               | wheel                                                                                                                                                                             |
+| ---------------- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Trigger Source   | Any scroll action                                                                                    | Mouse wheel or similar gestures                                                                                                                                                   |
+| Frequency        | Lower, per scroll update                                                                             | Higher, per small scroll step                                                                                                                                                     |
+| Event Data       | No detailed scroll data                                                                              | Includes deltaX, deltaY, etc.                                                                                                                                                     |
+| Use Cases        | Scroll-based animations, lazy loading                                                                | Custom scroll handling, precise adjustments                                                                                                                                       |
+| When to Use Each | Use scroll for general scroll events that work across all scroll actions (keyboard, dragging, etc.). | Use wheel for handling scroll input directly from a mouse wheel or touchpad gesture when you need more detailed control over scroll behavior or need the exact scroll increments. |
+
+### 10. drag (works only in desktop and not in mobile)
+
+This event can be used to make to-do lists etc. i.e. event is fired when we drag an element.
+
+For that add the following attribute to the target element `draggable="true"` in html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add cards</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body style="font-family: cursive">
+    <h1 draggable="true">Drag Me</h1>
+    <div class="container">
+      <div class="card" title="Add new card">+</div>
+    </div>
+  </body>
+</html>
+```
+
+```css
+.container {
+  color: green;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+h1 {
+  background-color: blue;
+}
+
+.card {
+  width: 100px;
+  height: 120px;
+  background-color: pink;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 36px;
+  cursor: pointer;
+}
+
+.card:nth-child(1) {
+  width: 50px;
+  height: 50px;
+  background-color: blue;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  border-radius: 50%;
+  text-align: center;
+  color: red;
+  line-height: 104px;
+}
+```
+
+```js
+const addCardBtn = document.querySelector(".card");
+const container = document.querySelector(".container");
+const h1 = document.querySelector("h1");
+
+let count = 1;
+
+h1.addEventListener("drag", function () {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  newCard.innerText = count;
+  count++;
+  container.append(newCard);
+});
+```
+
+## Some more mouse events but for mobile devices (to check in desktop, use dynamic resizing of devices in inspect, responsive design)
+
+### 1. touchstart
+
+Activates when we touch or tab any element. Works like keydown.
+
+```js
+const addCardBtn = document.querySelector(".card");
+const container = document.querySelector(".container");
+
+let count = 1;
+
+addCardBtn.addEventListener("touchstart", function () {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  newCard.innerText = count;
+  count++;
+  container.append(newCard);
+});
+```
+
+### 2. touchend
+
+Works in the same way but triggers when we lift the touch up, like keyup.
+
+```js
+const addCardBtn = document.querySelector(".card");
+const container = document.querySelector(".container");
+
+let count = 1;
+
+addCardBtn.addEventListener("touchend", function () {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  newCard.innerText = count;
+  count++;
+  container.append(newCard);
+});
+```
+
+### 3. touchmove
+
+Touch the button and then move i.e. press and move
+
+```js
+const addCardBtn = document.querySelector(".card");
+const container = document.querySelector(".container");
+
+let count = 1;
+
+addCardBtn.addEventListener("touchmove", function () {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  newCard.innerText = count;
+  count++;
+  container.append(newCard);
+});
+```
+
+## Events for both desktop and mobile
+
+### 1. pointermove (mousemove + touchmove => Works for both desktop and mobile)
+
+### For testing in mobile, press and then drag around the button
+
+```js
+const addCardBtn = document.querySelector(".card");
+const container = document.querySelector(".container");
+const h1 = document.querySelector("h1");
+
+let count = 1;
+
+addCardBtn.addEventListener("pointermove", function () {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  newCard.innerText = count;
+  count++;
+  container.append(newCard);
+});
+```
+
+### 2. pointerdown (mousedown + touchdown)
+
+```js
+const addCardBtn = document.querySelector(".card");
+const container = document.querySelector(".container");
+const h1 = document.querySelector("h1");
+
+let count = 1;
+
+addCardBtn.addEventListener("pointerdown", function () {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  newCard.innerText = count;
+  count++;
+  container.append(newCard);
+});
+```
+
+### 3. pointerleave (touchleave + mouseleave)
+
+```js
+const addCardBtn = document.querySelector(".card");
+const container = document.querySelector(".container");
+const h1 = document.querySelector("h1");
+
+let count = 1;
+
+addCardBtn.addEventListener("pointerleave", function () {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  newCard.innerText = count;
+  count++;
+  container.append(newCard);
+});
+```
+
+# [Event Bubbling and Event Capturing in JavaScript](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=663620bb0961586101fdcf48)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Bubbling and Event Capturing</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <div class="green">
+    <div class="pink">
+      <div class="yellow"></div>
+    </div>
+  </div>
+</html>
+```
+
+```css
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.green {
+  background-color: green;
+  width: 500px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pink {
+  background-color: pink;
+  width: 300px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.yellow {
+  background-color: yellow;
+  width: 120px;
+  height: 60px;
+}
+```
+
+```js
+const green = document.querySelector(".green");
+const pink = document.querySelector(".pink");
+const yellow = document.querySelector(".yellow");
+const body = document.querySelector("body");
+
+green.addEventListener("click", function (e) {
+  console.log("Green Box Clicked");
+});
+
+pink.addEventListener("click", function (e) {
+  console.log("Pink Box Clicked");
+});
+
+yellow.addEventListener("click", function (e) {
+  console.log("Yellow Box Clicked");
+});
+
+body.addEventListener("click", function (e) {
+  console.log("Body Clicked");
+});
+
+document.addEventListener("click", function (e) {
+  console.log("Html Document Clicked");
+});
+
+window.addEventListener("click", function (e) {
+  console.log("Window Clicked");
+});
+
+/*
+const green = document.querySelector('.green');
+const pink = document.querySelector('.pink');
+const yellow = document.querySelector('.yellow');
+const body = document.querySelector('body');
+
+
+yellow.addEventListener('click', function(e) {
+    console.log('1. Yellow Box Clicked');
+    // e.stopPropagation();
+
+});
+
+
+pink.addEventListener('click', function(e) {
+    console.log('2. Pink Box Clicked');
+    // e.stopPropagation();
+
+});
+
+green.addEventListener('click', function(e) {
+    console.log('3. Green Box Clicked');
+    // e.stopPropagation();
+
+});
+
+
+body.addEventListener('click', function(e) {
+    console.log('4. Body Clicked');
+    e.stopPropagation();
+
+});
+
+document.addEventListener('click', function(e) {
+    console.log('5. Html Document Clicked');
+    // e.stopPropagation();
+
+});
+
+window.addEventListener('click', function(e) {
+    console.log('6. Window Clicked');
+    // e.stopPropagation();
+});
+
+
+/*
+Output: 
+
+1. Yellow Box Clicked
+
+2. Pink Box Clicked
+
+3. Green Box Clicked
+
+4. Body Clicked
+
+5. Html Document Clicked 
+
+6. Window Clicked
+
+*/
+```
+
+Here normally on any event listener when we interact with a child here, i.e. when we click on yellow here we will see that we have outputs of yellow box clicked, pink box clicked, and green box clicked.
+
+So we are observing event bubbling here it starts from a child and goes on till the outermost parent i.e. till window object.
+
+### Flow of event bubbling here:
+
+yellow > pink > green > body > document (html) > window (last parent)
+
+To stop this event from bubbling, we do `e.stopPropagation()` on a child to prevent it to bubble up to its parent.
+
+Now when we click on yellow, we will see only (yellow button clicked) on output.
+
+Same with other cases
+
+## Event Capturing
+
+This is reverse of event bubbling, i.e. it starts from outermost parent (window) and comes to innermost child (yellow here)
+
+For using this event capturing, we will do the following: (mark the last parameter as true).
+
+```js
+const green = document.querySelector(".green");
+const pink = document.querySelector(".pink");
+const yellow = document.querySelector(".yellow");
+const body = document.querySelector("body");
+
+yellow.addEventListener(
+  "click",
+  function (e) {
+    console.log("1. Yellow Box Clicked");
+    // e.stopPropagation();
+  },
+  true
+);
+
+pink.addEventListener(
+  "click",
+  function (e) {
+    console.log("2. Pink Box Clicked");
+    // e.stopPropagation();
+  },
+  true
+);
+
+green.addEventListener(
+  "click",
+  function (e) {
+    console.log("3. Green Box Clicked");
+    // e.stopPropagation();
+  },
+  true
+);
+
+body.addEventListener(
+  "click",
+  function (e) {
+    console.log("4. Body Clicked");
+    // e.stopPropagation();
+  },
+  true
+);
+
+document.addEventListener(
+  "click",
+  function (e) {
+    console.log("5. Html Document Clicked");
+    // e.stopPropagation();
+  },
+  true
+);
+
+window.addEventListener(
+  "click",
+  function (e) {
+    console.log("6. Window Clicked");
+    // e.stopPropagation();
+  },
+  { capture: true }
+);
+
+/*
+
+Output: 
+
+6.Window Clicked
+
+5. Html Document Clicked 
+
+4. Body Clicked
+
+3. Green Box Clicked
+
+2. Pink Box Clicked
+
+1. Yellow Box Clicked
+
+*/
+```
+
+(Event bubbling is false (by default))
+
+This can also be stopped by using `e.stopPropagation()`
+
+Do it in innermost child to get only the outermost output and vice versa.
+
+## Another Way of writing event capture
+
+```js
+window.addEventListener(
+  "click",
+  function (e) {
+    console.log("6. Window Clicked");
+    // e.stopPropagation();
+  },
+  { capture: true }
+);
+```
+
+```js
+window.addEventListener(
+  "click",
+  function (e) {
+    console.log("6. Window Clicked");
+    // e.stopPropagation();
+  },
+  { capture: true, once: true }
+);
+```
+
+This makes the event listener active for only one click.
+
+Applications - Useful in making pop ups.
+
+### What is the difference between addEventListener() and attachEvent() in JavaScript?
+
+`addEventListener() is used for event bubbling, while attachEvent() is used for event capturing`
+
+# [Event Simulation in JavaScript](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=663622cfdd14bd12bc597ffe)
+
+In javascript we normally trigger events via mouse or keyboard, but we can also trigger them using js code, this is called `event simulation`, however, this is not an official term.
+
+Adding 1000 cards using js code
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add cards</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body style="font-family: cursive">
+    <!-- <h1 draggable="true">Drag Me</h1> -->
+    <div class="container">
+      <div class="card" title="Add new card">+</div>
+    </div>
+  </body>
+</html>
+```
+
+```css
+.container {
+  color: green;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+h1 {
+  background-color: blue;
+}
+
+.card {
+  width: 100px;
+  height: 120px;
+  background-color: pink;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 36px;
+  cursor: pointer;
+}
+
+.card:nth-child(1) {
+  width: 50px;
+  height: 50px;
+  background-color: blue;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  border-radius: 50%;
+  text-align: center;
+  color: red;
+  line-height: 104px;
+}
+```
+
+```js
+const addCardBtn = document.querySelector(".card");
+const container = document.querySelector(".container");
+const h1 = document.querySelector("h1");
+
+let count = 1;
+
+addCardBtn.addEventListener("click", function () {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  newCard.innerText = count;
+  count++;
+  container.append(newCard);
+});
+
+for (let i = 0; i < 1000; i++) {
+  addCardBtn.click();
+}
+```
+
+Slowly adding 1000 cards (using setInterval() => 1 card per m sec)
+
+```js
+const addCardBtn = document.querySelector(".card");
+const container = document.querySelector(".container");
+const h1 = document.querySelector("h1");
+
+let count = 1;
+
+addCardBtn.addEventListener("click", function () {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card");
+  newCard.innerText = count;
+  count++;
+  container.append(newCard);
+});
+
+const intervalId = setInterval(function () {
+  if (count > 999) {
+    clearInterval(intervalId);
+    // Stop when count reaches 1000
+  }
+  addCardBtn.click();
+}, 1);
+```
+
+Similarly we have `input.focus()`, this will bring an input to focus without clicking on it.
+
+We also have `input.blur()`, `form.submit()`, `form.reset()` etc.
+
+Use setTimeout to execute them after some delay.
+
+### For `form.submit()`=> button should be of type submit and for `form.reset()` => button should be of type reset.
+
+---
+
+# [Event Delegation in JavaScript](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=663626e198b425a2239d8f93)
+
+Let us do a simple task, when the user clicks on a particular card, the card should get removed.
+
+One way, add the event listener of remove before you append the card
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add cards</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body style="font-family: cursive">
+    <!-- <h1 draggable="true">Drag Me</h1> -->
+    <div class="container">
+      <div class="card" title="Add new card">+</div>
+    </div>
+  </body>
+</html>
+```
+
+```css
+.container {
+  color: green;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+h1 {
+  background-color: blue;
+}
+
+.card {
+  width: 100px;
+  height: 120px;
+  background-color: pink;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 36px;
+  cursor: pointer;
+}
+
+.card:nth-child(1) {
+  width: 50px;
+  height: 50px;
+  background-color: blue;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  border-radius: 50%;
+  text-align: center;
+  color: red;
+  line-height: 104px;
+}
+```
+
+```js
+const addCardBtn = document.querySelector(".card");
+const container = document.querySelector(".container");
+const h1 = document.querySelector("h1");
+
+let count = 1;
+
+addCardBtn.addEventListener("click", function () {
+  const newCard = document.createElement("div");
+  newCard.addEventListener("click", () => {
+    newCard.remove();
+  });
+  
+  newCard.classList.add("card");
+  newCard.innerText = count;
+  count++;
+  container.append(newCard);
+});
+
+```
+
+But by using this method, this will create multiple event listeners in our code which is not optimized, so let us try to use another method:
+
+## IMP INTERVIEW QUESTION => Putting the event listener in the parent container instead of putting it in each individual child (`Event Delegation`)
+
+This method reduces the event listeners and saves a lot of memory
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add cards</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body style="font-family: cursive">
+    <!-- <h1 draggable="true">Drag Me</h1> -->
+    <div class="container">
+    </div>
+    <div class="card" title="Add new card" id="plus">+</div>
+
+  </body>
+</html>
+```
+
+```css
+.container {
+    color: green;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+h1 {
+    background-color: blue;
+}
+
+.card {
+    width: 100px;
+    height: 120px;
+    background-color: pink;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-size: 36px;
+    cursor: pointer;
+}
+
+#plus {
+    width: 50px;
+    height: 50px;
+    background-color: blue;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    border-radius: 50%;
+    text-align: center;
+    color: red;
+    line-height: 104px;
+}
+```
+
+```js
+const addCardBtn = document.querySelector("#plus");
+const container = document.querySelector(".container");
+const h1 = document.querySelector("h1");
+
+let count = 1;
+
+addCardBtn.addEventListener("click", function () {
+  const newCard = document.createElement("div");
+
+  newCard.classList.add("card");
+  newCard.innerText = count;
+  count++;
+  container.append(newCard);
+});
+
+
+// Adding the event listener to the container (parent)
+container.addEventListener('click', (e) => {
+  if(e.target !== container) {
+    e.target.remove();
+  }
+})
+```
+
+### `e.target` ensures here on which item we have clicked, so in e.target we have the container itself and the cards that are created inside the container. So we want to remove only when we click on the cards and not when we click on the container hence specified. (We took out the + button outside the container hence, see html)
+
+### What is the primary benefit of event delegation in JavaScript?
+
+A. Optimisizing memory usage and page load
+
+---
+
+# [Local Storage](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=66362d960961586101ff410d)
+
+There is a local storage object present inside the window object.
+
+Each website has a separate local storage.
+
+Go to devtools -> Application => Local Storage
+
+Benifit of local storage is that the value will be saved even after the page is reloaded.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local Storage</title>
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <input type="text" id="name" placeholder="Enter your name" />
+  <p>Your name is : <span class="my-name"></span></p>
+</body>
+</html>
+```
+
+
+### Old way
+
+```js
+const input = document.querySelector("#name");
+const nameSpan = document.querySelector(".my-name");
+
+nameSpan.innerText = localStorage.myName;
+
+input.addEventListener("input", (e) => {
+  localStorage.myName = e.target.value;
+  nameSpan.innerText = localStorage.myName;
+});
+
+```
+
+### New and Optimized way
+```js
+const input = document.querySelector("#name");
+const nameSpan = document.querySelector(".my-name");
+
+// Update the local storage with the value of input and put that value in span
+
+
+// fetch from local storage
+nameSpan.innerText = localStorage.getItem("myName");
+
+input.addEventListener("input", (e) => {
+  // update the local storage
+  localStorage.setItem("myName", e.target.value);
+
+// fetch from local storage again
+  nameSpan.innerText = localStorage.getItem('myName');
+});
+
+```
+
+### One small difference when we try to access a key which is not there in localstorage
+
+`localStorage.getItem('age') => null`
+
+`localStorage.age => undefined`
+
+age is not a valid key here
+
+LocalStorage data only fails to get retained in Incognito tab when we try to close one incognito tab and open another incognito tab.
+
+### Using multiple different inputs with local storage
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local Storage</title>
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <input type="text" id="name" placeholder="Enter your name" name="name" />
+  <input type="number" id="age" placeholder="Enter age" name="age" />
+  <p>Your name is : <span class="my-name"></span></p>
+  <p>I am <span class="my-age"></span> years old</p>
+</body>
+</html>
+```
+
+```js
+const input = document.querySelector("#name");
+const nameSpan = document.querySelector(".my-name");
+const ageInput = document.querySelector("#age");
+const ageSpan = document.querySelector(".my-age");
+
+nameSpan.innerText = localStorage.getItem('myName');
+
+input.addEventListener("input", (e) => {
+  localStorage.setItem('myName', e.target.value);
+  nameSpan.innerText = localStorage.getItem('myName');
+});
+
+ageSpan.innerText = localStorage.getItem('myAge');
+
+ageInput.addEventListener("input", (e) => {
+  localStorage.setItem('myAge', e.target.value);
+  ageSpan.innerText = localStorage.getItem('myAge');
+});
+```
+
+### We can only store strings in local storage.
+
+Convert object to string (JSON string) => `JSON.stringify(object)`
+
+Convert JSON string back to object => `JSON.parse(JSON String)`
+
+Now here we are using a single object key and storing various keys inside it:
+
+We are not using the getItem and setItem methods completely here, see the code
+
+```js
+const nameInput = document.querySelector("#name");
+const nameSpan = document.querySelector(".my-name");
+const ageInput = document.querySelector("#age");
+const ageSpan = document.querySelector(".my-age");
+
+// We will try to fetch(get) the object data from local storage if it already exists, else we will create an empty object
+
+const myData = JSON.parse(localStorage.getItem("myData")) || {};
+
+// now we try to import the name and age from this object if it already exists
+if (myData.myName) {
+  nameSpan.innerText = myData.myName;
+}
+
+if (myData.myAge) {
+  ageSpan.innerText = myData.myAge;
+}
+
+
+nameInput.addEventListener("input", (e) => {
+  myData.myName = e.target.value;
+  localStorage.setItem('myData', JSON.stringify(myData));
+  nameSpan.innerText = e.target.value;
+});
+
+
+ageInput.addEventListener("input", (e) => {
+  myData.myAge = e.target.value;
+  localStorage.setItem('myData', JSON.stringify(myData));
+  ageSpan.innerText = e.target.value;
+});
+```
+
+### Now suppose we have multiple keys inside of localStorage and we want to remove them all then we do `localStorage.clear()`
+
+### If we want to delete a particular key object from the localStorage, then we do: `localStorage.removeItem('keyName')`
+
+#### Keep in mind, that the URL of the localStorage data is unique for each site.
+
+
+```ssh
+
+Q. What is the difference between local storage and session storage in JavaScript?
+
+A. Local storage stores data persistently, while session storage stores data temporarily
+
+
+Q. What is the primary purpose of local storage in JavaScript? 
+
+A. To store data persistently (continously)
+```
+---

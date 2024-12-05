@@ -1,12 +1,6 @@
-const card = document.querySelector('.card');
-const container = document.querySelector('.container');
+import { userKaData, myName as naam } from "./usersData.js";
+import  productsData  from "./productsData.js";
 
-let count = 1;
-
-card.addEventListener('click', function() {
-const newCard = document.createElement('div')
-newCard.classList.add('card')
-newCard.innerText = count;
-count++;
-container.append(newCard);
-});
+console.log(userKaData);
+console.log(naam);
+console.log(productsData);
