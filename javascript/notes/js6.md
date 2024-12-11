@@ -1408,7 +1408,7 @@ To import all exports from a file, do `import * as allData  from "./productsData
 
 allData => a random name (we can give it any other name too)
 
-### This * now gives us an object where all our imports are as properties, use `.` to access them by their name (eg allData.myName). But for default export, access them like this: (allData.default).
+### This \* now gives us an object where all our imports are as properties, use `.` to access them by their name (eg allData.myName). But for default export, access them like this: (allData.default).
 
 ### There can be only one default export in a file. Rest are all named exports.
 
@@ -1433,11 +1433,629 @@ So order of execution is:
 - Print B
 - Print A
 
-as B is imported first and all its code is executed first, then only we will start executing code in A. 
+as B is imported first and all its code is executed first, then only we will start executing code in A.
 
 ### Hence a good practice is to keep all import statements at the top of a particular file.
 
 [Quiz](https://app.procodrr.com/web/courses/assignment/663780ec442c351f520bedba/review?subscriber=66b85efe65f5003bec655b80)
+
+---
+
+# [OOPs (Encapsulation & Abstraction) and Factory Functions](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=66378de65a14d5d14b8c1c35)
+
+When we keep all of our data inside objects, then that is called Object Oriented Programming (OOP). We can think of objects as containers for values, and functions as procedures that your application can perform.
+
+Till now we have been doing procedural programming and functional programming.
+
+OOPS is class based. React was earlier class based, now it is function based.
+
+## Four Pillars of OOPS
+
+- Inheritance
+- Polymorphism
+- Encapsulation
+- Abstraction
+
+eg1 Let us see a simple example
+
+```js
+const user = {
+  fname: "John",
+  lname: "Wick",
+  age: 20,
+};
+
+// Calculating Year of birth of John using his age
+
+const currentYear = new Date().getFullYear();
+
+console.log(`Year of Birth -> ${currentYear - user.age}`);
+```
+
+Now putting it in a function to make it a procedural programming
+
+```js
+const user = {
+  fname: "John",
+  lname: "Wick",
+  age: 20,
+};
+
+function getAgeYear(age) {
+  // Calculating Year of birth of John using his age
+
+  const currentYear = new Date().getFullYear();
+
+  console.log(`Year of Birth -> ${currentYear - user.age}`);
+}
+
+getAgeYear(user.age);
+```
+
+Now converting this into an Object Oriented Programming Style
+
+```js
+const user = {
+  fname: "John",
+  lname: "Wick",
+  age: 20,
+  getDOBYear: function () {
+    const getCurrentYear = new Date().getFullYear();
+    console.log(`User's DOB Year is ${getCurrentYear - user.age}`);
+    return getCurrentYear - user.age;
+  },
+};
+
+console.log(user.getDOBYear?.());
+```
+
+Here we put everything inside an object
+
+## Encapsulation -> Putting different types of things inside one single place, which is an object here. It can also be a class.
+
+## Encapsulation
+
+Bundles data and methods within a single unit, like a class, and controls their access. Encapsulation focuses on how an object's data is accessed and manipulated, ensuring data integrity and privacy. For example, a music streaming app's interface is simple and intuitive, while the complex code that streams songs is hidden in the background.
+
+Encapsulation eg.
+Think of a toy car. You press a button, and it moves forward. You don’t need to know how the wires and gears inside work. All the complicated stuff is hidden inside the toy, and you just get to use the button! Encapsulation is like that—hiding the messy parts and only showing what’s needed.
+
+# So, encapsulation hides the messy and complex work, and abstraction shows just the important stuff while hiding the unimportant things.
+
+### Encapsulation is also called `data hiding -> i.e. HIDING THE COMPLEX AND MESSY STUFF`, i.e. data can not be changed or accessed from the outside, it is private.
+
+### But in JS there is no such thing as private.
+
+## Abstraction => Hiding the complexity of the code.
+
+eg. putting the code inside a function, so when we call the function, we get the result without worrying about the code logic (logic is actually inside the function) so just focus on calling the function without worrying about the logic.
+
+## Abstraction
+
+Abstraction hides the unnecessary things and focuses on showing only the essential features needed for a particular context. For example, when making coffee with a coffee machine, you need to know how to use the machine, but you don't need to know the technical details of how it works.
+
+Abstraction eg.
+Imagine drawing a stick figure to show a person. You don’t add every tiny detail like eyelashes or wrinkles; you just show the important parts—head, arms, legs. Abstraction is like that—it’s about showing only the useful and important things, ignoring the rest.
+
+# So, encapsulation hides the messy and complex work, and abstraction shows just the important stuff while hiding the unimportant things.
+
+## In short, both hide data:
+
+### Encapsulation: Hiding the "How"
+
+- What it hides: The internal details (like the wires in the toy car).
+
+- Purpose: To protect the inner workings so no one messes them up accidentally.
+
+- Example: A TV remote hides how the button works inside—you just use it to change channels.
+
+### Abstraction: Hiding the "What’s Not Important"
+
+- What it hides: The unnecessary details (like eyelashes in a stick figure).
+
+- Purpose: To simplify things and focus only on what matters.
+
+- Example: A car’s dashboard shows you the speed and fuel, not how the engine works.
+
+## So, encapsulation hides the inner workings, while abstraction hides unnecessary complexity. Both make your life easier, but they’re hiding different things! 🚗✨
+
+```js
+const user = {
+  fname: "John",
+  lname: "Wick",
+  age: 20,
+};
+
+function getAgeYear(age) {
+  const currentYear = new Date().getFullYear();
+
+  console.log(`Year of Birth -> ${currentYear - user.age}`);
+}
+
+// Calculating Year of birth of John using his age
+
+getAgeYear(user.age);
+```
+
+To get the DOB Year, just use (call) the function `getAgeYear` without taking tension about the logic of that function.
+
+## Factory Functions
+
+Now say we want to create multiple user objects, just like the user object shown in the example, what we can do is:
+
+- keep writing it manually one by one, with same properties (key will be same but value changes each time).
+
+- Create a factory function, create it once and use it multiple times.
+
+```js
+function factoryFnForUser(firstName, lastName, age) {
+  const user = {
+    fname: firstName,
+    lname: lastName,
+    age: age,
+  };
+
+  return user;
+}
+
+factoryFnForUser("Lal", "Singh", 20);
+factoryFnForUser("Dolly", "Singhania", 55);
+
+/*
+{fname: 'Lal', lname: 'Singh', age: 20}
+
+{fname: 'Dolly', lname: 'Singhania', age: 55}
+*/
+```
+
+With this we can enter multiple user inputs without worrying about writing multiple objects manually.
+
+If the parameter and key name is same in a factory function, then no need to write it twice:
+
+```js
+function factoryFnForUser(fname, lname, age) {
+  const user = {
+    fname,
+    lname,
+    age,
+    getDobYear() {
+      // function is also written in a shortcut manner
+      return new Date().getFullYear() - user.age;
+    },
+  };
+
+  return user;
+}
+
+const user1 = factoryFnForUser("Lal", "Singh", 20);
+const user2 = factoryFnForUser("Dolly", "Singhania", 55);
+
+console.log(user1);
+console.log(user2);
+```
+
+```ssh
+
+Quiz
+
+1. What is Encapsulation in JavaScript?
+
+The process of hiding the implementation details of an object and only exposing the necessary functionalities
+
+2. What is Abstraction in JavaScript?
+
+A way to expose internal implementation details of an object
+
+3. Why do we need Constructor Functions in JavaScript?
+
+To create a new object
+
+4. What is a Factory Function in JS?
+
+A function that creates and returns an object
+```
+
+===
+
+# [Constructor Function and new Keyword](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=6637902d1c72fd7f61430b6f)
+
+In the previous video where we used a factory function to create a user object, we see that inside it the getDobYear function is being created continuously, even though it is doing the same job each time.
+
+So to prevent this from happening, let us see some approaches:
+
+`this` keyword points to an object inside which it is.
+
+1.
+
+```js
+function getDobYear() {
+  // return new Date().getFullYear() - user.age;
+  // here as we cannot access user object directly, we will use "this" keyword, this will point to that object inside which it is. eg. it will point to user1 when we make user1 object and call this function inside it. and it will point to user2 object when we call this function inside the user2 object.
+  return new Date().getFullYear() - this.age;
+}
+
+function factoryFnForUser(fname, lname, age) {
+  const user = {
+    fname,
+    lname,
+    age,
+    getDobYear,
+  };
+
+  return user;
+}
+
+const user1 = factoryFnForUser("Lal", "Singh", 20);
+const user2 = factoryFnForUser("Dolly", "Singhania", 55);
+
+console.log(user1);
+console.log(user2);
+console.log(user1.getDobYear());
+console.log(user2.getDobYear());
+
+/*
+{
+  fname: 'Lal',
+  lname: 'Singh',
+  age: 20,
+  getDobYear: [Function: getDobYear]
+}
+{
+  fname: 'Dolly',
+  lname: 'Singhania',
+  age: 55,
+  getDobYear: [Function: getDobYear]
+}
+
+2004
+1969
+*/
+```
+
+Now by doing this, our function will be created in memory only once and each user object will refer this function only each time.
+
+Here we have achieved polymorphism, because we use the same function for multiple objects (user1 and user2 here).
+
+But we have violated encapsulation and abstraction here because we wrote the function outside in the global scope hence increasing the complexity.
+
+To tackle this, we can do this:
+
+```js
+function getDobYear() {
+  // return new Date().getFullYear() - user.age;
+  // here as we cannot access user object directly, we will use "this" keyword, this will point to that object inside which it is. eg. it will point to user1 when we make user1 object and call this function inside it. and it will point to user2 object when we call this function inside the user2 object.
+  return new Date().getFullYear() - this.age;
+}
+
+function factoryFnForUser(fname, lname, age) {
+  const user = {
+    fname, // same as user.fname : fname
+    lname,
+    age,
+    getDobYear: factoryFnForUser.commonMethods.getDobYear,
+  };
+
+  return user;
+}
+
+factoryFnForUser.commonMethods = {
+  getDobYear() {
+    return new Date().getFullYear() - this.age;
+  },
+};
+
+const user1 = factoryFnForUser("Lal", "Singh", 20);
+const user2 = factoryFnForUser("Dolly", "Singhania", 55);
+
+console.log(user1);
+console.log(user2);
+console.log(user1.getDobYear());
+console.log(user2.getDobYear());
+
+/*
+{
+  fname: 'Lal',
+  lname: 'Singh',
+  age: 20,
+  getDobYear: [Function: getDobYear]
+}
+{
+  fname: 'Dolly',
+  lname: 'Singhania',
+  age: 55,
+  getDobYear: [Function: getDobYear]
+}
+2004
+1969
+*/
+```
+
+Here we created a common object and put our function inside of it, so each time an object is created, for function, it will come and refer here.
+
+Abstraction and Encapsulation problems are now sorted.
+
+But negatives are that, a lot of code has to be written extra because of it.
+
+## Prototypes and Constructors
+
+Now every function has a prototype object, inside of which we get a constructor property which represents the parent function itself.
+
+Normally functions return `undefined` or `return the value we want it to return`
+
+But when we use `new function()` i.e. new keyword is used before a function call, `it created an object and returns that object created by the function by default`.
+
+```js
+function sayHi() {
+  return `Hi`;
+}
+
+sayHi(); // returns `Hi`
+
+new sayHi(); // returns an object created by sayHi()
+```
+
+Look at this now:
+
+```js
+function createUser(firstName, lastName, age) {
+  this.firstName = firstName;
+}
+
+const user1 = new createUser("Rahi");
+const user2 = new createUser("Rahul");
+
+console.log(user1);
+console.log(user2);
+```
+
+1. We created an object using `new`, we put a function inside it, with firstName parameter. It will also RETURN that object using new.
+
+2. we made sure this points to createUser and assigned it to 'Rahi' (first name)
+
+## So the function created using `new` keyword is a `constructor function`
+
+In normal cases, this will point to window, but in this case, it will point to createUser.
+
+Now for that case where we handle function call that gives dobYear (writing it only once)
+
+Here we used `new` with `createFunction()` and stored it in a variable (say user1), now these are connected. We know every function has a prototype object and inside it is a constructor property,
+
+so if we do `user1.constructor` or `user1.__proto__.constructor` or `createUser.prototype.constructor`, all will give us a constructor.
+
+So let us now add the dobYear funciton
+
+```js
+function createUser(firstName, lastName, age) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.age = age;
+}
+
+createUser.prototype.getDobYear = function () {
+  return new Date().getFullYear() - this.age;
+};
+
+const user1 = new CreateUser("Rahi", "Sujal", 22);
+const user2 = new CreateUser("Rahul", "Fad", 10);
+
+console.log(user1);
+console.log(user2);
+console.log(user1.getDobYear());
+console.log(user2.getDobYear());
+```
+
+![](./images/OOPS_JS_1.png)
+
+### Here we have achieved inheritance as both object boxes, user1 and user2 are able to access / inherit the functions in the prototype block (getDobYear) which is a child of createUser block.
+
+### Also we have seen polymorphism where a createUser block takes different forms when dealing with user1 and when dealing with user2
+
+## Convention -> When declaring a constructor function, always start its naming by a `Capital Letter`
+
+eg. `new CreateUser` (see code)
+
+[Quiz](https://app.procodrr.com/web/courses/assignment/663790450fe9932fc440c641/review?subscriber=66b85efe65f5003bec655b80)
+
+---
+
+# [Classes in JavaScript](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=663791b2d7f7dc03e8c76f5a)
+
+Behind the scenes, classes are just like functions only, doing the same thing.
+
+```js
+function CreateUser(firstName, lastName, age) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.age = age;
+}
+
+CreateUser.prototype.getDobYear = function () {
+  return new Date().getFullYear() - this.age;
+};
+
+CreateUser.prototype.getFullName = function () {
+  return this.firstName + ` ` + this.lastName;
+};
+
+const user1 = new CreateUser("Rahi", "Sujal", 22);
+const user2 = new CreateUser("Rahul", "Fad", 10);
+
+console.log(user1);
+console.log(user2);
+console.log(user1.getDobYear());
+console.log(user2.getDobYear());
+console.log(user1.getFullName());
+console.log(user2.getFullName());
+```
+
+Now one issue here is that, we have to create every time a prototype function, to incorporate a functionality, which increases our code base.
+
+To counter this, we have `classes aka syntactical sugar` in JS
+
+## Behind the scenes, class is a constructor function only
+
+so there are some ways to write code using classes:
+
+```js
+class CreateUser {}
+
+CreateUser.prototype.getDobYear = function () {
+  return new Date().getFullYear() - this.age;
+};
+
+CreateUser.prototype.getFullName = function () {
+  return this.firstName + ` ` + this.lastName;
+};
+
+const user1 = new CreateUser("Rahi", "Sujal", 22);
+const user2 = new CreateUser("Rahul", "Fad", 10);
+```
+
+But this makes our code a little bit heavier, to simplify it, we do as follows:
+
+1. Put those functions inside classes
+
+2. To access values while calling the function, we introduce a constructor method (this is different from the constructor function as discussed before).
+
+3. Whenever the code runs, the functions inside classes will not be executed, they will go straight inside the prototype. Only the constructor methods will run which will have values.
+
+We use the `constructor` keyword to make the constructor method.
+
+```js
+class CreateUser {
+  constructor(fname, lname, age) {
+    this.firstName = fname;
+    this.lastName = lname;
+    this.age = age;
+  }
+  getDobYear() {
+    return new Date().getFullYear() - this.age;
+  }
+
+  getFullName() {
+    return this.firstName + ` ` + this.lastName;
+  }
+}
+
+const user1 = new CreateUser("Rahi", "Sujal", 22);
+const user2 = new CreateUser("Rahul", "Fad", 10);
+```
+
+the new keyword calls the createUser class, inside it the constructor method runs and the values are assigned to the property keys. Also the functions are stored in the prototype of the class and they return values when called. Also via the new keyword, a class object is automatically returned. `this` will point to the object that is created via the `new` keyword.
+
+[Quiz](https://app.procodrr.com/web/courses/assignment/663792681c72fd7f6143536a/review?subscriber=66b85efe65f5003bec655b80)
+
+---
+
+# [Private and Public Fields in Class](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=663a24b4f0acc7d6ebc41900)
+
+Earlier there was no way in JS to make a property private in class, so people usually used `__` before a property name to tell others that this is a private property, please do not alter it (though it can be altered)
+
+## But in modern JS, we can use `#` before property name to make it private and then not alter it after declaring.
+
+But we get this error `Uncaught SyntaxError: Private field '#age' must be declared in an enclosing class (at class.js:6:13)`
+
+So before constructor function, write `#age` to remove the error
+
+```js
+class CreateUser {
+  #age;
+  constructor(fname, lname, age) {
+    this.firstName = fname;
+    this.lastName = lname;
+    this.#age = age;
+  }
+  getDobYear() {
+    return new Date().getFullYear() - this.age;
+  }
+
+  getFullName() {
+    return this.firstName + ` ` + this.lastName;
+  }
+}
+
+const user1 = new CreateUser("Rahi", "Sujal", 22);
+const user2 = new CreateUser("Rahul", "Fad", 10);
+```
+
+Now by making it private, we can access age inside the createUser class, but we cannot access it outside of the class.
+
+## Normally we put those properties inside a constructor which we want to make dynamic
+
+### We can also make private properties outside of a constructor method and inside of a class.
+
+```js
+class CreateUser {
+  #age;
+  constructor(fname, lname, age) {
+    this.firstName = fname;
+    this.lastName = lname;
+    this.#age = age;
+  }
+
+  publicSayHi = "Hello";
+  #privateSayHi = "Hi";
+
+  getDobYear() {
+    console.log(this.#privateSayHi);
+    return new Date().getFullYear() - this.#age;
+  }
+
+  getFullName() {
+    return this.firstName + ` ` + this.lastName;
+  }
+}
+
+const user1 = new CreateUser("Rahi", "Sujal", 22);
+const user2 = new CreateUser("Rahul", "Fad", 10);
+```
+
+We can also make methods private
+
+eg
+
+```js
+#getFullName() {
+    return this.firstName + ` ` + this.lastName;
+  }
+```
+
+When it is private, it comes out of the prototype.
+
+We cannot access it globally now, however, we can access it inside the class field
+
+```js
+class CreateUser {
+  #age;
+  constructor(fname, lname, age) {
+    this.firstName = fname;
+    this.lastName = lname;
+    this.#age = age;
+  }
+
+  publicSayHi = "Hello";
+  #privateSayHi = "Hi";
+
+  getDobYear() {
+    console.log(this.#privateSayHi);
+    console.log(this.#getFullName()); // accessing the private method
+    return new Date().getFullYear() - this.#age;
+  }
+
+  #getFullName() {
+    return this.firstName + ` ` + this.lastName;
+  }
+}
+
+const user1 = new CreateUser("Rahi", "Sujal", 22);
+const user2 = new CreateUser("Rahul", "Fad", 10);
+```
+
+In normal objects we can also declare a private property, but enclose it in strings `"#age: 22"`
+
+Access it via square brackets (using `.` to access gives error) (so this is not truly private).
+
+[Quiz](https://app.procodrr.com/web/courses/assignment/663a24a86d0dbc42134b3b83/review?subscriber=66b85efe65f5003bec655b80)
 
 ---
 
