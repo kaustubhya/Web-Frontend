@@ -2059,3 +2059,560 @@ Access it via square brackets (using `.` to access gives error) (so this is not 
 
 ---
 
+# [Static Properties And Methods on Classes](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=663a2632f0acc7d6ebc46f4a)
+
+When we use static keyword while initializing variables, it will not appear in the global scope, it will appear inside the classes.
+
+### Making static properties
+
+```js
+class CreateUser {
+  constructor(fname, lname, age) {
+    this.firstName = fname;
+    this.lastName = lname;
+    this.age = age;
+  }
+
+  static hi = "hello";
+  getDobYear() {
+    return new Date().getFullYear() - this.age;
+  }
+
+  getFullName() {
+    return this.firstName + ` ` + this.lastName;
+  }
+}
+
+const user1 = new CreateUser("Rahi", "Sujal", 22);
+const user2 = new CreateUser("Rahul", "Fad", 10);
+
+console.log(CreateUser.hi); // static can be accessed inside the class and not globally
+```
+
+### We can also make static methods (functions)
+
+```js
+class CreateUser {
+  constructor(fname, lname, age) {
+    this.firstName = fname;
+    this.lastName = lname;
+    this.age = age;
+  }
+
+  getDobYear() {
+    return new Date().getFullYear() - this.age;
+  }
+
+  static getFullName() {
+    return this.firstName + ` ` + this.lastName;
+  }
+}
+
+const user1 = new CreateUser("Rahi", "Sujal", 22);
+const user2 = new CreateUser("Rahul", "Fad", 10);
+
+console.dir(CreateUser);
+```
+
+By doing this, it will come out of the class prototype and will be seen directly inside it (in devtools)
+
+### Making static blocks
+
+```js
+class CreateUser {
+  constructor(fname, lname, age) {
+    this.firstName = fname;
+    this.lastName = lname;
+    this.age = age;
+  }
+
+  static {
+    console.log("Good day");
+  }
+
+  getDobYear() {
+    return new Date().getFullYear() - this.age;
+  }
+
+  getFullName() {
+    return this.firstName + ` ` + this.lastName;
+  }
+}
+
+const user1 = new CreateUser("Rahi", "Sujal", 22);
+const user2 = new CreateUser("Rahul", "Fad", 10);
+```
+
+We see it gets logged, without having to write clg()
+
+### Writing static properties and static functions inside a static block
+
+Use `this` inside the static block
+
+```js
+class CreateUser {
+  constructor(fname, lname, age) {
+    this.firstName = fname;
+    this.lastName = lname;
+    this.age = age;
+    // points to object, created by new
+  }
+
+  static {
+    this.hi = "hello";
+    this.getFullName = function () {
+      return this.firstName + ` ` + this.lastName;
+      // points to the class
+    };
+  }
+
+  getDobYear() {
+    return new Date().getFullYear() - this.age;
+  }
+}
+
+const user1 = new CreateUser("Rahi", "Sujal", 22);
+const user2 = new CreateUser("Rahul", "Fad", 10);
+
+console.dir(CreateUser);
+```
+
+#### Inside the static block, `this` points to the class but in the cases outside the static block, `this` points to the individual objects.
+
+[Quiz](https://app.procodrr.com/web/courses/assignment/663a2687ee71fb1380d2b5fc/review?subscriber=66b85efe65f5003bec655b80)
+
+---
+
+# [Getters and Setters](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=663a266c6d0dbc42134ba3ca)
+
+Let us see a sample code to print full name of a user
+
+```js
+const user = {
+  firstName: "Ksd",
+  lastName: "Shukla",
+  fullName: function () {
+    return this.firstName + ` ` + this.lastName;
+  },
+};
+
+console.log(user.fullName());
+```
+
+Now if we try to change to a different full name, we can do `user.fullName = Lakshay Gaur` but here we are creating a new fullName property instead of altering the firstName and lastName, because though we can see a different full name, the firstName and lastName are same.
+
+So to alter the firstName and lastName, to get a fullName, we can do this:
+
+1. Getting the fullName using `get`, this will be invoked, only after some action is performed
+
+```js
+  get fullName() {
+    return this.firstName + ` ` + this.lastName
+  },
+
+  console.log(user.fullName)
+```
+
+2. Setting the fullName using `set`, this will be set after some action is performed
+
+```js
+  set fullName(value) {
+    console.log(value);
+  },
+
+user.fullName = `Vaishnavi Shukla`;
+```
+
+### Normally it is a function (getFullName) but when used with getters and setters, it acts like it is a property of the object user.
+
+Till now when we set the fullName, it was giving us the new setted fullName but when we used fullName directly, it was giving us the original fullName (firstName + lastName).
+
+So....
+
+Let us now change the firstName and lastName using getters and setters to get one final fullName
+
+```js
+const user = {
+  firstName: "Ksd",
+  lastName: "Shukla",
+  get fullName() {
+    return this.firstName + ` ` + this.lastName;
+  },
+
+  set fullName(value) {
+    const [fname, lname] = value.split(" ");
+    this.firstName = fname;
+    this.lastName = lname;
+  },
+};
+
+user.fullName = "Sid Boy";
+
+console.log(user.fullName);
+
+// Sid Boy
+```
+
+Here split function splits the first name and last name into 2 variables (as we separated wrt space), firstname went in fname, lastname went in lname (this was destructuring the array)
+
+then we set firstname as fname and lastname as lname.
+
+finally when we clg(), we see our final new full name i.e. `Sid Boy`
+
+Similarly, it can also be used with classes, the approach of writing is same.
+
+
+[Quiz](https://app.procodrr.com/web/courses/assignment/663a26c15f969444b3e18c2e/review?subscriber=66b85efe65f5003bec655b80)
+
+---
+
+# [Prototypal Inheritance | Extends and Super Keyword](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=663a26f65f969444b3e19769)
+
+Every Prototyping Chain ends at an `Object`
+
+```js
+class User {
+  constructor(firstName, lastName, age) {
+    this.firstName = firstName
+    this.lastName = lastName
+    this.age = age
+  }
+
+  getBirthYear() {
+    return new Date().getFullYear() - this.age
+  }
+
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`
+  }
+
+  set fullName(value) {
+    const [firstName, lastName] = value.split(' ')
+    this.firstName = firstName
+    this.lastName = lastName
+  }
+}
+
+// const user1 = new User('Aman', 'Mishra', 32)
+// const user2 = new User('Anurag', 'Singh', 72)
+
+class Student {
+  constructor(firstName, lastName, age, rollNo) {
+    this.firstName = firstName
+    this.lastName = lastName
+    this.age = age
+    this.rollNo = rollNo
+  }
+
+  getBirthYear() {
+    return new Date().getFullYear() - this.age
+  }
+
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`
+  }
+
+  set fullName(value) {
+    const [firstName, lastName] = value.split(' ')
+    this.firstName = firstName
+    this.lastName = lastName
+  }
+}
+
+// const student1 = new Student('Raunak', 'Mandal', 14, 30)
+// const student2 = new Student('Navay', 'Koshik', 4, 1)
+
+class Employee {
+  constructor(firstName, lastName, age, companyName) {
+    this.firstName = firstName
+    this.lastName = lastName
+    this.age = age
+    this.companyName = companyName
+  }
+
+  getBirthYear() {
+    return new Date().getFullYear() - this.age
+  }
+
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`
+  }
+
+  set fullName(value) {
+    const [firstName, lastName] = value.split(' ')
+    this.firstName = firstName
+    this.lastName = lastName
+  }
+}
+
+const emp1 = new Employee('Maharaj', 'Kumar', 27, 'Tata Consulting');
+const emp2 = new Employee('Ojas', 'Kumari', 45, 'DLF');
+```
+
+Look at this, code. Here we have User, Student and Employee classes, and each of them have a constructor and some methods. We can link them together and also remove the repititive code of constructors too!!
+
+We want Users as the parent, and Student and Employee classes as children classes.
+
+Now to inherit properties from parent to children, we will use the `extends` keyword.
+
+```js
+class Student extends User {
+
+  study() {
+    console.log(`The student studies`);
+  }
+}
+```
+
+Now the student has all the things that the User class has + a study function of its own.
+
+Now if we want to add some extra parameters to the Student class apart form firstName, lastName, and age. We can make a constructor in student class.
+
+But after that we need to import the User class parameters i.e. firstName, lastName, and age.
+
+For that we use the `super` keyword.
+
+```js
+class Student extends User {
+  constructor(firstName, lastName, age, rollNo) {
+    super(firstName, lastName, age); // importing from User class
+
+    this.rollNo = rollNo; // working on our own student parameters now
+  }
+
+  study() {
+    console.log(`The student studies`);
+  }
+}
+```
+
+Let us see a code example below:
+
+```js
+class Person {
+  live() {
+    console.log("Person is living");
+  }
+}
+
+class User extends Person {
+  constructor(firstName, lastName, age) {
+    super(); // inheriting nothing from Person
+
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+  }
+
+  getBirthYear() {
+    return new Date().getFullYear() - this.age;
+  }
+
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+
+  set fullName(value) {
+    const [firstName, lastName] = value.split(" ");
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+}
+
+class Student extends User {
+  constructor(firstName, lastName, age, rollNo) {
+    super(firstName, lastName, age); // importing from User class
+
+    this.rollNo = rollNo; // working on our own student parameters now
+  }
+
+  study() {
+    console.log(`The student studies`);
+  }
+}
+
+class Employee extends User {
+  constructor(firstName, lastName, age, companyName) {
+    super(firstName, lastName, age); // importing from User class
+
+    this.companyName = companyName;
+  }
+
+  worker() {
+    console.log("The employee / worker works");
+  }
+}
+
+const user1 = new User("Rahi", "Sujal", 22);
+const user2 = new User("Rahul", "Fad", 10);
+const student1 = new Student("Aman", "Mishra", 32, 1);
+const student2 = new Student("Anurag", "Singh", 72, 2);
+const emp1 = new Employee("Maharaj", "Kumar", 27, "Tata Consulting");
+const emp2 = new Employee("Ojas", "Kumari", 45, "DLF");
+
+console.dir(emp1);
+console.log(emp1.worker());
+```
+
+Here we have 4 classes: Person, User, Student and Employee
+
+Person is the parent class.
+
+The User is the child class with the attributes, firstName, lastName and age. User is not inheriting any constructor from the Person class. It inherits only a live() function.
+
+The grand child classes are Student and Employee. These inherits things from User and Person classes. For inheriting values, we have used a `super` keyword. This inherits the constructor parameter values form the User class here. As for the functions, they are inherited already.
+
+When we open the employee (emp1) code and keep going through all their prototypes, we will go through as follows:
+
+Employee > User > Person > Object
+
+[Quiz](https://app.procodrr.com/web/courses/assignment/663a27275f969444b3e1a18b/review?subscriber=66b85efe65f5003bec655b80)
+
+---
+
+# [Demystifying THIS Keyword](https://app.procodrr.com/web/courses/6613af35b495b1c7835f280b?chapter=663a27795f969444b3e1b3a3)
+
+
+If an object calls a function, then the `this` keyword refers to that object.
+
+In global (function) scope, `this` points to `Window Object`
+
+Let us see some egs:
+
+```js
+const user = {
+  fname: 'Raj',
+  lname: 'Dhesi',
+  fullName:function() {
+    console.dir(this);
+    return `${this.fname} ${this.lname}`
+  } 
+}
+
+console.log(user.fullName())
+```
+
+Here, `this` points to the user object.
+
+
+eg2
+
+```js
+const user = {
+  fname: 'Raj',
+  lname: 'Dhesi',
+  fullName:function() {
+    function getAge() {
+      console.log('Getting Age');
+      console.log(this);
+    }
+
+    getAge()
+    console.log('********************');
+    console.dir(this);
+    return `${this.fname} ${this.lname}`
+  } 
+}
+```
+
+Here we called a function (getAge()) inside a function (fullName()).
+
+So, in such cases, the `this` inside getAge() points to the `Window Object`, while the `outer this (inside fullName())` points to the `user object`
+
+eg3
+
+```js
+const user = {
+  fname: 'Raj',
+  lname: 'Dhesi',
+  tags: ['a', 'b', 'c'],
+  printTags() {
+    // console.log(this.tags);
+    this.tags.forEach(function (tag) {
+      console.log(this);
+    })
+  }
+}
+
+user.printTags()
+```
+
+Here we have a function inside a function, so `this` inside `forEach()` inside `printTags()` points to the `Window Object`, while `outer this (inside printTags())` points to the `user object`
+
+We can make it point to the user object by adding a reference `this` after the forEach function
+
+```js
+const user = {
+  fname: 'Raj',
+  lname: 'Dhesi',
+  tags: ['a', 'b', 'c'],
+  printTags() {
+    // console.log(this.tags);
+    this.tags.forEach(function (tag) {
+      console.log(this);
+    }, this)
+  }
+}
+
+user.printTags()
+```
+
+Now all of it points to the user object
+
+If we've used arrow functions with forEach, we would not have faced this issue
+
+eg4
+
+```js
+function Hi() {
+  console.log(this);
+}
+
+new Hi();
+
+```
+
+We have used a `new` keyword here so this function is now a constructor function and the `this` keyword points to the object created by the constructor function. While writing constructor function, start the naming with a capital letter (good practice) 
+
+```js
+const h1 = document.querySelector('h1');
+
+h1.addEventListener('click', function() {
+  console.log(this)
+})
+```
+
+In cases like this, `this` will point to the `h1` object. And not the window object.
+
+## Arrow Functions + this
+
+Now according to MDN, arrow functions does not have their own bindings to `this`, `arguments` and `super` and hence they should not be used as methods.
+
+### Now let us look at this with classes
+
+```js
+class User {
+  constructor() {
+    this.fname = 'KSD',
+    console.log(this);
+  }
+
+  getUser() {
+    console.log(this)
+  }
+}
+
+
+
+console.log(new User())
+console.log(new User().getUser())
+```
+
+Here we have a normal `this` inside a constructor and a `this` inside a method in a constructor.
+
+In both the cases, `this` is pointing to the `User()` class here.
+
+[Quiz](https://app.procodrr.com/web/courses/assignment/663a30b23ee6e80f8712edb7/review?subscriber=66b85efe65f5003bec655b80)
+
+---
+
