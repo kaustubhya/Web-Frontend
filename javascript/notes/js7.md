@@ -1032,3 +1032,20 @@ function throttle(func, delay = 1000) {
   };
 }
 ```
+
+---
+
+# [Master Debugging and Become a Pro Developer | Catch Bugs Instantly | Advanced JavaScript](https://www.youtube.com/watch?v=0T3G1iPkR8s&list=PLfEr2kn3s-brmujLuaVPA_FTkflKbMc5x&index=8)
+
+
+Shortcut to detect any event and debug it:
+
+DevTools -> Sources -> Event Listener Breakpoints -> Mouse (here items are getting removed on click) -> click
+
+Then perform that event, this will highlight that code bit which is performing that event in debugger.
+
+Use `watch` in sources to track the variable value in devtools.
+
+Tip -> Do debugging in incognito mode because in normal mode, chrome extensions may hamper the debugging process.
+
+Practice some debugging problems!!
