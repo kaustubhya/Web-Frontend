@@ -135,3 +135,5 @@ The only drawback of git is that it stores all of our code in a git folder local
 - GitLab and BitBucket are alternatives of GitHub.
 
 - `git remote show origin` -> To see the details of the remote repository to which we are connected.
+
+- `git push -u origin branch_name` -> To push a branch to the remote repository
