@@ -114,3 +114,14 @@ In git, we use branches to create different versions of our code.
 - `git merge branch_name` -> To merge a branch into the current branch
 
 - `git log --all --oneline` -> To see all the git logs in short in one line
+
+- `git branch --delete branch_name` -> To delete a branch
+(We need to be in branch B to delete branch A)
+
+- `git branch -m branch_name` -> To rename a branch
+
+- `git branch -D about` -> When a branch is not merged and we want to delete that branch.
+
+## People normally do not make code changes in master branch, they just merge branches into the master branch.
+
+Whenever we merge a branch a commit is created with a commit id.
