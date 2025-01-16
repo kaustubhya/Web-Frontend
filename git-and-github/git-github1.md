@@ -125,3 +125,13 @@ In git, we use branches to create different versions of our code.
 ## People normally do not make code changes in master branch, they just merge branches into the master branch.
 
 Whenever we merge a branch a commit is created with a commit id.
+
+---
+
+# [Complete GitHub Tutorial in One Video | Git and GitHub Fundamentals | Ep.05](https://www.youtube.com/watch?v=5aslveqHw-4&list=PLfEr2kn3s-brBO7d9irTRvClcjiNhzczH&index=5)
+
+The only drawback of git is that it stores all of our code in a git folder locally in our system. So in case our system is malfunctioned, we will lose all of our work. To solve this issue, came github, where we can store our code in the cloud (github remote server). This will prevent our code from getting lost, even if our system is malfunctioned.
+
+- GitLab and BitBucket are alternatives of GitHub.
+
+- `git remote show origin` -> To see the details of the remote repository to which we are connected.
