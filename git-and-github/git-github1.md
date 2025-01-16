@@ -97,3 +97,20 @@ Checkout timeline in the bottom left part of VS code to see a specific file's lo
 
 ---
 
+# [How to Create & Merge Branches? | Git and GitHub Fundamentals | Ep.04](https://www.youtube.com/watch?v=UlckC6wLudI&list=PLfEr2kn3s-brBO7d9irTRvClcjiNhzczH&index=4)
+
+In git, we use branches to create different versions of our code.
+
+- `git branch` -> To see all the branches in the repository
+
+- `git branch branch_name` -> To create a new branch
+
+- `git branch -d branch_name` -> To delete a branch
+
+- `git checkout branch_name` -> To switch to a branch
+
+- `git checkout -b branch_name` -> To create a new branch and switch to it
+
+- `git merge branch_name` -> To merge a branch into the current branch
+
+- `git log --all --oneline` -> To see all the git logs in short in one line
