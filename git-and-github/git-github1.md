@@ -84,3 +84,16 @@ main branch / master branch is the default branch
 - `git status -s` -> Short cut of git status
 
 Commit means to take a snapshot of that file in your memory and save it in the database. We give a commit message with it too!
+
+## Press `q` to exit git log.
+
+- To go to any previous commit, we do `git checkout commit_id`
+
+- To come back from that previous commit to our present code, we do `git checkout master`.
+
+- `git branch` -> To see all the branches in the repository
+
+Checkout timeline in the bottom left part of VS code to see a specific file's local history, this can be used to retrieve older code from this file.
+
+---
+
