@@ -137,3 +137,13 @@ The only drawback of git is that it stores all of our code in a git folder local
 - `git remote show origin` -> To see the details of the remote repository to which we are connected.
 
 - `git push -u origin branch_name` -> To push a branch to the remote repository
+
+- `git fetch` -> To fetch the changes from the remote repository
+
+- `git pull` -> To pull the changes from the remote repository (basically fetch the changes and then merge them)
+
+- `git push` -> To push the changes to the remote repository
+
+CTRL + SHIFT + T -> Open any recently closed tab.
+
+We can also assign multiple users / contributors to a repository by assigning them as collaborators on GitHub.
