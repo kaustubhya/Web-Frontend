@@ -1,0 +1,70 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Lato", serif;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.input-str-cont {
+    display: flex;
+    justify-content: center;
+    margin: 30px 180px;
+}
+
+#input-str {
+    width: 100%; 
+    padding: 10px;
+    letter-spacing: 0.5px;
+
+}
+
+.result {
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: #F5F5DC;
+    margin: 40px 180px;
+    height: 40px;
+    height: auto;
+
+
+}
+
+.label {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 4px 8px;
+    z-index: 1;
+    position: relative;
+    top: -10px;
+    left: 15px;
+    width: 100px;
+}
+
+
+.container span {
+    margin-left: 20px;
+    overflow: hidden; /* Prevent any extra content from spilling out */
+    margin-bottom: 20px;
+    padding-right: 20px;
+    display: inline-block; /* Treat span as inline-block for better control */
+    width: calc(100% - 20px); /* Adjust width to account for margin */
+    word-wrap: break-word; /* Break long words to fit within the container */
+    white-space: normal; /* Allow text to wrap to the next line */
+}
