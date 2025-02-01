@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Quotes from 'inspirational-quotes';
 
 axios
   .get("https://jsonplaceholder.typicode.com/todos/1")
@@ -13,3 +14,5 @@ axios
   .finally(function () {
     // always executed
   });
+
+  console.log(Quotes.getRandomQuote()); // return any random quote

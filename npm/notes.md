@@ -148,3 +148,24 @@ A very new live server is created in our browser now.
 
 What did this bundler do here: It took everything that we imported from axios, and put it in a script.js file which it made itself, then it linked that script.js file to our index.html file and then it ran the index.html file in a localhost:1234 which it created itself here. 
 
+Now we have pushed this code to github.
+
+### Say we are pulling in someone's code from github and they have a lot of libraries in their package.json file, now locally we need not install each of those libraries again and again using `npm i package_name`. We can use `npm install` or `npm i` once. This will install the node_modules folder which is linked to the package.json file. Now this file already has all the packages in its dependencies and devDependencies, this will be installed along with the node_modules automatically. So, just install node modules to get all your packages installed automatically.
+
+If we have both `package.json` and `package-lock.json` in our folder then initially node_modules will check `package-lock.json` first for all dependencies. If there isn't a `package-lock.json` file then it will check for `package.json` file and install the dependencies from there.
+
+Now we see this text in package-lock.json: `parcel: "version": "2.13.3"` and this in package.json: `"parcel": "^2.13.3",`. We notice there is a `^` in package.json file, which means that if there is a newer version of parcel, we want to use that version. This is called a range in package.json file.
+
+`"parcel": "^2.13.3"` : 
+
+- 2 here is the major version (can not be increased by node modules), does major upgrades
+- 13 here is the minor version (can be increased by node modules), does minor upgrades
+- 3 here is the patch version or patch fix (can be increased by node modules), does security fixes and updates
+
+if we have `"parcel": "~2.13.3"` : 
+
+If we have `~`, then only patch fixes can be upgraded by the node modules.
+
+If we have `"parcel": "*"`, then install the latest version of parcel.
+
+devDependencies code does not go into our build.
