@@ -169,3 +169,26 @@ If we have `~`, then only patch fixes can be upgraded by the node modules.
 If we have `"parcel": "*"`, then install the latest version of parcel.
 
 devDependencies code does not go into our build.
+
+Lastly in this example below, we included another npm package here which will generate us some random inspirational quotes:
+
+```js
+import axios from 'axios';
+import Quotes from 'inspirational-quotes';
+
+axios
+  .get("https://jsonplaceholder.typicode.com/todos/1")
+  .then((response) => {
+    // handle success
+    console.log(response.data);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .finally(function () {
+    // always executed
+  });
+
+  console.log(Quotes.getRandomQuote()); // return any random quote
+```
