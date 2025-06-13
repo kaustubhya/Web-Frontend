@@ -8,11 +8,11 @@ JS was made by "Brendan Eich"
 
 Netscape made by Mark Andreessen
 
-ECMA - European Computers Manufacturing Association (organisation that makes laws related to computers).
+ECMA - European Computers Manufacturing Association (organization that makes laws related to computers).
 
-ECMAScript - Works like JS only but it is made up of things standardised by ECMA.
+ECMAScript - Works like JS only but it is made up of things standardized by ECMA.
 
-ECMAScript was inspired by JavaScript and is the standardised version of JavaScript. It is today used in almost all web browsers.
+ECMAScript was inspired by JavaScript and is the standardized version of JavaScript. It is today used in almost all web browsers.
 
 Versions of ECMAScript:
 
@@ -65,7 +65,7 @@ Using quotes inside string:
 
 `` also supports string
 
-`` advantage -> It can support input of multiple lines of strings ("" and '' donot support this and give error).
+`` advantage -> It can support input of multiple lines of strings ("" and '' do not support this and give error).
 
 eg.
 
@@ -82,6 +82,8 @@ Nice to meet
 you' => Error
 
 `Template literals` -> using `` to input strings in multiple lines
+
+Template literals are sometimes informally called `template strings`, because they are used most commonly for `string interpolation` (to create strings by doing substitution of placeholders).
 
 [docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)
 
@@ -133,6 +135,24 @@ parseInt(null)
 NaN
 
 BigInt:
+
+JavaScript can only safely represent integers:
+
+Up to 9007199254740991 +(253-1)
+
+and
+
+Down to -9007199254740991 -(253-1).
+
+Integer values outside this range lose precision.
+
+So to represent numbers outside this range, we use BigInt.
+
+To create a BigInt, append n to the end of an integer or call BigInt() like:
+
+1. let x = 1234567890123456789012345n; or
+2. let y = BigInt(1234567890123456789012345)
+
 https://www.w3schools.com/js/js_bigint.asp
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt
 
@@ -149,9 +169,7 @@ When we define a variable initially in JavaScript, javascript assigns it a type 
 
 const variables must be initialized as it cannot be updated later on.
 
-🛑🛑🛑 INTERVIEW QUESTION:
-
-var vs let differences ??
+## 🛑🛑🛑 INTERVIEW QUESTION: var vs let differences ??
 
 1. `let` and `const` are variables inside a block scope { (these variable values cannot be accessed outside of the block, if they are initialized inside the block) }.
 
@@ -183,7 +201,7 @@ Naming variables in JS:
 
 - only use A-Z or a-z
 - use 0-9 (not start with digits)
-- Special Chars (only \_ and $ are allowed)
+- Special Chars (only `_` and `$` are allowed)
 
 Also we can use any language to name variables like hindi, kannada, bengali etc.. (with same rules above)
 
@@ -195,7 +213,7 @@ The flow of program running in JavaScript happens in 2 ways:
 
 1. Memory Creation Phase - In this phase, we see that the code is not executed but each variable creates a memory block of datatype `undefined` and inside it inserts values of `undefined`. All the steps like console log or any code execution steps are skipped.
 
-2. Code Execution Phase - In this phase, we see that all the undefined values inserted inside the memory in step 1, gets replaced by the datatype values initialised in the code.
+2. Code Execution Phase - In this phase, we see that all the undefined values inserted inside the memory in step 1, gets replaced by the datatype values initialized in the code.
 
 eg. let name = 'ajay';
 
@@ -219,7 +237,7 @@ Defer Case:
 
 loads title, calls script tag (simultaneously loads it with html) and loads body html.
 
-This way when network is slow, we donot need to wait for the scipt tag to load after the html is done loading. (It is loaded beforehand and immediately starts working after loading of html body).
+This way when network is slow, we do not need to wait for the script tag to load after the html is done loading. (It is loaded beforehand and immediately starts working after loading of html body).
 
 Defer Case:
 
@@ -296,7 +314,7 @@ This dialog box works in a particular tab in a particular browser. Different tab
 
 ---
 
-[Template Literals | String Methods & Properties | The Complete JavaScript Course | Ep.07](https://www.youtube.com/watch?v=Z4x2EgRkJ1g&list=PLfEr2kn3s-br9ZFmejfLhAgMbGgbpdof8&index=53)
+# [Template Literals | String Methods & Properties | The Complete JavaScript Course | Ep.07](https://www.youtube.com/watch?v=Z4x2EgRkJ1g&list=PLfEr2kn3s-br9ZFmejfLhAgMbGgbpdof8&index=53)
 
 String Methods and Properties
 Before starting string methods and properties we need know that strings are indexed. So basically we can access any single character of a string by doing something like this.
@@ -309,7 +327,7 @@ Result: 'e'
 
 If we entered, 'Hello World[28] then result would have been 'undefined' as there is no char at position 28.
 
-There is only one property that exists.
+### There is only one property that exists.
 
 Property
 
@@ -346,7 +364,7 @@ faltu.trim
 -> trim() { [native code] }
 
 faltu.trim()
--> 'Gannu Bhai     Zinda  hai'
+-> 'Gannu Bhai     Zinda  hai' // space at end and start gone
 
 faltu.trim().toLowerCase() // chaining lowercase to trim
 -> 'gannu bhai     zinda  hai'
@@ -483,29 +501,29 @@ const amount = 4587;;
 
 ---
 
-[Math Object in JavaScript | The Complete JavaScript Course | Ep.08](https://www.youtube.com/watch?v=H3-1EQW2evA&list=PLfEr2kn3s-br9ZFmejfLhAgMbGgbpdof8&index=49)
+# [Math Object in JavaScript | The Complete JavaScript Course | Ep.08](https://www.youtube.com/watch?v=H3-1EQW2evA&list=PLfEr2kn3s-br9ZFmejfLhAgMbGgbpdof8&index=49)
 
 Operators:
 
-- - (Addition Operator)
-- - (Subtraction Operator)
-- - (Multiplication Operator)
-- / (Division Operator)
-- % (Remainder Operator)
-- ** (Exponential Operator) (eg. 5 ** 3 => 5 _ 5 _ 5 = 125)
+- `+` (Addition Operator)
+- `-` (Subtraction Operator)
+- `*` (Multiplication Operator)
+- `/` (Division Operator)
+- `%` (Remainder Operator)
+- `**` (Exponential Operator) (eg. 5 ** 3 => 5 _ 5 _ 5 = 125)
   (came in ES7)
 
 ### Math Object in JavaScript
 
-Properties on Math Object: (no brackets)
+#### Properties on Math Object: (no brackets)
 
 - Math.PI => 3.14.......
 - Math.SQRT2 => 1.414.....
 - Math.E => 2.7..... (Euler's Number)
 
-Methods on Math Object: (Need brackets)
+#### Methods on Math Object: (Need brackets)
 
-- Math.pow(25, 2) => 25 \* 25 => 125 (old way)
+- Math.pow(25, 2) => 25 `*` 25 => 125 (old way)
 - Math.sqrt(25) => 5
 - Math.floor(6.1245) => 6
 - Math.floor(6.999999999999999999999999) => 7 (number too large to be 6)
@@ -534,7 +552,7 @@ Methods on Math Object: (Need brackets)
 - `Math.floor(Math.random() * 21)`
 
 ## give numbers between 10 to 20
-`10 + Math.floor(Math.random() * 11)`
+`Math.floor(Math.random() * 11) + 10`
 basic formula `Math.floor(Math.random() * (max - min + 1) + min);`
 
 min -> 10
@@ -631,7 +649,7 @@ We can use `!` (NOT operator) to convert from truthy to falsy and vice versa.
 
 ---
 
-[Comparison Operators](https://www.youtube.com/watch?v=HVhD13U5Bh0&list=PLfEr2kn3s-br9ZFmejfLhAgMbGgbpdof8&index=51)
+# [Comparison Operators](https://www.youtube.com/watch?v=HVhD13U5Bh0&list=PLfEr2kn3s-br9ZFmejfLhAgMbGgbpdof8&index=51)
 
 - `==` equal value
 - `===` equal value and equal datatype (strict equality, we have to do explicit(manual) conversion to compare different data types) (use === more than ==)
@@ -665,7 +683,7 @@ parseInt('20') === 20 (true)
 
 ---
 
-[Logical Operators in JavaScript | And, Or, Not, Operators | The Complete JavaScript Course | Ep.11](https://www.youtube.com/watch?v=hjSSoCRU_nc&list=PLfEr2kn3s-bo4LwlbyZugHPavhcdW8YMC&index=12)
+# [Logical Operators in JavaScript | And, Or, Not, Operators | The Complete JavaScript Course | Ep.11](https://www.youtube.com/watch?v=hjSSoCRU_nc&list=PLfEr2kn3s-bo4LwlbyZugHPavhcdW8YMC&index=12)
 
 Logical Operators:
 
@@ -691,7 +709,7 @@ so let us see some egs.
 // eg.
 0 || '' => 0
 
-'' || 0 => ''
+'' || 0 => 0
 
 // OR on the other hand checks for both values and returns the later value if both are falsy and the first value if both are truthy and the truthy value if one is truthy and other is falsy.
 
@@ -710,7 +728,8 @@ some more egs.
 ''
 
 11 || 5
-11
+11 
+// (true || true/false) -> true hence returned first value
 
 '' || 5
 5
@@ -745,10 +764,7 @@ undefined
 null || null
 null
 
-null ||  null
-null
-
-null &&  null
+null && null
 null
 
 45 && NaN
@@ -803,8 +819,9 @@ if (userAge >= 22 && userAge <= 60) {
 console.log(`His age is ${userAge}`);
 ```
 
-One drawback of parseInt:
+#### One drawback of parseInt:
 🛑 parseInt(null) = NaN (cannot convert null to a number)
+
 🛑 +null = 0
 
 Task
@@ -819,7 +836,7 @@ console.log(`Age is ${userAge}`);
 
 ---
 
-[Optimize Decision Making Using Else If and Else | The Complete JavaScript Course | Ep.13](https://www.youtube.com/watch?v=7lld3Xk5usQ&list=PLfEr2kn3s-bo4LwlbyZugHPavhcdW8YMC&index=14)
+# [Optimize Decision Making Using Else If and Else | The Complete JavaScript Course | Ep.13](https://www.youtube.com/watch?v=7lld3Xk5usQ&list=PLfEr2kn3s-bo4LwlbyZugHPavhcdW8YMC&index=14)
 
 Some more examples
 
@@ -1054,7 +1071,7 @@ This is pretty advance so look closely!!!
 
 ---
 
-[How to See Variable Address in Dev Tools? | Memory Location | The Complete JavaScript Course | Ep.17](https://www.youtube.com/watch?v=Gqlv6inCZqI&list=PLfEr2kn3s-bo4LwlbyZugHPavhcdW8YMC&index=18)
+# [How to See Variable Address in Dev Tools? | Memory Location | The Complete JavaScript Course | Ep.17](https://www.youtube.com/watch?v=Gqlv6inCZqI&list=PLfEr2kn3s-bo4LwlbyZugHPavhcdW8YMC&index=18)
 
 ![](./images/JavaScript%20Memory%20Addresses%20and%20Variables.png)
 

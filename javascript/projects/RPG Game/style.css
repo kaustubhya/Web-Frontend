@@ -1,0 +1,235 @@
+:root {
+  --bg-color: #7f21ab;
+  font-family: "verdana", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: #0a0a23;
+}
+
+h1 {
+  color: #f5f6f7;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.container {
+  background-color: #f5f6f7;
+  margin: 50px 450px 0px 450px;
+  border-radius: 16px;
+  box-shadow: 5px 5px 5px 8px #f5f6f7a4;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 10px;
+}
+
+label {
+  font-size: 16px;
+}
+input {
+  width: 200px;
+  padding: 7px 10px 7px 10px;
+  margin-right: 5px;
+}
+
+input:focus {
+  outline: 3px solid rgb(0, 119, 255);
+}
+
+#search-button {
+  padding: 10px 20px;
+  background-color: var(--bg-color);
+  color: #fff;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+#search-button:hover {
+  background-color: #6f1d9b;
+}
+
+.top-container {
+  margin: 15px 20px;
+  padding-bottom: 10px;
+}
+
+#creature-name {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+#creature-id {
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+#height {
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+#weight {
+  font-size: 14px;
+}
+
+.size {
+  margin-top: 10px;
+}
+
+#types {
+  margin-top: 10px;
+}
+
+.type {
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+#special-name {
+  margin-top: 10px;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+#special-abilities {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.water {
+  background-color: #1e90ff;
+  color: #fff;
+  margin: 0px 10px 0px 0px;
+
+}
+
+.fire {
+  background-color: #ff4500;
+  color: #fff;
+  margin: 0px 10px 0px 0px;
+
+}
+
+.rock {
+  background-color: #8b4513;
+  color: #fff;
+  margin: 0px 10px 0px 0px;
+}
+
+.ghost {
+  background-color: #8a2be2;
+  color: #fff;
+  margin: 0px 10px 0px 0px;
+}
+
+.fairy {
+  background-color: #ff69b4;
+  margin: 0px 10px 0px 0px;
+  color: #fff;
+}
+
+.electric {
+  background-color: #ffd700;
+  color: #fff;
+  margin: 0px 10px 0px 0px;
+}
+
+.dragon {
+  background-color: #00bfff;
+  color: #fff;
+  margin: 0px 10px 0px 0px;
+}
+
+.psychic {
+  background-color: #ff00ff;
+  color: #fff;
+  margin: 0px 10px 0px 0px;
+}
+
+.grass {
+  background-color: #32cd32;
+  color: #fff;
+  margin: 0px 10px 0px 0px;
+}
+
+.poison {
+  background-color: #800080;
+  color: #fff;
+  margin: 0px 10px 0px 0px;
+}
+
+.ice{
+  background-color: #00ffff;
+  color: #fff;
+  margin: 0px 10px 0px 0px;
+}
+
+.ground {
+  background-color: #deb887;
+  color: #fff;
+  margin: 0px 10px 0px 0px;
+}
+
+.flying {
+  background-color: #87ceeb;
+  color: #fff;
+  margin: 0px 10px 0px 0px;
+}
+
+.bug {
+  background-color: #adff2f;
+  color: #fff;
+  margin: 0px 10px 0px 0px;
+}
+
+.dark {
+  background-color: #696969;
+  color: #fff;
+  margin: 0px 10px 0px 0px;
+}
+
+.steel {
+  background-color: #c0c0c0;
+  color: #fff;
+  margin: 0px 10px 0px 0px;
+}
+
+.bottom-container {
+  margin: 15px 20px;
+  padding-bottom: 10px;
+}
+
+table {
+  width: 100%;
+}
+
+th,
+td {
+  background-color: var(--bg-color);
+  border-bottom: 5px solid #f5f6f7;
+  border-right: 5px solid #f5f6f7;
+  color: #f5f6f7;
+  padding: 10px 24px;
+  text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    margin: 50px 20px 0px 20px;
+  }
+}
