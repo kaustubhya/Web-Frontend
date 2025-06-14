@@ -450,7 +450,7 @@ Now if we write `I am a cat|dog` , then it will select line 1 fully and only dog
 
 This is because `|` considers LHS of `|` as case 1 and RHS of `|` as case 2. So to make both lines select we need to group them.
 
-## Grouping
+## Grouping and Capturing
 
 `I am a (cat|dog)` -> It will select those lines that have `cat` or `dog` in them fully now.
 
