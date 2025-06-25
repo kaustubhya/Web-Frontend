@@ -1,0 +1,142 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  padding: 16px;
+  text-align: center;
+  overflow: hidden;
+}
+
+h1 {
+  margin-bottom: 16px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 400px;
+  margin: auto;
+}
+
+select,
+input[type="text"],
+button {
+  font: inherit;
+  padding: 8px;
+}
+
+.duration-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#duration {
+  flex-grow: 1;
+}
+
+.show-toast {
+  cursor: pointer;
+}
+
+.toasts-container {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 1000;
+}
+
+.toasts-container_top-right {
+  top: 1rem;
+  right: 1rem;
+  left: auto;
+}
+
+.toasts-container_bottom-left {
+  top: auto;
+  bottom: 1rem;
+  left: 1rem;
+}
+
+.toasts-container_bottom-right {
+  top: auto;
+  bottom: 1rem;
+  right: 1rem;
+  left: auto;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.75rem 1.25rem;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  color: white;
+  font-size: 1rem;
+  animation: slideIn 0.3s ease-out;
+  min-width: 200px;
+}
+
+.toast span:last-child {
+  margin-left: auto;
+  cursor: pointer;
+}
+
+/* Toast Type Colors */
+.toast-success {
+  background-color: #28a745;
+}
+
+.toast-error {
+  background-color: #dc3545;
+}
+
+.toast-info {
+  background-color: #007bff;
+}
+
+.toast-warning {
+  background-color: #ffc107;
+  color: #000;
+}
+
+/* Animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+.toast {
+  animation: slideIn 0.4s ease forwards;
+  transition: all 0.4s ease;
+}
+
+.toast.slide-out {
+  animation: slideOut 0.4s ease forwards;
+}
