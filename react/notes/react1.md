@@ -169,8 +169,8 @@ final code eg.
       src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
     defer></script>
     <script src="./script.js" defer></script>
-
   </head>
+
   <body style="font-family: cursive">
     <h1>React Element</h1>
     <div id="root"></div>
@@ -222,7 +222,7 @@ Look how we wrote style inside an object in a key-value pair.
 
 eg. backgroundColor instead of background-color
 
-Now those elements which do not have any text (aka children) inside them are called void elements, eg. img, input, hr etc.
+Now those elements which do not have any text (aka children) inside them are called `void elements`, eg. img, input, hr etc.
 
 If we try to give a children to them here, React will throw an error.
 
@@ -309,13 +309,13 @@ console.dir(h2);
 
 What babel does here is, it takes script.js, converts the code file into a format which is readable by our browser and then includes it in a script tag inside our head tag, (check the last script tag in the head tag while inspecting the html). We will see the same old format code which is written automatically by babel.
 
-## Installing babel via cli 
+# 🛑 Installing babel via cli 
 
 1. `npm install --save-dev @babel/preset-react`
 
 2. `npm install --save-dev @babel/preset-env`
 
-3. Make a babel.config.json file in the same directory as the package.json and use this code:
+3. Make a `babel.config.json` file in the same directory as the package.json and use this code:
 
 ```json
 {
@@ -486,7 +486,7 @@ We see in dist folder, it servers a completely different index.html, a different
 
 # [Render Multiple Elements in React | The Complete React Course | Ep.08](https://www.youtube.com/watch?v=Ps_6LcVhERs)
 
-1. Now to avoid repeatedly writing `npx parcel index.html` to run our code, we can do this:
+#### 1. Now to avoid repeatedly writing `npx parcel index.html` to run our code, we can do this:
 
 - Go to package.json file
 - Inside the script object, insert this code:
@@ -495,7 +495,7 @@ We see in dist folder, it servers a completely different index.html, a different
 
 - now do `npm start` (shortcut)
 
-2. Next we donot write any html in index.html, we just write our react code in script.js
+2. Next we do not write any html in index.html, we just write our react code in script.js
 
 we just write this in html body
 
@@ -568,100 +568,334 @@ We can use a function instead of a variable here, for multiple cards, we will ca
 ```
 
 ```css
-* {
-    box-sizing: border-box;
-  }
-
-.card-container {
-    border: 2px solid #000;
-    border-radius: 12px;
-    max-width: 300px;
+.card {
+    width: 250px;
+    border: 1px solid black;
+    border-radius: 8px;
     overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    max-height: 150px;
+}
+
+.card h3, .card p {
+    margin: 6px 0;
+}
+
+.card-content {
+    padding: 0 8px;
 }
 
 .container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    justify-content: space-around;
-}
-
-.card {
-    margin-inline: auto;
-}
-
-.card img {
-    width: 100%;
-}
-
-.card-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-h2 {
-    margin-block: 0;
-    text-align: center;
-}
-
-p {
-    margin: 0;
-    padding: 0;
+    gap: 12px;
+    /* justify-content: space-between; */
+    /* align-items: flex-start; */
 }
 ```
 
 ```js
-import React from "react";
-import "./style.css";
-import { createRoot } from "react-dom/client";
+import { createRoot } from 'react-dom/client'
+import './style.css'
 
-/**
- * A single card component that displays the given image, title, brand and price.
- * @param {{key: string, title: string, image: string, brand: string, price: string}} props 
- * @returns {JSX.Element}
- */
-function Card({id, title, image, brand, price}) {
-  console.log(id);
-  // for keys, we will use id as key
-  // To use the key value inside your component, pass it as a separate prop, like id.
+function Card(key, title, image, brand, price) {
+  console.log(key)
   return (
-    <>
-      <div className="card-container">
-        <div className="card" >
-          <img
-            src={image}
-            alt="iphone"
-          />
-        </div>
-        <div className="card-content">
-          <h2>{title}</h2>
-          <p>{brand}</p>
-          <p>{price}</p>
-        </div>
+    <div className="card" key={key}>
+      <img src={image} alt="iphone" />
+      <div className="card-content">
+        <h3>{title}</h3>
+        <p>{brand}</p>
+        <p>
+          <b>${price}</b>
+        </p>
       </div>
-    </>
-  );
-}
-const root = createRoot(document.getElementById("root"));
-
-fetch("https://dummyjson.com/products")
-.then((res) => res.json())
-.then((data) => {
-  root.render(
-    <div className="container">
-      {data.products.map((product) => (
-         <Card
-          key={product.id}
-          id={product.id}
-          title={product.title}
-          image={product.thumbnail}
-          brand={product.brand}
-          price={product.price}
-        />
-      ))}
     </div>
   )
+}
+
+const root = createRoot(document.getElementById('root'))
+
+console.log('Hello world!!!')
+
+fetch('https://dummyjson.com/products')
+  .then((res) => res.json())
+  .then((data) => {
+    root.render(
+      <div className="container">
+        {data.products.map((product) => {
+          return Card(
+            product.id,
+            product.title,
+            product.thumbnail,
+            product.brand,
+            product.price
+          )
+        })}
+      </div>
+    )
+  })
+```
+
+---
+
+# [Introduction to React Component | The Complete React Course | Ep.09](https://www.youtube.com/watch?v=TUsVCNr7HnY&list=PLfEr2kn3s-brb-vHE-c-QCUq-nFwDYtWu&index=10)
+
+Now in last lecture when we rendered multiple objects using a re-usable function, we rendered `id, title, image, brand, price` in this order and displayed. But if we do not use this exact order to display things, then we may see different things getting output every time.
+
+To fix this order issue, we will put all these inside an object and make them key-value pairs.
+
+## This is where we will use it as `PROPS`
+
+```js
+import { createRoot } from "react-dom/client";
+import "./style.css";
+
+function Card(props) {
+  const { key, title, image, brand, price } = props;
+  // console.log(key)
+  return (
+    <div className="card" key={key}>
+      <img src={image} alt="iphone" />
+      <div className="card-content">
+        <h3>{title}</h3>
+        <p>{brand}</p>
+        <p>
+          <b>${price}</b>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+const root = createRoot(document.getElementById("root"));
+
+console.log("Hello world!!!");
+
+fetch("https://dummyjson.com/products")
+  .then((res) => res.json())
+  .then((data) => {
+    root.render(
+      <div className="container">
+        {data.products.map((product) => {
+          return Card({
+            title: product.title,
+            image: product.thumbnail,
+            key: product.id,
+            price: product.price,
+            brand: product.brand,
+          });
+          {
+            /* no issues when we reorder */
+          }
+        })}
+      </div>
+    );
+  });
+```
+
+### We will now create a react element inside root.render
+
+We know that root.render accepts a react element. React element is a simple object which has some properties.
+
+Let us create one below with those properties.
+
+```js
+import { createRoot } from "react-dom/client";
+import "./style.css";
+
+root.render({
+  $$typeof: Symbol.for('react.element'),
+  type: 'h1',
+  ref: null,
+  props: {
+    children: 'This is a prop children i.e. text inside h1 element',
+  },
 })
+```
+
+#### But we will get an error. The error you're seeing is because you are manually creating a React element object instead of using React's createElement or JSX, which is not supported directly like you're doing above.
+
+Instead, use 2 ways
+
+1. via jsx
+
+```js
+import React from "react";
+import { createRoot } from "react-dom/client";
+
+const root = createRoot(document.getElementById("root"));
+
+root.render(<h1>This is a prop children i.e. text inside h1 element</h1>);
 
 ```
+
+2. via React.createElement
+
+```js
+import React from "react";
+import { createRoot } from "react-dom/client";
+
+const root = createRoot(document.getElementById("root"));
+
+const element = React.createElement('h1', null, 'This is a prop children i.e. text inside h1 element');
+
+root.render(element);
+```
+
+Now we can also give type as a function instead of an html element and keep that html element inside our type function
+
+```js
+import React from "react";
+import { createRoot } from "react-dom/client";
+
+function MyHeading() {
+  return React.createElement("h1", null, "Hello from MyHeading function");
+}
+
+const root = createRoot(document.getElementById("root"));
+
+// This works because type is a function returning a React element
+const element = {
+  $$typeof: Symbol.for("react.element"),
+  type: MyHeading,  // <== This is the function
+  ref: null,
+  props: {},
+};
+
+root.render(element);
+
+```
+
+But the above is old version so it won't work. This one will work.
+
+```js
+import React from "react";
+import { createRoot } from "react-dom/client";
+
+function MyHeading() {
+  return <h1>This is rendered from a function component</h1>;
+}
+
+const root = createRoot(document.getElementById("root"));
+
+// Using JSX (Recommended)
+root.render(<MyHeading />);
+
+```
+
+Now in the case where we used props, we can also do it like this, it will not work though as it's an older version
+
+```js
+import React from "react";
+import { createRoot } from "react-dom/client";
+
+function Card(props) {
+  const { key, title, image, brand, price } = props;
+  return (
+    <div className="card">
+      <img src={image} alt="iphone" />
+      <div className="card-content">
+        <h3>{title}</h3>
+        <p>{brand}</p>
+        <p>
+          <b>${price}</b>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+const root = createRoot(document.getElementById("root"));
+
+// Using JSX (Recommended)
+root.render({
+  $$typeof: Symbol.for("react.element"),
+  type: Card,
+  ref: null,
+  props: {
+    title: "iPhone 13",
+    image: "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+    brand: "Apple",
+    price: 899,
+    key: 12,
+  },
+});
+
+```
+
+This one will work
+
+```js
+import React from "react";
+import { createRoot } from "react-dom/client";
+
+function Card(props) {
+  const { id, title, image, brand, price } = props;
+   console.log("ID (acts as key):", id); // ✅
+  return (
+    <div className="card" key={id}>
+      <img src={image} alt="iphone" />
+      <div className="card-content">
+        <h3>{title}</h3>
+        <p>{brand}</p>
+        <p>
+          <b>${price}</b>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+const root = createRoot(document.getElementById("root"));
+
+// Using JSX (Recommended)
+root.render(
+  React.createElement(Card, {
+    id: 12,
+    title: "Essence Mascara Lash Princess",
+    image: 'https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp',
+    brand: "Essence",
+    price: 9.99,
+  })
+);
+
+```
+
+More shortcut
+
+instead of
+
+```js
+function Card(props) {
+  const { id, title, image, brand, price } = props;
+}
+```
+
+de-structure props directly
+
+```js
+function Card({id, title, image, brand, price}) {
+}
+```
+
+## Q. Now what is a React Component?
+
+### A. React component is a react element of type `function`. It will return a JSX i.e. a simple element
+
+eg. 
+```js
+React.createElement(Card, {
+    id: 12,
+    title: "Essence Mascara Lash Princess",
+    image:
+      "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp",
+    brand: "Essence",
+    price: 9.99,
+  })
+```
+
+Card is a function here.

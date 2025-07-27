@@ -680,11 +680,7 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _styleCss = require("./style.css");
 var _client = require("react-dom/client");
-/**
- * A single card component that displays the given image, title, brand and price.
- * @param {{key: string, title: string, image: string, brand: string, price: string}} props 
- * @returns {JSX.Element}
- */ function Card({ id, title, image, brand, price }) {
+function Card({ id, title, image, brand, price }) {
     console.log(id);
     // for keys, we will use id as key
     // To use the key value inside your component, pass it as a separate prop, like id.
@@ -699,12 +695,12 @@ var _client = require("react-dom/client");
                         alt: "iphone"
                     }, void 0, false, {
                         fileName: "script.js",
-                        lineNumber: 18,
+                        lineNumber: 13,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "script.js",
-                    lineNumber: 17,
+                    lineNumber: 12,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -714,33 +710,33 @@ var _client = require("react-dom/client");
                             children: title
                         }, void 0, false, {
                             fileName: "script.js",
-                            lineNumber: 24,
+                            lineNumber: 19,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                             children: brand
                         }, void 0, false, {
                             fileName: "script.js",
-                            lineNumber: 25,
+                            lineNumber: 20,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                             children: price
                         }, void 0, false, {
                             fileName: "script.js",
-                            lineNumber: 26,
+                            lineNumber: 21,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "script.js",
-                    lineNumber: 23,
+                    lineNumber: 18,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "script.js",
-            lineNumber: 16,
+            lineNumber: 11,
             columnNumber: 7
         }, this)
     }, void 0, false);
@@ -758,12 +754,12 @@ fetch("https://dummyjson.com/products").then((res)=>res.json()).then((data)=>{
                 price: product.price
             }, product.id, false, {
                 fileName: "script.js",
-                lineNumber: 40,
+                lineNumber: 35,
                 columnNumber: 10
             }, undefined))
     }, void 0, false, {
         fileName: "script.js",
-        lineNumber: 38,
+        lineNumber: 33,
         columnNumber: 5
     }, undefined));
 });
