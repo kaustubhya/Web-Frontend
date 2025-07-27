@@ -1,0 +1,21 @@
+# Ignore all Parcel cache folders
+**/.parcel-cache/
+
+# Ignore all Node.js dependencies
+**/node_modules/
+
+# Ignore build output folders
+**/dist/
+**/build/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore VSCode settings (optional)
+.vscode/
+
+# Ignore environment variables (optional)
+.env
+.env.local
+.env.*.local
