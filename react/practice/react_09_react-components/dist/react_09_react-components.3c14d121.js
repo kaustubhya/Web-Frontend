@@ -674,23 +674,21 @@ var prevRefreshSig = globalThis.$RefreshSig$;
 $parcel$ReactRefreshHelpers$a0da.prelude(module);
 
 try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
 var _client = require("react-dom/client");
-function Card(props) {
-    const { id, title, image, brand, price } = props;
-    console.log("ID (acts as key):", id); // ✅
+var _styleCss = require("./style.css");
+// 📦 Reusable Card component that displays product info
+// Receives props: id (used in content), price, brand, image, title
+function Card({ id, price, brand, image, title }) {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "card",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
                 src: image,
-                alt: "iphone"
+                alt: `Image of ${title}`
             }, void 0, false, {
                 fileName: "script.js",
-                lineNumber: 9,
+                lineNumber: 10,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -700,14 +698,14 @@ function Card(props) {
                         children: title
                     }, void 0, false, {
                         fileName: "script.js",
-                        lineNumber: 11,
+                        lineNumber: 14,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                         children: brand
                     }, void 0, false, {
                         fileName: "script.js",
-                        lineNumber: 12,
+                        lineNumber: 15,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -718,37 +716,63 @@ function Card(props) {
                             ]
                         }, void 0, true, {
                             fileName: "script.js",
-                            lineNumber: 14,
+                            lineNumber: 17,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "script.js",
-                        lineNumber: 13,
+                        lineNumber: 16,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("small", {
+                        children: [
+                            "Product ID: ",
+                            id
+                        ]
+                    }, void 0, true, {
+                        fileName: "script.js",
+                        lineNumber: 21,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "script.js",
-                lineNumber: 10,
+                lineNumber: 12,
                 columnNumber: 7
             }, this)
         ]
-    }, id, true, {
+    }, void 0, true, {
         fileName: "script.js",
         lineNumber: 8,
         columnNumber: 5
     }, this);
 }
 _c = Card;
+// 🔗 Get a reference to the root DOM element and attach React to it
 const root = (0, _client.createRoot)(document.getElementById("root"));
-// Using JSX (Recommended)
-root.render(/*#__PURE__*/ (0, _reactDefault.default).createElement(Card, {
-    id: 12,
-    title: "Essence Mascara Lash Princess",
-    image: 'https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp',
-    brand: "Essence",
-    price: 9.99
-}));
+// 🛠️ Fetch product data from the API and render it
+fetch("https://dummyjson.com/products").then((res)=>res.json()).then((data)=>{
+    console.log(data);
+    // ✅ Render a list of <Card /> components inside a container
+    root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "container",
+        children: data.products.map((product)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Card, {
+                id: product.id,
+                title: product.title,
+                image: product.thumbnail,
+                brand: product.brand,
+                price: product.price
+            }, product.id, false, {
+                fileName: "script.js",
+                lineNumber: 39,
+                columnNumber: 11
+            }, undefined))
+    }, void 0, false, {
+        fileName: "script.js",
+        lineNumber: 37,
+        columnNumber: 7
+    }, undefined));
+});
 var _c;
 $RefreshReg$(_c, "Card");
 
@@ -757,7 +781,7 @@ $RefreshReg$(_c, "Card");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-dom/client":"hrvwu","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"dVPUn":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react-dom/client":"hrvwu","./style.css":"dRy26","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"dVPUn":[function(require,module,exports,__globalThis) {
 'use strict';
 module.exports = require("ee51401569654d91");
 
@@ -16156,37 +16180,7 @@ module.exports = require("b0f0e6b9e8349dac");
     "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
 })();
 
-},{"6f0162e9ab224cd4":"jMk1U"}],"jnFvT":[function(require,module,exports,__globalThis) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"7h6Pi":[function(require,module,exports,__globalThis) {
+},{"6f0162e9ab224cd4":"jMk1U"}],"dRy26":[function() {},{}],"7h6Pi":[function(require,module,exports,__globalThis) {
 "use strict";
 var Refresh = require("7422ead32dcc1e6b");
 function debounce(func, delay) {
@@ -18464,6 +18458,36 @@ function $da9882e673ac146b$var$ErrorOverlay() {
     return null;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}]},["n0fw4","kTBnD"], "kTBnD", "parcelRequiredc76", {}, null, null, "http://localhost:1234")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"jnFvT":[function(require,module,exports,__globalThis) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}]},["n0fw4","kTBnD"], "kTBnD", "parcelRequiredc76", {}, null, null, "http://localhost:1234")
 
 //# sourceMappingURL=react_09_react-components.3c14d121.js.map

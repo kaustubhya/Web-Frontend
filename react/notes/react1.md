@@ -681,7 +681,7 @@ fetch("https://dummyjson.com/products")
     root.render(
       <div className="container">
         {data.products.map((product) => {
-          return Card({
+          retun Card({
             title: product.title,
             image: product.thumbnail,
             key: product.id,
@@ -899,3 +899,661 @@ React.createElement(Card, {
 ```
 
 Card is a function here.
+
+More shorter way:
+
+```js
+root.render(
+<Card 
+    id= {12}
+    title= "Essence Mascara Lash Princess"
+    image="https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp"
+    brand= "Essence"
+    price= {9.99}
+/>
+);
+```
+
+Numbers in `{}`, string in `'' or ""` and no comma separating properties
+
+
+Final full code (for multiple cards):
+
+```js
+import { createRoot } from "react-dom/client";
+import "./style.css";
+
+// 📦 Reusable Card component that displays product info
+// Receives props: id (used in content), price, brand, image, title
+function Card({ id, price, brand, image, title }) {
+  return (
+    <div className="card">
+      {/* 🖼️ Product image */}
+      <img src={image} alt={`Image of ${title}`} />
+
+      <div className="card-content">
+        {/* 🏷️ Title, Brand and Price */}
+        <h3>{title}</h3>
+        <p>{brand}</p>
+        <p>
+          <b>${price}</b>
+        </p>
+
+        {/* 🆔 Just to show that 'id' is accessible inside the component */}
+        <small>Product ID: {id}</small>
+      </div>
+    </div>
+  );
+}
+
+// 🔗 Get a reference to the root DOM element and attach React to it
+const root = createRoot(document.getElementById("root"));
+
+// 🛠️ Fetch product data from the API and render it
+fetch("https://dummyjson.com/products")
+  .then((res) => res.json())
+  .then((data) => {
+    // ✅ Render a list of <Card /> components inside a container
+    root.render(
+      <div className="container">
+        {data.products.map((product) => (
+          <Card
+            key={product.id}         // ✅ 'key' is for React’s internal use (must be unique in list)
+            id={product.id}          // ✅ 'id' is passed as a prop (can be used inside the component)
+            title={product.title}
+            image={product.thumbnail}
+            brand={product.brand}
+            price={product.price}
+          />
+        ))}
+      </div>
+    );
+  });
+
+```
+
+### So now actual definition of a React component is: It is a function that returns some JSX. (Technical Definition). (Visually) it is a piece of UI that can be reused.
+
+---
+
+# [How to Use Images in React? | The Complete React Course | Ep.10](https://www.youtube.com/watch?v=P98-YCZ7h2k&list=PLfEr2kn3s-brb-vHE-c-QCUq-nFwDYtWu&index=11)
+
+## Fuck Parcel, it does not load images, I will use VITE now
+
+Flow:
+
+1. index.jsx
+
+```js
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import App from './App.jsx'
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+```
+
+2. App.jsx
+
+```js
+import React from "react";
+import AppleCounterComponent from "./components/AppleCounter";
+import "./App.css";
+
+function AppComponent() {
+  return (
+    <>
+      <h1>Apple Counter</h1>
+      <div className="App">
+        <AppleCounterComponent />
+      </div>
+    </>
+  );
+}
+
+export default AppComponent;
+
+```
+
+3. Applecounter.jsx 
+
+```js
+import React from "react";
+import ButtonComponent from "./Button";
+import LeftArrow from "../assets/left_arrow.jpg";
+import RightArrow from "../assets/right_arrow.jpg";
+import ApplesBaskt from "./AppleBasket";
+
+const AppleCounterComponent = () => {
+
+  return (
+    <div className="container">
+      <ApplesBaskt appleCount={0} basket="Basket 1" />
+      <ButtonComponent imageUrl={LeftArrow} buttonName="left arrow btn" />
+      <ButtonComponent imageUrl={RightArrow} buttonName="right arrow btn" />
+      <ApplesBaskt appleCount={0} basket="Basket 2" />
+    </div>
+  );
+};
+
+export default AppleCounterComponent;
+
+```
+
+4. AppleBasket.jsx
+
+```js
+import React from "react";
+
+const ApplesBaskt = ({appleCount, basket}) => {
+  return (
+    <div>
+      <div>
+        <span className= "apples">{appleCount}</span>
+        <span className="apples">Apples</span>
+      </div>
+      <p className="basket">{basket}</p>
+    </div>
+  );
+};
+
+export default ApplesBaskt;
+
+```
+
+5. Button.jsx
+
+```js
+const ButtonComponent = ({ imageUrl, buttonName }) => {
+  return (
+    <div>
+      <button className="btn" title={buttonName}>
+        <img
+          src={imageUrl}
+          alt={buttonName}
+          style={{ width: "50px", height: "50px" }}
+        />
+      </button>
+    </div>
+  );
+};
+
+export default ButtonComponent;
+
+```
+
+6. App.css
+
+```css
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+}
+
+h1{
+  text-align: center;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: space-evenly;
+  column-gap: 40px;
+}
+
+.apples {
+  font-size: 30px;  
+  font-weight: bold;
+}
+
+.btn {
+  padding: 10px 20px;
+
+}
+
+.basket {
+  margin-top: 15px;
+}
+```
+
+do `npm run dev`
+
+Now we will work with events to make this app work
+
+---
+
+# [Event Handling in ReactJS | The Complete React Course | Ep.11](https://www.youtube.com/watch?v=Yj2UB6NcMiw&list=PLfEr2kn3s-brb-vHE-c-QCUq-nFwDYtWu&index=12)
+
+If you pass methods like onClick on elements, it works fine, but if you pass that same method inside a component, it will be treated as a prop.
+
+So we have to pass the method as a prop and then call it inside the component
+
+Let us continue with the previous example in AppleCounter.jsx
+
+```jsx
+import ButtonComponent from "./Button";
+import LeftArrow from "../assets/left_arrow.jpg";
+import RightArrow from "../assets/right_arrow.jpg";
+import ApplesBaskt from "./AppleBasket";
+
+const AppleCounterComponent = () => {
+  const totalApples = 20;
+  let leftApples = 10;
+  let rightApples = totalApples - leftApples;
+
+  const rightBtnEvt = () => {
+    if (leftApples > 0) {
+      rightApples += 1;
+      leftApples = leftApples--;
+    }
+  };
+
+  const leftEvtBtn = () => {
+    if (rightApples > 0) {
+      leftApples++;
+      rightApples--;
+    }
+  };
+
+  return (
+    <>
+      <div className="container">
+      <ApplesBaskt appleCount={leftApples} basket="Basket 1" />
+
+      {/* way 1 */}
+      {/* <ButtonComponent imageUrl={LeftArrow} buttonName="left arrow btn" btnClickEvt={() => console.log("Left Btn Clicked")} /> */}
+
+      {/* way 2 */}
+      <ButtonComponent
+        imageUrl={LeftArrow}
+        buttonName="left arrow btn"
+        btnClickEvt={leftEvtBtn}
+      />
+
+      <ButtonComponent
+        imageUrl={RightArrow}
+        buttonName="right arrow btn"
+        btnClickEvt={rightBtnEvt}
+      />
+      <ApplesBaskt appleCount={rightApples} basket="Basket 2" />
+    </div>
+    </>
+    
+  );
+};
+
+export default AppleCounterComponent;
+
+```
+
+Ok now here code will not show any change because as soon as we click the left or right arrow button, the function runs and only the left and right apple VARIABLES change, we do not see any change in the text as react does not track it in this way. For it we need to use a Use state hook.
+
+But we can still make it run without a use state, although the following code is considered as bad practice
+
+```js
+import ButtonComponent from "./Button";
+import LeftArrow from "../assets/left_arrow.jpg";
+import RightArrow from "../assets/right_arrow.jpg";
+import ApplesBaskt from "./AppleBasket";
+import { createRoot } from "react-dom/client";
+
+const root = createRoot(document.getElementById("root"));
+
+const totalApples = 20;
+let leftApples = 10;
+let rightApples = totalApples - leftApples;
+
+const AppleCounterComponent = () => {
+  const rightBtnEvt = () => {
+    if (leftApples > 0) {
+      rightApples++;
+      leftApples--;
+      root.render(<AppleCounterComponent />);
+    }
+  };
+
+  const leftEvtBtn = () => {
+    if (rightApples > 0) {
+      leftApples++;
+      rightApples--;
+      root.render(<AppleCounterComponent />);
+    }
+  };
+
+  return (
+    <>
+      <div className="container">
+        <ApplesBaskt appleCount={leftApples} basket="Basket 1" />
+
+        {/* way 1 */}
+        {/* <ButtonComponent imageUrl={LeftArrow} buttonName="left arrow btn" btnClickEvt={() => console.log("Left Btn Clicked")} /> */}
+
+        {/* way 2 */}
+        <ButtonComponent
+          imageUrl={LeftArrow}
+          buttonName="left arrow btn"
+          btnClickEvt={leftEvtBtn}
+        />
+
+        <ButtonComponent
+          imageUrl={RightArrow}
+          buttonName="right arrow btn"
+          btnClickEvt={rightBtnEvt}
+        />
+        <ApplesBaskt appleCount={rightApples} basket="Basket 2" />
+      </div>
+      <p style={{ textAlign: "center", marginTop: "32px" }}>
+        <button onClick={() => {
+          root.render(<AppleCounterComponent />);
+        }}>Re - Render </button>
+      </p>
+    </>
+  );
+};
+
+export default AppleCounterComponent;
+
+```
+
+#### Choice, either pass root.render inside the button Re-render, then everytime you click the left or right arrow button, click see render to see the change.
+
+Or
+
+#### Pass root.render in both left and right arrow button and see the changes getting rendered directly without the need to click the re-render button every time you click left or right arrow.
+
+---
+
+# [How State Works in React – Explained in Depth | The Complete React Course | Ep.12](https://www.youtube.com/watch?v=iKWeMeeZdio&list=PLfEr2kn3s-brb-vHE-c-QCUq-nFwDYtWu&index=13)
+
+state -> State is a variable that automatically re-renders when we change its value.
+
+basically it checks and compares, which value is new and which value is old, and if the new value is different from the old value, then it will re-render the component.
+
+In any function, if it starts with a `use` it is a hook.
+
+### useState(undefined, function()) Hook
+
+It returns an array and is used to set the initial state of a component.
+
+First value is undefined, we can replace it with anything and it takes place of that undefined value. It then becomes the first value of a use State function.
+
+Second value is an updater function, its job is to update the first value.
+
+Take a look at this function below (see Counter.jsx in react_12)
+
+```jsx
+import { useState } from "react"
+
+const Counter = () => {
+  const [count, setCount] = useState(0)
+
+  return (
+    <div style={{marginBlock: "40px"}}>
+      <h1>{count}</h1>
+      <button onClick={() => {setCount(count + 1)}}>Count ko badhaao</button>
+      {/* Never use count++ with React state. Use count + 1 or the callback form. */}
+    </div>
+  )
+}
+
+export default Counter
+
+```
+
+Now we used array destructuring here to get the 2 values of useState(), count is set as 0, see that line, and we call the setCount function below. 
+
+Then we put the count variable in h1, and call the setCount inside the button onClick, it is calling the function everytime the button is clicked, it is not calling the count variable, it is calling the setCount function. Set count checks what is the count variable value each time and since we do `count + 1` inside setCount, we get incrementation by 1 on each re-render.
+
+Try doing count + 2, count + 3....
+
+Basically, useState is a very mast and clever function. When we call it for the first time, it picks up the value of 0 from useState(0). But when when we re-render the page i.e. call it again it remembers that it has been called and it the picks up the value from setCount(count + 1).
+
+For this, closures and memoization are used. See JS for recap.
+
+So re-rendering happens only when the setCount value is updated.
+
+Now what if we do this:
+
+```jsx
+import { useState } from "react";
+
+const Counter = () => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div style={{ marginBlock: "40px" }}>
+      <h1>{count}</h1>
+      <button
+        onClick={() => {
+          {
+            setCount(count + 1);
+          }
+          {
+            setCount(count + 1);
+          }
+          {
+            setCount(count + 1);
+          }
+        }}
+      >
+        Count ko badhaao
+      </button>
+      {/* Never use count++ with React state. Use count + 1 or the callback form. */}
+    </div>
+  );
+};
+
+export default Counter;
+
+```
+
+How many times will the count feature increment on each re-render. 
+
+#### Ans -> Just 1. It is because the setCount function is called only once.
+
+So let us now see changes in apples via useState
+
+```jsx
+import ButtonComponent from "./Button";
+import LeftArrow from "../assets/left_arrow.jpg";
+import RightArrow from "../assets/right_arrow.jpg";
+import ApplesBaskt from "./AppleBasket";
+import { useState } from "react";
+
+
+const AppleCounterComponent = () => {
+const totalApples = 20;
+const [leftApples, setLeftApples] = useState(0);
+const [rightApples, setRightApples] = useState(totalApples - leftApples);
+
+  const rightBtnEvt = () => {
+    if (leftApples > 0) {
+      setLeftApples(leftApples - 1);
+      setRightApples(rightApples + 1);
+    }
+  };
+
+  const leftEvtBtn = () => {
+    if (rightApples > 0) {
+      setRightApples(rightApples - 1);
+      setLeftApples(leftApples + 1);
+    }
+  };
+
+  return (
+    <>
+      <div className="container">
+        <ApplesBaskt appleCount={leftApples} basket="Basket 1" />
+
+        <ButtonComponent
+          imageUrl={LeftArrow}
+          buttonName="left arrow btn"
+          btnClickEvt={leftEvtBtn}
+        />
+
+        <ButtonComponent
+          imageUrl={RightArrow}
+          buttonName="right arrow btn"
+          btnClickEvt={rightBtnEvt}
+        />
+        <ApplesBaskt appleCount={rightApples} basket="Basket 2" />
+      </div>
+    </>
+  );
+};
+
+export default AppleCounterComponent;
+
+```
+
+See this is declarative programming where react uses its own virtual dom to update the real dom. In JS and JQuery which was imperative programming, we needed to ourselves update the real dom. Here in react, we just focus on the logic.
+
+---
+
+# [How useState Works Behind the Scenes in React | The Complete React Course | Ep.13](https://www.youtube.com/watch?v=FhBQsUZOc8c&list=PLfEr2kn3s-brb-vHE-c-QCUq-nFwDYtWu&index=14)
+
+Let us come back to this question now, what if we use multiple useStates at once, say 3 at once, each incrementing the count by 1, so will the overall count increment by 3 upon rendering.
+
+```jsx
+import { useState } from "react";
+
+const Counter = () => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div style={{ marginBlock: "40px" }}>
+      <h1>{count}</h1>
+      <button
+        onClick={() => {
+          {
+            setCount(count + 1);
+          }
+          {
+            setCount(count + 1);
+          }
+          {
+            setCount(count + 1);
+          }
+        }}
+      >
+        Count ko badhaao
+      </button>
+      {/* Never use count++ with React state. Use count + 1 or the callback form. */}
+    </div>
+  );
+};
+
+export default Counter;
+```
+
+Well no, because use state, say we use 4 different use states, three for doing count + 1, and other for printing hello.
+
+Now useState will store the values in an array like this: [0, "hello"]. Since all 3 are same, only one value went to the array. Now every time, the component is re-rendered, the value in the array is updated and useState checks this value, not the one in component. Also setCount is inside onClick which is an asynchronous function, so every time it is called. It will only see the count as 0 and just go for it by 1. Not like 1, 2, 3. For all the 3 setCounts, in one call, the count value still remains 0. Once it is updated to 1 in the array, it will not be updated anymore unless it is re-rendered again.
+
+### But then how to make it update by 3?
+
+Simple, we use a callback to store its previous states, and we use the previous state to update the current state.
+
+
+```jsx
+import { useState } from "react";
+
+const Counter = () => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div style={{ marginBlock: "40px" }}>
+      <h1>{count}</h1>
+      <button
+        onClick={() => {
+          // prev => previousState
+          {
+            setCount((prev) => prev + 1);
+          }
+          {
+            setCount((prev) => prev + 1);
+          }
+          {
+            setCount((prev) => prev + 1);
+          }
+        }}
+      >
+        Count ko badhaao
+      </button>
+    </div>
+  );
+};
+
+export default Counter;
+
+```
+
+Here prev gets the latest updated count value instead of the usual count when we were not using callbacks. Using callbacks makes it remember the latest updated value.
+
+We know the latest state value comes in setState. 
+
+### So whenever our state value depends on the previous state value, we use callbacks.
+
+---
+
+# [State Vs Props in React | When to use what? | The Complete React Course | Ep.14](https://www.youtube.com/watch?v=R5KmPOYxpss&list=PLfEr2kn3s-bqpPUbeTZP6iRXTxTLwNB7F&index=15)
+
+State => State is mutable, ie. changeable and is inside a component. When we change a state, the component, re-renders.
+
+Props => Props is immutable, ie. cannot be changed. Props are passed to components. We can modify props but it is a bad practice. It is like a function's arguments.
+
+Props jo hai wo parent component ka state hota hai, most of the time.
+
+# [What are React Fragments? | Hindi | The Complete React Course | Ep.15](https://www.youtube.com/watch?v=6IU7VCVyy-M&list=PLfEr2kn3s-bqpPUbeTZP6iRXTxTLwNB7F&index=16)
+
+We can only return one element from a react component. But say we want to return multiple elements, then we will use a react fragment. This is no element, i.e. when we will use this, it will not create any element.
+
+Ways to do it:
+
+1. import {Fragment}
+
+```jsx
+import { Fragment } from 'react'
+
+return (
+  <Fragment>
+    <section></section>
+    <p></p>
+  </Fragment>
+)
+```
+
+Datatype of fragment => `Symbol(react.fragment)`
+
+So when we do `<Fragment></Fragment>`, it will do a `React.createElement` internally.
+
+Basically it creates a wrapper object, usually ignored by the react dom.
+
+2. `<></>`
+
+It works the same, ditto.
+
+```jsx
+return (
+  <>
+    <section></section>
+    <p></p>
+  </>
+)
+```

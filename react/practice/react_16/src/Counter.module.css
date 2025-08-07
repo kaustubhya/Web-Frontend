@@ -1,0 +1,12 @@
+.btn {
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  background-color: yellow;
+}
+
+.text-ksd {
+  font-size: 80px;
+  color: green;
+}

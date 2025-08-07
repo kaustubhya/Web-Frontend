@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+}
+
+h1{
+  text-align: center;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: space-evenly;
+  column-gap: 40px;
+}
+
+.apples {
+  font-size: 30px;  
+  font-weight: bold;
+}
+
+.btn {
+  padding: 10px 20px;
+
+}
+
+.basket {
+  margin-top: 15px;
+}
