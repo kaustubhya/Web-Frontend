@@ -14,7 +14,7 @@ function getMemes() {
       return res.json();
     })
     .then((data) => {
-      console.log(data);
+    //   console.log(data);
       loading.style.display = "none";
       memeContent.innerHTML = ""; // Clear previous memes
 
