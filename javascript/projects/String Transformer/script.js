@@ -31,10 +31,30 @@ function trimFunc(input) {
     .join('');
 }
 
+function pCase(input) {
+    pascalCase.innerText = input
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    /* hello world => ['hello', 'world']
+    then, 
+    H + ello (word.slice(1, to end))
+    W + orld (word.slice(1, to end))
+    we then join them using join('') to remove the spaces
+    so we get HelloWorld
+    */
+    .join('');
+}
+
+
 function cCase(input) {
     camelCase.innerText = input
     .split(' ')
-    .map((word, index) => index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1))
+    .map((word, index) => {
+        if (index === 0) {
+            return word = word.toLowerCase();
+        }
+        return word.charAt(0).toUpperCase() + word.slice(1);
+    })
     .join('');
 
     // here we first split the chars based on spaces and then used map to traverse the array of split
@@ -43,12 +63,6 @@ function cCase(input) {
     // finally we joined them using join('') to remove the spaces
 }
 
-function pCase(input) {
-    pascalCase.innerText = input
-    .split(' ')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join('');
-}
 
 
 input.addEventListener("input", (e) => {

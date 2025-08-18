@@ -8,6 +8,7 @@
       formatted = digits;
     } else {
       formatted = `+(${digits.slice(0, 3)}) - ${digits.slice(3)}`;
+      console.log(formatted);
     }
 
     input.value = formatted;

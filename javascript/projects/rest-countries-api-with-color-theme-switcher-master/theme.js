@@ -15,7 +15,7 @@
 })();
 
 document.addEventListener("DOMContentLoaded", () => {
-  // support multiple toggles if present
+  // convert node list to array using array,from
   const modeBoxes = Array.from(document.querySelectorAll(".modeBox"));
 
   // helper to update icon + text for a single modeBox
