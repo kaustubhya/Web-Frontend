@@ -1079,7 +1079,7 @@ In JS variables are created differently (we store undefined value in each variab
 
 In second step, we join the variable block (blue) and address-value block (red). This is the second step of JS -> Code Execution.
 
-See address in memory tab in dev tools (use ctrl + f to get search bar, type akash, locate its address (starts with @), then type this address in search bar and then finally see all variables address there in the search execution context option).
+
 
 ```js
 const firstName = "Akash";
@@ -1089,6 +1089,7 @@ const birthYear = 2000;
 const isGraduate = false;
 const hasJob = true;
 ```
+See address in memory tab in dev tools (use ctrl + f to get search bar, type akash, locate its address (starts with @), then type this address in search bar and then finally see all variables address there in the search execution context option).
 
 Variables having similar values are stored in same addresses
 (eg.
