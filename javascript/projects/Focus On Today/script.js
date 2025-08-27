@@ -15,6 +15,7 @@ let tasksDone = 0;
 // ========== LOAD SAVED GOALS ==========
 function loadGoals() {
   let savedGoals = JSON.parse(localStorage.getItem("myGoals"));
+  errorRemoval()
 
   if (savedGoals) {
     // populate inputs + checkboxes
