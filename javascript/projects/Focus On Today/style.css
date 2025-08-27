@@ -51,17 +51,33 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative; /* required for absolute positioning in sun eyes-mouth */
 }
 
-.sun-icon {
+.sun-body {
   width: 100%;
+  animation: spin 8s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.sun-eyes-mouth {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .progress-text {
   color: rgba(0, 0, 0, 0.571);
   margin-top: 30px;
   margin-inline: 22px;
-
 }
 
 .progress-bar-container {
@@ -91,7 +107,6 @@ h1 {
   color: red;
   margin-top: 30px;
   margin-inline: 22px;
-
 }
 
 fieldset {
@@ -99,7 +114,6 @@ fieldset {
   border-radius: 10px;
   margin-block: 25px;
   margin-inline: 22px;
-
 }
 
 .inputs-container {
@@ -123,7 +137,7 @@ fieldset {
 }
 
 .checkbox:checked {
-  background-color: #4ba300;  /* green fill when checked */
+  background-color: #4ba300; /* green fill when checked */
 }
 
 input[type="checkbox"]:checked::after {
@@ -134,7 +148,9 @@ input[type="checkbox"]:checked::after {
   margin-left: 3px;
 }
 
-#goal1-checkbox:disabled, #goal2-checkbox:disabled, #goal3-checkbox:disabled {
+#goal1-checkbox:disabled,
+#goal2-checkbox:disabled,
+#goal3-checkbox:disabled {
   cursor: not-allowed;
 }
 
@@ -155,9 +171,9 @@ input[type="text"]:focus {
 }
 
 .footer-message {
-    text-align: center;
-    font-weight: 700;
-    margin-block: 50px;
+  text-align: center;
+  font-weight: 700;
+  margin-block: 50px;
 }
 
 .credits {
@@ -170,6 +186,18 @@ input[type="text"]:focus {
   color: red;
 }
 
+@-webkit-keyframes sun-body {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+.rotating {
+  -webkit-animation: rotating 2s linear infinite;
+}
 
 @media screen and (max-width: 600px) {
   .container {
@@ -185,7 +213,9 @@ input[type="text"]:focus {
     height: 20px;
   }
 
-  .goal1, .goal2, .goal3 {
+  .goal1,
+  .goal2,
+  .goal3 {
     padding: 5px 5px;
   }
 
@@ -211,9 +241,13 @@ input[type="text"]:focus {
     width: 35px;
     height: 35px;
   }
-  
-  .sun-icon-container > img {
+
+  .sun-icon-container > .sun-body {
     width: 100%;
+  }
+
+  .sun-eyes-mouth {
+    width: 7px;
   }
 
   .credits {
