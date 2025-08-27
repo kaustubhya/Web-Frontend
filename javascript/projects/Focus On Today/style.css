@@ -186,18 +186,6 @@ input[type="text"]:focus {
   color: red;
 }
 
-@-webkit-keyframes sun-body {
-  from {
-    -webkit-transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-  }
-}
-
-.rotating {
-  -webkit-animation: rotating 2s linear infinite;
-}
 
 @media screen and (max-width: 600px) {
   .container {
