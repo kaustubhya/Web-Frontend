@@ -3,17 +3,63 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
     <title>Focus On Today</title>
     <link rel="stylesheet" href="style.css" />
     <script src="./script.js" defer></script>
   </head>
   <body>
-    <h1><span>Focus On </span><span>Today</span></h1>
     <main>
+      <h1>
+        <span class="focus-heading">Focus On </span
+        ><span class="today-heading">Today</span>
+      </h1>
+
       <div class="container">
-        <div class="today-container"><p class="today">Today</p><div class="sun-icon-container"><img alt="sun-icon" src="" /></div></div>
+        <div class="today-container">
+          <p class="today">Today</p>
+          <div class="sun-icon-container">
+            <img alt="sun-icon" src="./Sun.svg" />
+          </div>
+        </div>
         <p class="progress-text">Raise the bar by completing your goals!</p>
-        <div class="progress-bar"></div>
+        <div class="progress-bar-container">
+          <div class="progress-bar">
+            <span class="progress-update-text"></span>
+          </div>
+        </div>
+        <div class="red-warnings"></div>
+        <div class="goals-container">
+          <fieldset class="goal1">
+            <div class="inputs-container">
+              <input type="checkbox" id="goal1-checkbox" class="checkbox" />
+              <input type="text" placeholder="Add new goal..." id="goal1-input" />
+            </div>
+          </fieldset>
+
+          <fieldset class="goal2">
+            <div class="inputs-container">
+              <input type="checkbox" id="goal2-checkbox" class="checkbox" />
+              <input type="text" placeholder="Add new goal..." id="goal2-input" />
+            </div>
+          </fieldset>
+
+          <fieldset class="goal3">
+            <div class="inputs-container">
+              <input type="checkbox" id="goal3-checkbox" class="checkbox" />
+              <input type="text" placeholder="Add new goal..." id="goal3-input" />
+            </div>
+          </fieldset>
+        </div>
+        <p class="footer-message">"Move one step ahead today!"</p>
+        <p class="credits">
+          Made with <span class="heart">❤️</span> by Kaustubhya Shukla
+        </p>
       </div>
     </main>
   </body>
