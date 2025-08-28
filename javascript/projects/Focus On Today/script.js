@@ -1,67 +1,121 @@
 const warnings = document.querySelector(".red-warnings");
-const goal1Checkbox = document.querySelector("#goal1-checkbox");
-const goal1Input = document.querySelector("#goal1-input");
-const goal2Checkbox = document.querySelector("#goal2-checkbox");
-const goal2Input = document.querySelector("#goal2-input");
-const goal3Checkbox = document.querySelector("#goal3-checkbox");
-const goal3Input = document.querySelector("#goal3-input");
-
+const goalsContainer = document.querySelector(".goals-container");
 const progressBar = document.querySelector(".progress-bar");
 const progressText = document.querySelector(".progress-update-text");
 const footerMessage = document.querySelector(".footer-message");
+const addTodo = document.querySelector(".add-todo");
+const removeTodo = document.querySelector(".remove-todo");
 
-let tasksDone = 0;
+let goalsArray = [];
 
 // ========== LOAD SAVED GOALS ==========
 function loadGoals() {
   let savedGoals = JSON.parse(localStorage.getItem("myGoals"));
-  errorRemoval()
 
-  if (savedGoals) {
-    // populate inputs + checkboxes
-    goal1Input.value = savedGoals[0].text;
-    goal1Checkbox.checked = savedGoals[0].checked;
-
-    goal2Input.value = savedGoals[1].text;
-    goal2Checkbox.checked = savedGoals[1].checked;
-
-    goal3Input.value = savedGoals[2].text;
-    goal3Checkbox.checked = savedGoals[2].checked;
-
-    // count completed
-    tasksDone = savedGoals.filter((g) => g.checked).length;
-    progressUpdate(tasksDone);
-
-    // restore error
-    errorRemoval();
+  if (savedGoals && Array.isArray(savedGoals)) {
+    goalsArray = savedGoals;
   } else {
-    saveGoals(); // initialize storage if empty
+    // default 3 blank goals
+    goalsArray = [
+      { text: "", checked: false },
+      { text: "", checked: false },
+      { text: "", checked: false },
+    ];
   }
+  renderGoals();
 }
 
 // ========== SAVE GOALS ==========
 function saveGoals() {
-  const myGoals = [
-    { text: goal1Input.value, checked: goal1Checkbox.checked },
-    { text: goal2Input.value, checked: goal2Checkbox.checked },
-    { text: goal3Input.value, checked: goal3Checkbox.checked },
-  ];
-  localStorage.setItem("myGoals", JSON.stringify(myGoals));
+  localStorage.setItem("myGoals", JSON.stringify(goalsArray));
 }
 
-// ========== ERROR HANDLING ==========
-function errorRemoval() {
-  // Enable/disable checkboxes based on inputs
-  goal1Checkbox.disabled = goal1Input.value.trim() === "";
-  goal2Checkbox.disabled = goal2Input.value.trim() === "";
-  goal3Checkbox.disabled = goal3Input.value.trim() === "";
+// ========== RENDER GOALS ==========
+const renderGoals = () => {
+  goalsContainer.innerHTML = "";
 
-  // Show warning if ANY input is empty
-  if (
-    goal1Input.value.trim() === "" ||
-    goal2Input.value.trim() === "" ||
-    goal3Input.value.trim() === ""
-  ) {
+  goalsArray.forEach((goal, index) => {
+    const fieldset = document.createElement("fieldset");
+    fieldset.classList.add("goal");
+
+    fieldset.innerHTML = `
+      <div class="inputs-container">
+        <input type="checkbox" id="goal-${index}-checkbox" class="checkbox" ${
+      goal.checked ? "checked" : ""
+    } />
+        <input type="text" id="goal-${index}-input" class="goal-input" value="${
+      goal.text
+    }" placeholder="Enter your goal here" />
+      </div>`;
+
+    goalsContainer.appendChild(fieldset);
+
+    const checkbox = fieldset.querySelector(`#goal-${index}-checkbox`);
+    const input = fieldset.querySelector(`#goal-${index}-input`);
+
+    // --- cursor updater ---
+    function updateCheckboxCursor() {
+      if (checkbox.checked || input.value.trim() !== "") {
+        checkbox.classList.add("enabled-cursor");
+        checkbox.classList.remove("disabled-cursor");
+      } else {
+        checkbox.classList.add("disabled-cursor");
+        checkbox.classList.remove("enabled-cursor");
+      }
+    }
+
+    // input change
+    input.addEventListener("input", () => {
+      goalsArray[index].text = input.value;
+      errorRemoval();
+      updateCheckboxCursor();
+      saveGoals();
+    });
+
+    // checkbox change
+    checkbox.addEventListener("change", () => {
+      if (input.value.trim() === "") {
+        checkbox.checked = false;
+        updateCheckboxCursor();
+        return; // stop if no input
+      }
+
+      goalsArray[index].checked = checkbox.checked;
+      if (checkbox.checked) {
+        input.style.textDecoration = "line-through";
+        input.style.color = "#4ba300";
+        input.disabled = true;
+      } else {
+        input.style.textDecoration = "none";
+        input.style.color = "#000";
+        input.disabled = false;
+      }
+
+      updateCheckboxCursor();
+      progressUpdate();
+      saveGoals();
+    });
+
+    // restore styles for checked ones
+    if (goal.checked) {
+      input.style.textDecoration = "line-through";
+      input.style.color = "#4ba300";
+      input.disabled = true;
+    }
+
+    // initial cursor update
+    updateCheckboxCursor();
+  });
+
+  errorRemoval();
+  progressUpdate();
+  updateAddRemoveButtons(); // update buttons every render
+};
+
+// ===== ERROR HANDLING =====
+function errorRemoval() {
+  const empty = goalsArray.some((g) => g.text.trim() === "");
+  if (empty) {
     warnings.innerText = "Please set all the goals!";
     warnings.style.display = "block";
   } else {
@@ -70,57 +124,47 @@ function errorRemoval() {
   }
 }
 
-// ========== PROGRESS BAR ==========
-function progressUpdate(tasksDone) {
-  progressBar.style.backgroundColor = "#4ba300";
+// ===== PROGRESS BAR =====
+function progressUpdate() {
+  const done = goalsArray.filter((g) => g.checked).length;
+  const total = goalsArray.length;
+  const percent = Math.round((done / total) * 100);
 
-  if (tasksDone === 0) {
-    progressBar.style.width = "0%";
-    progressText.innerText = "";
+  progressBar.style.backgroundColor = "#4ba300";
+  progressBar.style.width = percent + "%";
+  progressText.innerText = `${done}/${total} Completed`;
+
+  if (done === 0) {
     footerMessage.innerText = `"Move one step ahead today!"`;
-  } else if (tasksDone === 1) {
-    progressBar.style.width = "33%";
-    progressText.innerText = "1/3 Completed";
+  } else if (done < total) {
     footerMessage.innerText = `"You're on the right path"`;
-  } else if (tasksDone === 2) {
-    progressBar.style.width = "66%";
-    progressText.innerText = "2/3 Completed";
-    footerMessage.innerText = `"Keep Going, You're making great progress!"`;
-  } else if (tasksDone === 3) {
-    progressBar.style.width = "100%";
-    progressText.innerText = "3/3 Completed";
+  } else {
     footerMessage.innerText = `"He's Done it!!!!"`;
   }
 }
 
-// ========== EVENT LISTENERS ==========
-window.addEventListener("DOMContentLoaded", loadGoals);
-
-[goal1Input, goal2Input, goal3Input].forEach((input) => {
-  input.addEventListener("input", () => {
-    errorRemoval();
-    saveGoals();
-  });
-});
-
-function handleCheckbox(checkbox, input) {
-  checkbox.addEventListener("change", () => {
-    if (checkbox.checked) {
-      input.style.textDecoration = "line-through";
-      input.style.color = "#4ba300";
-      input.disabled = true;
-      tasksDone += 1;
-    } else {
-      input.style.textDecoration = "none";
-      input.style.color = "#000";
-      input.disabled = false;
-      tasksDone -= 1;
-    }
-    progressUpdate(tasksDone);
-    saveGoals();
-  });
+// ===== BUTTON STATE HANDLER =====
+function updateAddRemoveButtons() {
+  addTodo.disabled = goalsArray.length >= 5; // disable Add if 5
+  removeTodo.disabled = goalsArray.length <= 1; // disable Remove if 1
 }
 
-handleCheckbox(goal1Checkbox, goal1Input);
-handleCheckbox(goal2Checkbox, goal2Input);
-handleCheckbox(goal3Checkbox, goal3Input);
+// ===== ADD / REMOVE =====
+addTodo.addEventListener("click", () => {
+  if (goalsArray.length < 5) {
+    goalsArray.push({ text: "", checked: false });
+    saveGoals();
+    renderGoals();
+  }
+});
+
+removeTodo.addEventListener("click", () => {
+  if (goalsArray.length > 1) {
+    goalsArray.pop();
+    saveGoals();
+    renderGoals();
+  }
+});
+
+// ===== INITIALIZE =====
+window.addEventListener("DOMContentLoaded", loadGoals);

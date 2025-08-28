@@ -51,7 +51,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative; /* required for absolute positioning in sun eyes-mouth */
+  position: relative;
 }
 
 .sun-body {
@@ -126,18 +126,24 @@ fieldset {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-
   max-width: 20px;
   width: 100%;
   min-height: 20px;
   border: 2px solid rgba(99, 73, 29, 0.347);
   border-radius: 50%;
   margin-left: 30px;
+}
+
+.checkbox.disabled-cursor {
+  cursor: not-allowed !important;
+}
+
+.checkbox.enabled-cursor {
   cursor: pointer;
 }
 
 .checkbox:checked {
-  background-color: #4ba300; /* green fill when checked */
+  background-color: #4ba300;
 }
 
 input[type="checkbox"]:checked::after {
@@ -146,12 +152,6 @@ input[type="checkbox"]:checked::after {
   font-size: 12px;
   position: absolute;
   margin-left: 3px;
-}
-
-#goal1-checkbox:disabled,
-#goal2-checkbox:disabled,
-#goal3-checkbox:disabled {
-  cursor: not-allowed;
 }
 
 input[type="text"] {
@@ -170,6 +170,47 @@ input[type="text"]:focus {
   outline: none;
 }
 
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  column-gap: 100px;
+  margin-top: 30px;
+}
+
+.add-todo,
+.remove-todo {
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.add-todo {
+  background-color: #4ba300;
+}
+.add-todo:hover {
+  background-color: #3e8e00;
+  transform: scale(1.15);
+}
+
+.remove-todo {
+  background-color: red;
+}
+.remove-todo:hover {
+  background-color: rgb(222, 0, 0);
+  transform: scale(1.15);
+}
+
+/* Disabled buttons */
+button:disabled {
+  cursor: not-allowed !important;
+  opacity: 0.6;
+  transform: none !important;
+}
+
 .footer-message {
   text-align: center;
   font-weight: 700;
@@ -186,7 +227,6 @@ input[type="text"]:focus {
   color: red;
 }
 
-
 @media screen and (max-width: 600px) {
   .container {
     margin-inline: 30px;
@@ -199,12 +239,6 @@ input[type="text"]:focus {
   .progress-bar-container {
     width: 85%;
     height: 20px;
-  }
-
-  .goal1,
-  .goal2,
-  .goal3 {
-    padding: 5px 5px;
   }
 
   .inputs-container {
@@ -244,5 +278,15 @@ input[type="text"]:focus {
 
   h1 {
     font-size: 30px;
+  }
+
+  .buttons-container {
+    justify-content: space-around;
+    column-gap: 0px;
+  }
+
+  .add-todo,
+  .remove-todo {
+    padding: 5px 10px;
   }
 }
