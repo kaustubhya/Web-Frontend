@@ -96,3 +96,36 @@ h2 {
   box-shadow: 4px 4px 0px 6px #01ab08;
   cursor: pointer;
 }
+
+.sharing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px;
+  font-size: 24px;
+  font-weight: 600;
+  row-gap: 10px;
+}
+
+.apps {
+  display: flex;
+  column-gap: 10px;
+  
+}
+
+.linkedin,
+.twitter, .instagram {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.credits {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  color: #858585;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}

@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
+  let finalScore = 0;
+  let totalQuestions = 0;
+
   const raw = localStorage.getItem("quizProgress");
   let p = null;
   try {
@@ -7,8 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
     p = null;
   }
 
-  const finalScore = p?.score ?? 0;
-  const totalQuestions = p?.qIndex ?? 0;
+  finalScore = p?.score ?? 0;
+  totalQuestions = p?.qIndex ?? 0;
   const wrong = totalQuestions - finalScore;
 
   // setting the text based on percentage
@@ -16,17 +19,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const percent = ((finalScore / totalQuestions) * 100).toFixed(1);
   if (percent === 100) {
     remarks.innerText = "You got it all right! Way to gooooo!!!!";
-  }
-  else if (percent >= 90) {
+  } else if (percent >= 90) {
     remarks.innerText = "Well Well..., you did great!";
-  }   
-  else if(percent >= 50 && percent < 90) {
+  } else if (percent >= 50 && percent < 90) {
     remarks.innerText = "You're doing good!, Keep Improving!!";
-  }
-  else if(percent < 50 && percent > 20) {
+  } else if (percent < 50 && percent > 20) {
     remarks.innerText = "You need to study more!";
-  }
-  else {
+  } else {
     remarks.innerText = "You need to study hard! You're dumb AF!";
   }
 
@@ -35,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   new Chart(resultChart, {
     type: "doughnut",
     data: {
-      labels: ['Incorrect', 'Correct'],
+      labels: ["Incorrect", "Correct"],
       datasets: [
         {
           label: "Quiz Results",
@@ -69,39 +68,42 @@ document.addEventListener("DOMContentLoaded", () => {
           },
         },
         centerText: {
-            display: true,
-            text: `${finalScore} / ${totalQuestions}`,
-        }
+          display: true,
+          text: `${finalScore} / ${totalQuestions}`,
+        },
       },
     },
-    plugins: [{
-        id: 'centerText',
-        beforeDraw: function(chart) {
-            if (chart.config.options.plugins.centerText.display !== null &&
-                chart.config.options.plugins.centerText.display) {
+    plugins: [
+      {
+        id: "centerText",
+        beforeDraw: function (chart) {
+          if (
+            chart.config.options.plugins.centerText.display !== null &&
+            chart.config.options.plugins.centerText.display
+          ) {
+            const ctx = chart.ctx;
+            const width = chart.width;
+            const height = chart.height;
 
-                const ctx = chart.ctx;
-                const width = chart.width;
-                const height = chart.height;
+            ctx.restore();
+            const fontSize = (height / 154).toFixed(2);
+            ctx.font = `bold ${fontSize}em sans-serif`;
+            ctx.textBaseline = "middle";
 
-                ctx.restore();
-                const fontSize = (height / 154).toFixed(2);
-                ctx.font = `bold ${fontSize}em sans-serif`;
-                ctx.textBaseline = "middle";
+            const text = chart.config.options.plugins.centerText.text;
+            const textX = Math.round((width - ctx.measureText(text).width) / 2);
+            const textY = height / 2;
 
-                const text = chart.config.options.plugins.centerText.text;
-                const textX = Math.round((width - ctx.measureText(text).width) / 2);
-                const textY = height / 2;
-
-                ctx.fillText(text, textX, textY);
-                ctx.save();
-            }
-        }
-    }]
+            ctx.fillText(text, textX, textY);
+            ctx.save();
+          }
+        },
+      },
+    ],
   });
-});
 
-const retry = document.querySelector(".retry");
-retry.addEventListener("click", () => {
-  window.location.href = "index.html";
+  const retry = document.querySelector(".retry");
+  retry.addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
 });
