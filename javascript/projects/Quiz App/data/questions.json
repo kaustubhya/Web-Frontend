@@ -1,0 +1,302 @@
+[
+  {
+    "id": "q1",
+    "category": "html",
+    "question": "Which HTML element is used to define the most important heading on a page?",
+    "options": ["<heading>", "<h1>", "<head>", "<title>"],
+    "correctIndex": 1,
+    "timeLimit": 15,
+    "explanation": "<h1> is the top-level heading element."
+  },
+  {
+    "id": "q2",
+    "category": "html",
+    "question": "Which attribute is required on an <img> tag to improve accessibility?",
+    "options": ["title", "srcset", "alt", "ref"],
+    "correctIndex": 2,
+    "timeLimit": 15,
+    "explanation": "The alt attribute provides alternative text for screen readers."
+  },
+  {
+    "id": "q3",
+    "category": "html",
+    "question": "What does the charset meta tag <meta charset=\"utf-8\"> do?",
+    "options": [
+      "Specifies character encoding for the document",
+      "Links external style sheets",
+      "Declares page title",
+      "Enables JavaScript"
+    ],
+    "correctIndex": 0,
+    "timeLimit": 15,
+    "explanation": "It tells the browser which character encoding to use (UTF-8)."
+  },
+  {
+    "id": "q4",
+    "category": "html",
+    "question": "Which element is semantic and intended to contain navigation links?",
+    "options": ["<nav>", "<div class=\"nav\">", "<menu>", "<section>"],
+    "correctIndex": 0,
+    "timeLimit": 15,
+    "explanation": "<nav> is the semantic element for navigation blocks."
+  },
+  {
+    "id": "q5",
+    "category": "html",
+    "question": "Where should the main CSS stylesheet usually be linked?",
+    "options": [
+      "Inside <head> with <link rel=\"stylesheet\">",
+      "At the end of <body> with <script>",
+      "Inside <footer>",
+      "Using <style> after </html>"
+    ],
+    "correctIndex": 0,
+    "timeLimit": 15,
+    "explanation": "Stylesheets are typically linked inside the <head>."
+  },
+  {
+    "id": "q6",
+    "category": "html",
+    "question": "Which element is used to create an ordered (numbered) list?",
+    "options": ["<list>", "<ol>", "<ul>", "<dl>"],
+    "correctIndex": 1,
+    "timeLimit": 15,
+    "explanation": "<ol> creates an ordered list; <ul> is unordered."
+  },
+  {
+    "id": "q7",
+    "category": "html",
+    "question": "Which attribute on a <form> sets where the form data is sent?",
+    "options": ["action", "method", "target", "name"],
+    "correctIndex": 0,
+    "timeLimit": 15,
+    "explanation": "The action attribute specifies the URL to submit the form data to."
+  },
+  {
+    "id": "q8",
+    "category": "html",
+    "question": "Which HTML element defines self-contained content like a blog post?",
+    "options": ["<article>", "<aside>", "<div>", "<section>"],
+    "correctIndex": 0,
+    "timeLimit": 15,
+    "explanation": "<article> is used for self-contained pieces of content."
+  },
+  {
+    "id": "q9",
+    "category": "html",
+    "question": "To embed a YouTube video via URL, which element is commonly used?",
+    "options": ["<video>", "<iframe>", "<embed>", "<object>"],
+    "correctIndex": 1,
+    "timeLimit": 15,
+    "explanation": "YouTube provides an iframe embed URL for videos."
+  },
+  {
+    "id": "q10",
+    "category": "html",
+    "question": "Which attribute makes a form input required before submission?",
+    "options": ["validate", "required", "must", "placeholder"],
+    "correctIndex": 1,
+    "timeLimit": 15,
+    "explanation": "The required attribute enforces client-side requirement."
+  },
+  {
+    "id": "q11",
+    "category": "css",
+    "question": "Which CSS property controls the space between an element's content and its border?",
+    "options": ["margin", "padding", "gap", "border-spacing"],
+    "correctIndex": 1,
+    "timeLimit": 20,
+    "explanation": "padding is space inside the border; margin is outside."
+  },
+  {
+    "id": "q12",
+    "category": "css",
+    "question": "Which selector targets an element with id=\"header\"?",
+    "options": [".header", "#header", "header", "*header"],
+    "correctIndex": 1,
+    "timeLimit": 20,
+    "explanation": "ID selectors use # followed by the id value."
+  },
+  {
+    "id": "q13",
+    "category": "css",
+    "question": "What does CSS specificity determine?",
+    "options": [
+      "The order of HTML elements in the DOM",
+      "Which CSS rule applies when multiple rules match",
+      "How fast CSS loads",
+      "How many animations can run"
+    ],
+    "correctIndex": 1,
+    "timeLimit": 20,
+    "explanation": "Specificity decides which rule wins when there's a conflict."
+  },
+  {
+    "id": "q14",
+    "category": "css",
+    "question": "Which display value makes an element a flex container?",
+    "options": ["display: grid;", "display: inline;", "display: flex;", "float: left;"],
+    "correctIndex": 2,
+    "timeLimit": 20,
+    "explanation": "display: flex creates a flex container for its children."
+  },
+  {
+    "id": "q15",
+    "category": "css",
+    "question": "How do you select only direct children in CSS?",
+    "options": [".parent .child", ".parent > .child", ".parent + .child", ".parent ~ .child"],
+    "correctIndex": 1,
+    "timeLimit": 20,
+    "explanation": "The > combinator selects direct child elements."
+  },
+  {
+    "id": "q16",
+    "category": "css",
+    "question": "Which property controls the stacking order of positioned elements?",
+    "options": ["order", "z-index", "stack", "depth"],
+    "correctIndex": 1,
+    "timeLimit": 20,
+    "explanation": "z-index changes the stacking context for positioned elements."
+  },
+  {
+    "id": "q17",
+    "category": "css",
+    "question": "Which pseudo-class applies when the user hovers over an element?",
+    "options": [":active", ":focus", ":hover", ":visited"],
+    "correctIndex": 2,
+    "timeLimit": 20,
+    "explanation": ":hover activates when pointer is over the element."
+  },
+  {
+    "id": "q18",
+    "category": "css",
+    "question": "What does box-sizing: border-box do?",
+    "options": [
+      "Includes padding and border in the element's specified width/height",
+      "Removes the border",
+      "Sets width to auto",
+      "Forces block formatting"
+    ],
+    "correctIndex": 0,
+    "timeLimit": 20,
+    "explanation": "border-box makes width include padding and border."
+  },
+  {
+    "id": "q19",
+    "category": "css",
+    "question": "Which property creates a smooth change of a property over time?",
+    "options": ["animation", "transition", "transform", "filter"],
+    "correctIndex": 1,
+    "timeLimit": 20,
+    "explanation": "transition animates property changes between states."
+  },
+  {
+    "id": "q20",
+    "category": "css",
+    "question": "Which layout system uses rows and columns explicitly?",
+    "options": ["Flexbox", "Grid", "Block", "Inline"],
+    "correctIndex": 1,
+    "timeLimit": 20,
+    "explanation": "CSS Grid is a two-dimensional layout system for rows and columns."
+  },
+  {
+    "id": "q21",
+    "category": "js",
+    "question": "Which keyword declares a block-scoped variable that can be reassigned?",
+    "options": ["var", "let", "const", "static"],
+    "correctIndex": 1,
+    "timeLimit": 30,
+    "explanation": "let declares block-scoped mutable variables."
+  },
+  {
+    "id": "q22",
+    "category": "js",
+    "question": "What is the strict equality operator in JavaScript?",
+    "options": ["=", "==", "===", "!=="],
+    "correctIndex": 2,
+    "timeLimit": 30,
+    "explanation": "=== checks value and type; == coerces types."
+  },
+  {
+    "id": "q23",
+    "category": "js",
+    "question": "Which method adds an element to the end of an array?",
+    "options": ["push()", "pop()", "shift()", "unshift()"],
+    "correctIndex": 0,
+    "timeLimit": 30,
+    "explanation": "push appends to the array's end; pop removes the end."
+  },
+  {
+    "id": "q24",
+    "category": "js",
+    "question": "Which statement is true about arrow functions compared to regular functions?",
+    "options": [
+      "Arrow functions have their own 'this' binding",
+      "Arrow functions hoist similarly to function declarations",
+      "Arrow functions do not have their own 'this'",
+      "Arrow functions can be used as constructors with new"
+    ],
+    "correctIndex": 2,
+    "timeLimit": 30,
+    "explanation": "Arrow functions inherit 'this' from the surrounding scope."
+  },
+  {
+    "id": "q25",
+    "category": "js",
+    "question": "What does event delegation let you do?",
+    "options": [
+      "Attach many identical listeners to each element",
+      "Attach a single listener to a parent to handle child events",
+      "Prevent default browser behavior",
+      "Stop event propagation"
+    ],
+    "correctIndex": 1,
+    "timeLimit": 30,
+    "explanation": "Delegation uses event bubbling to handle many children via one listener."
+  },
+  {
+    "id": "q26",
+    "category": "js",
+    "question": "Which Promise method is used to handle success and failure in one chain?",
+    "options": ["then()", "catch()", "finally()", "then().catch()"],
+    "correctIndex": 3,
+    "timeLimit": 30,
+    "explanation": "Use then() for success and catch() for failure, often chained as then().catch()."
+  },
+  {
+    "id": "q27",
+    "category": "js",
+    "question": "Which method finds the first element in an array that matches a predicate?",
+    "options": ["filter()", "find()", "map()", "reduce()"],
+    "correctIndex": 1,
+    "timeLimit": 30,
+    "explanation": "find returns the first matching element; filter returns all matches."
+  },
+  {
+    "id": "q28",
+    "category": "js",
+    "question": "What will console.log(typeof NaN) print?",
+    "options": ["'number'", "'NaN'", "'undefined'", "'object'"],
+    "correctIndex": 0,
+    "timeLimit": 30,
+    "explanation": "NaN is of type 'number' in JavaScript."
+  },
+  {
+    "id": "q29",
+    "category": "js",
+    "question": "Which DOM method selects the first element that matches a CSS selector?",
+    "options": ["getElementById()", "querySelector()", "getElementsByClassName()", "querySelectorAll()"],
+    "correctIndex": 1,
+    "timeLimit": 30,
+    "explanation": "querySelector returns the first match for a selector string."
+  },
+  {
+    "id": "q30",
+    "category": "js",
+    "question": "Which keyword allows an asynchronous function to pause until a Promise resolves?",
+    "options": ["await", "async", "then", "yield"],
+    "correctIndex": 0,
+    "timeLimit": 30,
+    "explanation": "await pauses execution inside an async function until the promise resolves."
+  }
+]
