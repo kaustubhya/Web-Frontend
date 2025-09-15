@@ -1,0 +1,309 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  color: #492118;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: #f6f0eb;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 55px 25px 45px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1002;
+  background-color: rgba(255, 255, 255, 0.511);
+  backdrop-filter: blur(8px);
+}
+
+.logo-container {
+  display: flex;
+  width: 50px;
+  cursor: pointer;
+}
+
+.logo-container > img {
+  width: 100%;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  column-gap: 60px;
+  margin-right: 20px;
+  flex-wrap: wrap;
+}
+
+.nav-list a {
+  position: relative;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 42px;
+}
+
+.nav-list a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: #492118;
+  transition: width 0.3s ease-in-out;
+}
+
+.nav-list a:hover::after {
+  width: 100%;
+}
+
+.close-btn {
+  display: none;
+}
+
+.hamburger {
+  display: none;
+}
+
+main {
+  background-color: #f6f0eb;
+}
+
+.overlay {
+  display: none;
+}
+
+.img1-container {
+  display: flex;
+  margin-inline: auto;
+  padding-top: 250px;
+  max-width: 1290px;
+}
+
+.img1-container img {
+  width: 100%;
+  height: auto;
+  display: block; /* removes inline gaps */
+  object-fit: contain; /* makes sure aspect ratio is preserved */
+}
+
+.p1 {
+  text-align: center;
+  font-size: 24px;
+  line-height: 30px;
+  margin-top: 24px;
+  padding-bottom: 120px;
+}
+
+.p2 {
+  padding-top: 120px;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 42px;
+  text-align: center;
+}
+
+.img2-container {
+  display: flex;
+  max-width: 1042px;
+  margin-inline: auto;
+  margin-top: 86px;
+  margin-bottom: 148px;
+}
+
+.img2-container > img {
+  width: 100%;
+  height: auto;
+  display: block; /* removes inline gaps */
+  object-fit: contain; /* makes sure aspect ratio is preserved */
+}
+
+.anchor-container {
+  display: flex;
+  margin-inline: 200px;
+  justify-content: flex-end;
+  margin-top: -60px;
+}
+
+.top-anchor {
+  font-size: 32px;
+  line-height: 42px;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.top-anchor:hover {
+  text-decoration: underline;
+  position: relative;
+  transform: translateY(-8px);
+  transition: all 0.3s ease-in-out;
+}
+
+.credits {
+  text-align: center;
+  padding-bottom: 45px;
+  margin-top: 90px;
+}
+
+@media screen and (max-width: 800px) {
+  header {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1002;
+    background-color: #f6f0eb;
+    padding: 16px 18px;
+    backdrop-filter: blur(8px);
+  }
+
+  .logo-container {
+    width: 40px;
+    z-index: inherit;
+  }
+
+  .nav-list {
+    position: fixed;
+    top: 25px; /* instead of 25px */
+    right: 0;
+    flex-direction: column;
+    align-items: start;
+    background-color: #ffffffbf;
+    padding: 25px 20px;
+    z-index: 9;
+    visibility: visible;
+    transform: translateX(130%); /* hidden offscreen */
+    transition: transform 0.3s ease;
+  }
+
+  .nav-list.open {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  .nav-list a {
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+  .close-btn {
+    display: flex;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    z-index: 8;
+    max-width: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .close-btn > img {
+    width: 100%;
+  }
+
+  .hamburger {
+    display: flex;
+    width: 58px;
+    height: 58px;
+    align-items: center;
+    justify-content: center;
+    z-index: 1004; /* above header so visible/clickable */
+    cursor: pointer;
+    background: white;
+    border-radius: 0 0 0 100%;
+  }
+  .hamburger > img {
+    width: 20px;
+    margin: 0 0 0 10px;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f6f0eb84;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    display: none;
+  }
+
+  .overlay.active {
+    pointer-events: all;
+    display: block;
+    opacity: 1;
+  }
+
+  .img1-container {
+    margin-inline: 16px;
+    margin-top: 34px;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .img1-container img {
+    flex-shrink: 0;
+    width: 84px; /* or any fixed width that fits your design */
+    object-fit: cover;
+    display: block;
+  }
+
+  .p1 {
+    font-size: 14px;
+    padding-bottom: 0;
+  }
+
+  .p2 {
+    font-size: 24px;
+    margin-top: 58px;
+    padding-top: 0;
+  }
+
+  .img2-container {
+    max-width: 294px;
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+
+  .anchor-container {
+    margin-inline: 34px;
+    margin-top: 25px;
+  }
+
+  .top-anchor {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .credits {
+    font-size: 12px;
+    margin-top: 40px;
+  }
+}
