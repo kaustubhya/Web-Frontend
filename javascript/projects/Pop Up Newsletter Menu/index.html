@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pop Up Menu</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Heebo:100,200,300,regular,500,600,700,800,900"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Inika:regular,700"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="./script.js" defer></script>
+  </head>
+
+  <body>
+    <main>
+      <div class="main-container">
+        <div class="container-1">
+          <button>Get Newsletter</button>
+          <div class="pointer-img-container">
+            <img src="./images/pointer.svg" alt="pointer img" />
+          </div>
+        </div>
+
+        <div class="popup-overlay">
+          <div class="container-2">
+            <div class="close-icon-container">
+              <img src="./images/close.svg" alt="close-icon" />
+            </div>
+            <div class="inner-container-1">
+              <div class="img-container">
+                <img src="./images/img1.svg" alt="image-2" />
+              </div>
+              <div class="image-proxy"></div>
+
+              <div class="text-container">
+                <p>Don't miss out.</p>
+                <p>Sign up for our newsletter to stay</p>
+                <p>in the loop.</p>
+              </div>
+            </div>
+            <div class="inner-container-2">
+              <div class="email-div-container">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="EMAIL ADDRESS"
+                  required
+                />
+              </div>
+              <div class="subscribe-div-container">
+                <button class="subscribe" disabled>SUBSCRIBE</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="credits">Made with <span>❤️</span> by Kaustubhya Shukla</div>
+    </main>
+  </body>
+</html>

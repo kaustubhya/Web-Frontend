@@ -1,0 +1,240 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background-color: #4b4b4b;
+}
+
+main {
+  height: 100vh;
+  background-color: #afa187;
+}
+
+.main-container {
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.container-1 {
+  max-width: 486px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 80px 105px 80px 105px;
+  background-color: #fff;
+  border-radius: 30px;
+  position: relative;
+  border: 1px solid #afa187;
+  box-shadow: 0px 3px 0px 3px #00000040;
+}
+
+.container-1.inactive {
+  display: none;
+}
+
+.container-1 button {
+  padding: 12px 48px;
+  border-radius: 32px;
+  background-color: #ebbf53;
+  border: none;
+}
+
+.container-1 button:hover {
+  cursor: pointer;
+  background-color: #d4a637;
+  transition: all 0.3s ease-in-out;
+}
+
+.pointer-img-container {
+  position: absolute;
+  right: 82px;
+  bottom: 30px;
+  max-width: 40px;
+  display: flex;
+}
+
+.pointer-img-container img {
+  width: 100%;
+  height: auto;
+}
+
+/* overlay wrapper */
+.popup-overlay {
+  position: fixed;      /* always cover screen */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;        /* center child */
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+  pointer-events: none; /* can’t click when hidden */
+  /* transition: opacity 0.1s ease; */
+}
+
+/* show overlay */
+.popup-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+  background-color: #b5f70027;
+  position: fixed;
+  z-index: 3;
+}
+
+/* your original popup box */
+.container-2 {
+  position: relative;   /* keep this for children */
+  max-width: 690px;
+  border-radius: 42px;
+  padding: 56px 64px;
+  background-color: #fff;
+  z-index: 10;
+
+  transform: scale(0.5);
+  transition: transform 0.1s ease-out;
+
+}
+
+/* animate popup itself */
+.popup-overlay.active .container-2 {
+  transform: scale(1);
+  box-shadow: 0px 3px 0px 2px #00000040;
+}
+
+.close-icon-container {
+  position: absolute;
+  top: 22px;
+  right: 36px;
+  max-width: 14px;
+  display: flex;
+}
+
+.close-icon-container img {
+  width: 100%;
+  cursor: pointer;
+}
+
+.inner-container-1 {
+  display: flex;
+  flex-direction: row;
+}
+
+.img-container {
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  top: -34px;
+  left: 30px;
+}
+
+.img-container img {
+  width: 100%;
+}
+
+.image-proxy {
+    width: 250px;
+    height:120px;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.text-container p:first-child {
+  font-size: 40px;
+  font-weight: 400;
+  font-family: "Inika", serif;
+}
+
+.text-container p:nth-child(2) {
+  font-size: 18px;
+  font-weight: 400;
+  font-family: "Inika", serif;
+  margin-top: 10px;
+}
+
+.text-container p:last-child {
+  font-size: 18px;
+  font-weight: 400;
+  font-family: "Inika", serif;
+}
+
+.inner-container-2 {
+  display: flex;
+  margin-top: 50px;
+  overflow: hidden;
+}
+
+.email-div-container {
+  width: 70%;
+  border-radius: 42px 0px 0px 42px;
+}
+
+.email-div-container input {
+  width: 100%;
+  padding: 12px 40px;
+  border: 1px solid #afa187;
+  border-radius: 42px 0px 0px 42px;
+  outline: none;
+  overflow: hidden;
+  font-family: "Heebo", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.subscribe-div-container {
+  width: 30%;
+  border-radius: 0px 42px 42px 0px;
+}
+
+.subscribe-div-container button {
+  width: 100%;
+  padding: 12px 30px;
+  border: none;
+  background-color: #ebbf53;
+  color: #fff;
+  font-weight: 700;
+  font-family: "Inika", serif;
+  border-radius: 0px 42px 42px 0px;
+  font-family: "Heebo", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  overflow: hidden;
+}
+
+.subscribe-div-container button:hover {
+  cursor: pointer;
+  background-color: #d4a637;
+  transition: all 0.3s ease-in-out;
+}
+
+.subscribe-div-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.credits {
+  display: flex;
+  justify-content: center;
+  background-color: #afa187;
+  position: absolute;
+  bottom: 12px;
+  left: 42%;
+}
+
+.credits span {
+  position: relative;
+  bottom: 2px;
+}
