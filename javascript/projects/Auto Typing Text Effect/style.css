@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+}
+
+main {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: 52px;
+
+  color: rgb(60, 13, 13);
+}
+
+h3 {
+  font-size: 36px;
+  margin-top: 40px;
+  color: seagreen;
+}
+
+.one,
+.two {
+  color: brown;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap; /* better than pre, no collapsing, no wrapping */
+  min-width: 20ch; /* optional: reserve space for longest word ch-> characters, so min width is kept for accommodating 10 characters */
+}
+
+.one::after {
+  content: "";
+  width: 3px;
+  height: 50px;
+  background-color: brown;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.two::after {
+  content: "";
+  width: 3px;
+  height: 30px;
+  background-color: rgb(13, 0, 255);
+  display: inline-block;
+  margin-left: 5px;
+}
