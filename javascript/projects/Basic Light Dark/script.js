@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
       checkboxOne.checked = theme.boxOne;
       checkboxTwo.checked = theme.boxTwo;
       themeSwitch();
-      boxThemeSwitch();
     }
   } catch (e) {
     console.error("Error parsing JSON from localStorage:", e);
