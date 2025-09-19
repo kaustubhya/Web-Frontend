@@ -23,7 +23,6 @@ function themeSwitch() {
   if (checkboxOne.checked) {
     main.classList.add("dark");
     document.body.classList.add("dark");
-    container.classList.add("dark");
   } else {
     main.classList.remove("dark");
     container.classList.remove("dark");
