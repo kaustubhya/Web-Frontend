@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
       checkboxOne.checked = theme.boxOne;
       checkboxTwo.checked = theme.boxTwo;
       themeSwitch();
+      boxThemeSwitch();
     }
   } catch (e) {
     console.error("Error parsing JSON from localStorage:", e);
@@ -20,12 +21,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function themeSwitch() {
   if (checkboxOne.checked) {
-    checkboxTwo.checked = true;
     main.classList.add("dark");
     document.body.classList.add("dark");
     container.classList.add("dark");
   } else {
-    checkboxTwo.checked = false;
     main.classList.remove("dark");
     container.classList.remove("dark");
     document.body.classList.remove("dark");
