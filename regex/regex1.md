@@ -634,3 +634,53 @@ Explanation:
 - Negative lookahead `pattern1(?!pattern2)`
 - Positive lookbehind `(?<=pattern1)pattern2`
 - Negative lookbehind `(?<!pattern1)pattern2`
+
+```ssh
+20 people can do this work in 15 minutes.
+10 people can do this work in 30 min.
+20 people can do this work in 15 hours.
+10 people can do this work in 30 hrs.
+```
+
+### Positive Lookahead
+
+Keep looking ahead of the main pattern.
+
+Here we type: `\d+(?= (?:min|hours))` to select those numbers which have either min, minutes or hours after them, hrs is not considered here.
+
+so
+- `\d+` => Selects one or more numbers (main pattern)
+- `(?= (min|hours))` => Positive lookahead here which chooses our target
+- `?:` => As we choose our target, some groups are made so we do this i.e. add a non capturing group to remove the grouping.
+
+### Negative Lookahead
+
+`\d+(?! people)\b`
+
+- \d+ → matches the number.
+- (?! people) → asserts that the number is not followed by a space and the word people.
+- \b → word boundary (ensures we’re stopping at the end of the number).
+
+### Positive Lookbehind
+
+For this we will look at this example:
+
+```
+I am Kaustubhya, I am 23 years old. I have $20.
+$785
+547
+```
+
+We will select the number which has `$` before it. We will use a look behind for it.
+
+`(?<=\$)\d+`
+
+Here `\d+` is the main string, `(?<=\$)` is the positive lookbehind which will select the number which has `$` before it.
+
+### Negative Lookbehind
+
+We will select those numbers which are not having `$` before them.
+
+`\b(?<!\$)\d+`
+
+Here `\d+` is the main string, `\b` is the word boundary, `(?<!\$)` is the negative lookbehind which will select the number which does not have `$` before it.

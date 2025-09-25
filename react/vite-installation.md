@@ -5,6 +5,13 @@ node -v
 npm -v
 ```
 
+(if already made a black folder:
+
+1. `cd folder_path`
+2. `npm create vite@latest .`
+)
+
+
 2. Time to make our new directory
 
 ```bash
@@ -18,6 +25,7 @@ fill the details asked
 ```bash
 cd my-vite-app
 ```
+
 
 4. Install node modules
 
