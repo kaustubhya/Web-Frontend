@@ -1,12 +1,14 @@
 import Header from "./components/Header";
-import SearchBar from "./components/SearchBar";
-import './App.css'
+import { Outlet } from "react-router-dom";
+import './App.css';
 
 const App = () => {
-  return <>
-    <Header />
-    <SearchBar />
-  </>;
+  return (
+    <>
+      <Header />
+      <Outlet />
+    </>
+  );
 };
 
 export default App;
