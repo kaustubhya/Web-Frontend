@@ -1,0 +1,41 @@
+.shimmer-country-card {
+  height: 300px;
+}
+/* for all countries */
+
+.shimmer {
+  background: linear-gradient(90deg, #ccc 25%, #e0e0e0 50%, #ccc 75%);
+  background-size: 200% 100%;
+  animation: shimmerAnimation 1.5s infinite linear;
+}
+
+@keyframes shimmerAnimation {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* for country details */
+
+.country-flag {
+  height: 400px;
+  width: 600px;
+}
+
+.country-name {
+  height: 30px;
+  width: 200px;
+  margin: 20px 0 30px 0;
+}
+
+.other-details {
+  height: 10px;
+  width: 200px;
+  margin: 10px auto;
+
+}
+
+/* shimmer is common for all */

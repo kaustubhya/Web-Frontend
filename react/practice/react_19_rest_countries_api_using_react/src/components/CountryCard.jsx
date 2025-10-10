@@ -7,7 +7,9 @@ const CountryCard = ({ name, flag, population, region, capital }) => {
 
     
   return (
-    <Link className="country-card" to={`/countryDetails?name=${name}`}>
+    <Link className="country-card" to={`/${encodeURIComponent(name)}`}>
+    {/* changed this above link "to" portion */}
+    
       <div className="img-container">
         <img src={flag} alt="{country.name.common} flag" />
       </div>

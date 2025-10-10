@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouteError } from 'react-router-dom'
 
-const Pages = () => {
+const Error_Page = () => {
   const error = useRouteError();
   console.log(error);
   return (
@@ -11,4 +11,4 @@ const Pages = () => {
   )
 }
 
-export default Pages
+export default Error_Page;

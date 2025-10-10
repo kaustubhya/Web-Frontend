@@ -1638,4 +1638,432 @@ So with that all fields are filled, and we are done with this country details pa
 
 ---
 
-# []()
+# [Dynamic Routing in React | The Complete React Course | Ep.23](https://www.youtube.com/watch?v=jMbAk9btszU&list=PLfEr2kn3s-brb-vHE-c-QCUq-nFwDYtWu&index=24)
+
+Till now, a normal route of a specific country page looks like this: `http://localhost:5173/countryDetails?name=Chile`. Now what if we do it like this where say `http://localhost:5173/Chile` takes us to Chile country's page, `http://localhost:5173/India` takes us to India's page and so on.
+
+This is called `Dynamic Routing` and we will cover it in this episode.
+
+First we will play will dynamic routing a bit, then work on Country Details page.
+
+Now in main.jsx, let us play with Contact.jsx and contact route. If we add a `:` before the route, we will get a dynamic route.
+
+```jsx
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "./pages/Home.jsx";
+import Contact_Us from "./pages/Contact_Us.jsx";
+import Error_Pages from "./pages/Error_Pages.jsx";
+import Country_Details from "./components/Country_Details.jsx";
+
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <Error_Pages />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/:contact",
+        element: <Contact_Us />,
+      },
+      {
+        path: "/countryDetails",
+        element: <Country_Details />,
+      }
+    ],
+  },
+]);
+
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <RouterProvider router={router} />
+  </StrictMode>
+);
+
+```
+
+See in this section,
+
+```jsx
+{
+  path: "/:contact",
+  element: <Contact_Us />,
+},
+```
+
+we added a `:` before the route, now if we do `http://localhost:5173/`, we see all countries page but if we do `http://localhost:5173/(add any text here)`, all will lead us to Contact Us page.
+
+Now let us go to `Contact_Us.jsx`.
+
+Here, what to do if we want to extract this dynamic route???]
+
+For this we will use a new hook `useParams`.
+
+```jsx
+import React from 'react'
+import { useParams } from 'react-router-dom'
+
+const Contact_Us = () => {
+  const params = useParams();
+  console.log(params);
+  return (
+   <>
+    <h1>Contact Us</h1>
+   </>
+  )
+}
+
+export default Contact_Us
+
+```
+
+Go to console upon inspecting, we see something like this:
+
+```jsx
+contact : "ksd"
+```
+
+Here contact is the path (main route, see main.jsx) and ksd is the dynamic route.
+
+Now we can use this in CountryDetails.jsx
+
+
+So earlier we used URLSearch Params to extract the name of the country form the Link Tag, now we will use useParams for this.
+
+Follow these steps:
+
+1. Add a `:` before the path to country details, this will activate the dynamic routing. In main.jsx
+
+```jsx
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "./pages/Home.jsx";
+import Contact_Us from "./pages/Contact_Us.jsx";
+import Error_Pages from "./pages/Error_Pages.jsx";
+import Country_Details from "./components/Country_Details.jsx";
+
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <Error_Pages />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/contact",
+        element: <Contact_Us />,
+      },
+      {
+        path: "/:countryDetails",
+        element: <Country_Details />,
+      }
+    ],
+  },
+]);
+
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <RouterProvider router={router} />
+  </StrictMode>
+);
+
+```
+
+Note: As country details and contact us are in the same level, avoid using a `:` for both of them. It will confuse the react router. So remove the `:` from the `contact` route.
+
+2. Next we use `useParams` instead of URLSearchParams in Country Details.jsx.
+
+```jsx
+import React, { useEffect } from "react";
+import { useState } from "react";
+import '../CountryDetail.css';
+import { useParams } from "react-router-dom";
+
+const Country_Details = () => {
+  const params = useParams();
+  // console.log(params);
+  // we get an object from useParams, to extract the dynamic route
+  const countryName = params.countryDetails;
+  // see main.jsx or console tab to see the path called `countryDetails`
+  // console.log(countryName);
+
+  const [countryData, setCountryData] = useState({});
+
+  useEffect(() => {
+    fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Network error");
+        return res.json();
+      })
+      .then(([data]) => {
+        // console.log(data[0]); [data] is similar to data[0]
+        console.log(data);
+        setCountryData({
+          name: data.name.common,
+          nativeName: data.name?.nativeName ? Object.values(data.name.nativeName).map((language) => language.common).join(", ") : "N/A",
+          population: data.population.toLocaleString("en-IN"),
+          region: data.region,
+          subregion: data?.subregion ? data.subregion : "N/A",
+          capital: data.capital?.join(", ") || "N/A",
+          top_level_domain: data.tld?.join(", ") || "N/A",
+          currency: data?.currencies ? Object.values(data.currencies).map((lang) => lang.name).join(", ") : "N/A",
+          language: data?.languages ? Object.values(data.languages).map((lang) => lang).join(", ") : "N/A",
+          flag: data.flags.svg,
+        });
+      });
+  },[]);
+  return (
+    <main>
+      <div className="country-details-container">
+        <span className="back-button">
+          <i className="fa-solid fa-arrow-left"></i>&nbsp; Back
+        </span>
+        <div className="country-details">
+          <img src={countryData.flag} alt={`${countryData.name} flag`} />
+          {/* imp see alt */}
+          <div className="details-text-container">
+            <h1>{countryData.name}</h1>
+            <div className="details-text">
+              <p>
+                <b>Native Name: </b>
+                <span className="native-name">{countryData.nativeName}</span>
+              </p>
+              <p>
+                <b>Population: </b>
+                <span className="population">{countryData.population}</span>
+              </p>
+              <p>
+                <b>Region: </b>
+                <span className="region">{countryData.region}</span>
+              </p>
+              <p>
+                <b>Sub Region: </b>
+                <span className="sub-region">{countryData.subregion}</span>
+              </p>
+              <p>
+                <b>Capital: </b>
+                <span className="capital">{countryData.capital}</span>
+              </p>
+              <p>
+                <b>Top Level Domain: </b>
+                <span className="top-level-domain">{countryData.top_level_domain}</span>
+              </p>
+              <p>
+                <b>Currencies: </b>
+                <span className="currencies">{countryData.currency}</span>
+              </p>
+              <p>
+                <b>Languages: </b>
+                <span className="languages">{countryData.language}</span>
+              </p>
+            </div>
+            <div className="border-countries">
+              <b>Border Countries: </b>&nbsp;
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+};
+
+export default Country_Details;
+
+```
+
+3. Finally, we are sending a static link from our Link tag in country card and we expect a dynamic link in country details. We need to fix our link tag to make it a dynamic link. In Country Card.jsx
+
+```jsx
+import React from "react";
+import { Link } from "react-router-dom";
+
+const CountryCard = ({ name, flag, population, region, capital }) => {
+  const capitalText =
+    capital && capital.length > 0 ? capital.join(", ") : "N/A";
+
+    
+  return (
+    <Link className="country-card" to={`/${encodeURIComponent(name)}`}>
+    {/* changed this above link "to" portion */}
+    
+      <div className="img-container">
+        <img src={flag} alt="{country.name.common} flag" />
+      </div>
+      <div className="card-text">
+        <h3 className="card-title">{name}</h3>
+        <p>
+          <b>Population: </b>
+          {population.toLocaleString("en-IN")}
+        </p>
+        <p>
+          <b>Region: </b>
+          {region}
+        </p>
+        <p>
+          <b>Capital: </b>
+          {capitalText}
+        </p>
+      </div>
+    </Link>
+  );
+};
+
+export default CountryCard;
+
+```
+
+Final Task....
+
+What if we enter an invalid url, to handle that let us do this. If a user enters an invalid url then he will see the Error Page we just made.
+
+We made some changes to the component name, it was something else in the past, check the previous notes.
+
+So, basically, 
+
+1. we will use a .catch method in use effect to negate the error
+2. We will make a new useState where it will track if the country is found or not
+3. If the url is incorrect ie. country is not found, then we will return the 404 page by rendering it.
+
+
+```jsx
+import React, { useEffect } from "react";
+import { useState } from "react";
+import "../CountryDetail.css";
+import { useParams } from "react-router-dom";
+import Error_Page from "../pages/Error_Page";
+
+const Country_Details = () => {
+  const params = useParams();
+  // console.log(params);
+  // we get an object from useParams, to extract the dynamic route
+  const countryName = params.countryDetails;
+  // see main.jsx or console tab to see the path called `countryDetails`
+  // console.log(countryName);
+
+  const [countryData, setCountryData] = useState({});
+
+  // to handle invalid urls
+  const [notFound, setNotFound] = useState(false);
+
+  useEffect(() => {
+    fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
+      .then((res) => {
+        return res.json();
+      })
+      .then(([data]) => {
+        // console.log(data[0]); [data] is similar to data[0]
+        console.log(data);
+        setCountryData({
+          name: data.name.common,
+          nativeName: data.name?.nativeName
+            ? Object.values(data.name.nativeName)
+                .map((language) => language.common)
+                .join(", ")
+            : "N/A",
+          population: data.population.toLocaleString("en-IN"),
+          region: data.region,
+          subregion: data?.subregion ? data.subregion : "N/A",
+          capital: data.capital?.join(", ") || "N/A",
+          top_level_domain: data.tld?.join(", ") || "N/A",
+          currency: data?.currencies
+            ? Object.values(data.currencies)
+                .map((lang) => lang.name)
+                .join(", ")
+            : "N/A",
+          language: data?.languages
+            ? Object.values(data.languages)
+                .map((lang) => lang)
+                .join(", ")
+            : "N/A",
+          flag: data.flags.svg,
+        });
+      })
+      .catch((err) => {
+        // catch the errors of invalid urls
+        setNotFound(true);
+        console.log(err);
+      });
+  }, []);
+
+  if(notFound) {
+    return <Error_Page />
+    // show error page if country is not found
+  }
+  
+  return (
+    <main>
+      <div className="country-details-container">
+        <span className="back-button">
+          <i className="fa-solid fa-arrow-left"></i>&nbsp; Back
+        </span>
+        <div className="country-details">
+          <img src={countryData.flag} alt={`${countryData.name} flag`} />
+          {/* imp see alt */}
+          <div className="details-text-container">
+            <h1>{countryData.name}</h1>
+            <div className="details-text">
+              <p>
+                <b>Native Name: </b>
+                <span className="native-name">{countryData.nativeName}</span>
+              </p>
+              <p>
+                <b>Population: </b>
+                <span className="population">{countryData.population}</span>
+              </p>
+              <p>
+                <b>Region: </b>
+                <span className="region">{countryData.region}</span>
+              </p>
+              <p>
+                <b>Sub Region: </b>
+                <span className="sub-region">{countryData.subregion}</span>
+              </p>
+              <p>
+                <b>Capital: </b>
+                <span className="capital">{countryData.capital}</span>
+              </p>
+              <p>
+                <b>Top Level Domain: </b>
+                <span className="top-level-domain">
+                  {countryData.top_level_domain}
+                </span>
+              </p>
+              <p>
+                <b>Currencies: </b>
+                <span className="currencies">{countryData.currency}</span>
+              </p>
+              <p>
+                <b>Languages: </b>
+                <span className="languages">{countryData.language}</span>
+              </p>
+            </div>
+            <div className="border-countries">
+              <b>Border Countries: </b>&nbsp;
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+};
+
+export default Country_Details;
+
+```
+
+By doing this, now no need to call that error page in main.jsx now, we can hence remove it.
+
+All Done...
