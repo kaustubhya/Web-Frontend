@@ -1786,3 +1786,11 @@ const [isDark, setIsDark] = useTheme();
 ```
 
 remove the useContext and ThemeContext from Home.jsx, CountryDetails.jsx and Header.jsx
+
+---
+
+# [REST Countries API Project Completed | Frontend Mentor | The Complete React Course | Ep.30](https://www.youtube.com/watch?v=8N-FOwUAxEE&list=PLfEr2kn3s-brb-vHE-c-QCUq-nFwDYtWu&index=31)
+
+Made some updates to the shimmer effect on main page country cards + used grid layout to make some css adjustments in the cards.
+
+Look at the code to know better.
