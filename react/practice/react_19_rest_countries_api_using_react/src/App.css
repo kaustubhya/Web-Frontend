@@ -9,11 +9,16 @@ body {
   --elements-color: white;
   margin: 0;
   font-family: Nunito, sans-serif;
+}
+
+main,
+header {
   background-color: var(--background-color);
   color: var(--text-color);
 }
 
-body.dark {
+main.dark,
+header.dark {
   --background-color: hsl(207, 26%, 17%);
   --text-color: white;
   --elements-color: hsl(209, 23%, 22%);
@@ -21,6 +26,8 @@ body.dark {
 
 main {
   padding: 24px;
+  min-height: calc(100vh - 73px);   
+  /* to get proper fit dark mode. Do not give height, as dark mode will disappear when we scroll, give min-height  */
 }
 
 a {
@@ -32,6 +39,9 @@ a {
   box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.1);
   padding-inline: 24px;
   background-color: var(--elements-color);
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
 .header-content {
@@ -53,7 +63,8 @@ a {
 .countries-container {
   max-width: 1200px;
   margin-top: 16px;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 64px;
   flex-wrap: wrap;
   margin-inline: auto;
@@ -147,7 +158,12 @@ a {
   color: var(--text-color);
 }
 
+.border-countries-link {
+  background-color: var(--elements-color);
+}
+
 @media (max-width: 768px) {
+
   .countries-container {
     justify-content: center;
   }

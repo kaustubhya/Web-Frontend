@@ -9,7 +9,7 @@ const AllCountries = ({ query, region }) => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch(
-      "https://restcountries.com/v3.1/all?fields=name,population,region,capital,flags"
+      "https://restcountries.com/v3.1/all?fields=name,flags,population,region,subregion,capital,currencies,languages,borders,tld"
     )
       .then((res) => res.json())
       .then((data) => {
@@ -41,6 +41,7 @@ const AllCountries = ({ query, region }) => {
               population={country.population}
               region={country.region}
               capital={country.capital}
+              data={country}
             />
           ))}
       </div>

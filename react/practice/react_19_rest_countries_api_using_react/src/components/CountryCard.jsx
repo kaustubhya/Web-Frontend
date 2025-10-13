@@ -1,15 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CountryCard = ({ name, flag, population, region, capital }) => {
+const CountryCard = ({ name, flag, population, region, capital, data }) => {
+  console.log(data);
   const capitalText =
     capital && capital.length > 0 ? capital.join(", ") : "N/A";
 
-    
   return (
-    <Link className="country-card" to={`/${encodeURIComponent(name)}`}>
-    {/* changed this above link "to" portion */}
-    
+    <Link
+      className="country-card"
+      to={`/${encodeURIComponent(name)}`}
+      state={data}
+    >
+      {/* changed this above link "to" portion */}
+
       <div className="img-container">
         <img src={flag} alt="{country.name.common} flag" />
       </div>
