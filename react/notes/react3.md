@@ -1794,3 +1794,99 @@ remove the useContext and ThemeContext from Home.jsx, CountryDetails.jsx and Hea
 Made some updates to the shimmer effect on main page country cards + used grid layout to make some css adjustments in the cards.
 
 Look at the code to know better.
+
+---
+
+# [How to Deploy a React JS App? | Hindi | The Complete React Course | Ep.31](https://app.netlify.com/projects/rest-countries-react-ksd/overview)
+
+I have not followed this video. I have used chatgpt as I use Vite and not parcel.
+
+Now to deploy any react project make sure you have each project as a separate repo in github, I tried doing it via `C/Web Revision/react/practice/react_19_rest_countries_api_using_react`
+
+Now this is good for pushing code to github but will cause issues in Netlify during deploy as I have many other projects deployed to netlify from Web Frontend.
+
+So first, copy the `react_19_rest_countries_api_using_react`. Bring it out of Web Frontend and rename it to a new folder say `rest-countries-ksd`.
+
+## 1. Prepare your Project
+
+Make sure your project has:
+
+```bash
+react-projects/
+  └── rest-countries-ksd/
+       ├── src/
+       ├── public/
+       ├── package.json
+       ├── vite.config.js
+       └── index.html
+
+```       
+
+### Note:
+1. Avoid keeping it inside large repos like “Web Frontend”. 
+2. Each React app should ideally have its own repo to prevent submodule issues.
+
+## 2. Initialize Git and Create a Repo
+
+In your project folder:
+
+```bash
+cd C:/react-projects/rest-countries-ksd
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/kaustubhya/rest-countries-react-ksd
+git push -u origin main
+```
+
+Now your project is on GitHub.
+
+## 3. Create a Netlify Site
+
+1. Go to `https://app.netlify.com`
+
+2. Click “Add new site → Import an existing project”
+
+3. Choose GitHub, and select your repo
+
+4. Set build settings:
+
+|Setting |	Value |
+|---|---|
+| Build Command	| npm run build|
+|Publish Directory	| dist|
+
+Then click Deploy Site ✅
+
+## 4. Fix “Page Not Found” Error on Direct URLs
+
+React (or any SPA) routes like /country/India don’t exist as actual files —
+Netlify must redirect all unknown routes to index.html.
+
+Basically if we try to go to a country page via URL, we cannot do so here.
+
+To fix this, add a redirects rule.
+
+Create this file:
+
+`public/_redirects` (_redirects file inside the public folder)
+
+
+with content:
+
+`/* /index.html 200` (content inside this file)
+
+
+Now rebuild and push:
+
+```bash
+npm run build
+git add public/_redirects
+git commit -m "Add Netlify SPA redirect"
+git push origin main
+```
+
+Netlify will automatically redeploy and fix routing.
+
+If any issues come, check logs, use gpt to debug.
