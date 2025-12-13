@@ -20,10 +20,6 @@ main {
 
 }
 
-* {
-  box-sizing: border-box;
-}
-
 .expense-tracker {
   display: flex;
   gap: 32px;
@@ -32,6 +28,7 @@ main {
 .expense-form {
   width: 100%;
 }
+
 
 .expense-table {
   width: 100%;
@@ -91,7 +88,7 @@ main {
   font-size: 14px;
 }
 
-.input-container input {
+.input-container input, #category {
   height: 28px;
   font-family: inherit;
 }
