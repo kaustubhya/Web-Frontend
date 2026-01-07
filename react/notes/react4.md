@@ -113,9 +113,22 @@ So we make a new file called expenseData.js
 ```js
 export const expenseData = [
   {
+    id: crypto.randomUUID(),
     title: "Milk",
-    category: "grocery",
+    category: "Grocery",
     amount: 40,
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Shirt",
+    category: "Clothes",
+    amount: 600,
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Electricity Bill",
+    category: "Bills",
+    amount: 1100,
   },
 ];
 ```
@@ -128,6 +141,34 @@ now for multiple objects, we need to give it a unique id, for that we can do one
 All done in expenseData.js
 
 Now we need to use this data in expense table, so to do that, we will first bring it inside App.jsx and then from there we will send it to expenseTable.jsx
+
+```jsx
+import { useState } from "react";
+import "./App.css";
+import ContextMenu from "./components/ContextMenu";
+import ExpenseForm from "./components/ExpenseForm";
+import ExpenseTable from "./components/ExpenseTable";
+import { expenseData } from "../expenseData";
+
+function App() {
+  const [fetchData, setFetchData] = useState(expenseData);
+  // initially, we have some values from expense data, so you first show that in the table, we will add some more in the future
+  return (
+    <main>
+      <h1>Track Your Expense</h1>
+      <div className="expense-tracker">
+        <ExpenseForm setFetchData={setFetchData} />
+        <ExpenseTable fetchData={fetchData} /> 
+        {/* send this fetched in the table to display */}
+        <ContextMenu />
+      </div>
+    </main>
+  );
+}
+
+export default App;
+
+```
 
 We did it like this because we also want to link this data with the form wherein, when we make a new entry in form, it should be appended in expenseData and ExpenseTable. Hence we will use a useState in App.jsx
 
@@ -203,7 +244,27 @@ export default ExpenseTable;
 
 ```
 
-We will come back to this one, for now let us first focus on the form, where we will enter the form values and when we press on submit, then the data will be added to this table.
+Now here:
+
+```jsx
+{fetchData.map(({ id, title, category, amount }) => {
+  return (
+    <tr key={id}>
+      <td>{title}</td>
+      <td>{category}</td>
+      <td>₹{amount}</td>
+    </tr>
+  );
+})}
+```
+
+We could've used index instead of id for key to give each fetch data entry a unique identity, the problem with that is, suppose we want to delete from this array, then the id we created via indexing will also be deleted, and the ordering will be fucked up as some indexes will be missing. To prevent that, we use id from random UUID, this will be safe as it is not in order and our list will not be affected, even if we delete some data entries.
+
+---
+
+We will come back to this one, for now let us first focus on the form, where we will enter the form values and when we press on submit, then the data will be added to the expense table.
+
+ExpenseForm.jsx
 
 ```jsx
 import React from "react";
@@ -261,7 +322,62 @@ export default ExpenseForm;
 
 Ok, firstly:
 
-1. Replace the category input with a select element
-2. To enter and get the form values in react, we need a `name` attribute. VVIMP. Use it in all inputs.
-3. Then we made a function handleSubmit in form's onSubmit, there we will write our logic
-4. In handle submit, first we take care of page reload on form submit, 
+To get the values from the form input fields, we will first use this line
+`const myFormData = new FormData(.....);`
+
+This is a constructor which by itself will not give anything, but will give something when certain conditions are met
+
+1. We need to loop the values of formData
+2. Also use `name` attribute in input fields, these will act as identifiers and help in extracting data
+
+
+```jsx
+const getFormData = (form) => {
+    const myFormData = new FormData(form);
+    const data = {};
+    for (const [key, value] of myFormData.entries()) {
+      console.log(key, value);
+      data[key] = value;
+    }
+    return data;
+};
+```
+
+```jsx
+<input id="title" name="title" />
+<select id="category" name="category">
+<input id="amount" name="amount" />
+```
+
+So now when we are inputting values and pressing submit, instead of reloading and not saving, we are now getting this in logs:
+
+```
+title Roti
+category medicine
+amount 333
+```
+
+Also we de-structured it in the loop because we want to get the keys and values separately
+
+And after doing console log, we store it in `const data = {};`
+
+So all in all getFormData takes in form, which is basically, e.target ie. value in the input box, and returns the data ie. key:value
+
+We will see it now when we see how we implement handle submit and make the state change because of it. Also we need to mention id.
+
+```jsx
+const ExpenseForm = ({ setFetchData }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const expense = { ...getFormData(e.target), id: crypto.randomUUID() };
+    setFetchData((prevData) => [...prevData, expense]);
+    
+    e.target.reset();
+    // clean the fields after submitting
+  };
+}
+
+```
+
+We called this handle submit here:
+`<form className="expense-form" onSubmit={handleSubmit}>`

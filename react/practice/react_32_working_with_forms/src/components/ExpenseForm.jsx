@@ -6,6 +6,8 @@ const ExpenseForm = ({ setFetchData }) => {
     const expense = { ...getFormData(e.target), id: crypto.randomUUID() };
     setFetchData((prevData) => [...prevData, expense]);
     e.target.reset();
+    // clean the fields after submitting
+
   };
 
   const getFormData = (form) => {
