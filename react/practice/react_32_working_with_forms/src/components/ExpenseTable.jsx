@@ -1,6 +1,10 @@
 import React from "react";
 
 const ExpenseTable = ({ fetchData }) => {
+
+  // console.log(fetchData); // array of objects
+  const totalAmtSum = fetchData.reduce((acc, curr) => acc + Number(curr.amount), 0);
+
   return (
     <table className="expense-table">
       <thead>
@@ -54,7 +58,7 @@ const ExpenseTable = ({ fetchData }) => {
         <tr>
           <th>Total:</th>
           <th></th>
-          <th>8400</th>
+          <th>{totalAmtSum}</th>
         </tr>
       </tbody>
     </table>

@@ -381,3 +381,207 @@ const ExpenseForm = ({ setFetchData }) => {
 
 We called this handle submit here:
 `<form className="expense-form" onSubmit={handleSubmit}>`
+
+---
+
+# [Unidirectional Data Flow in React | Controlled Components | The Complete React Course | Ep.33](https://www.youtube.com/watch?v=4gHnFthACk8&list=PLfEr2kn3s-brb-vHE-c-QCUq-nFwDYtWu&index=34)
+
+In last lecture, we saw how we extracted data from the input fields using getFormData, now we will see another method.
+
+Now in JS, we can set the value of any input field using the `value` attribute and also we can modify it later, but in react, if we set the value using the `value` attribute and then later try to modify it, then react will not let us do so by default.
+
+#### To make the input value change wrt the `value` attribute in react, we need to update the state of the value attribute each time we do a keypress and keep in mind the previous state. This way of when we do a keypress, the state is getting updated at every keypress is called `one way data binding`
+
+In one way data binding, the UI screen is updated whenever the data is getting updated.
+
+But in two way data binding (as it is in Vue.js and Angular.js), when we type in screen, the value automatically gets updated. No need to update the data via state change.
+
+### This `one way data binding is only called uni-directional data flow`. In short, data will update UI, Not the other way around.
+
+```jsx
+import React from "react";
+import { useState } from "react";
+
+const ExpenseForm = ({ setFetchData }) => {
+  const [title, setTitle] = useState('');
+  const [category, setCategory] = useState('');
+  const [amount, setAmount] = useState('');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  return (
+    <form className="expense-form" onSubmit={handleSubmit}>
+      <div className="input-container">
+        <label htmlFor="title">Title</label>
+        {/* Fetching the data using value attribute */}
+        <input id="title" name="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+        {/* VVIMP, add the name attribute for getFormData to work in react */}
+      </div>
+      <div className="input-container">
+        <label htmlFor="category">Category</label>
+        <select id="category" name="category" value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option value="" hidden>
+            Select Category
+          </option>
+          <option value="grocery">Grocery</option>
+          <option value="clothes">Clothes</option>
+          <option value="bills">Bills</option>
+          <option value="education">Education</option>
+          <option value="medicine">Medicine</option>
+        </select>
+      </div>
+      <div className="input-container">
+        <label htmlFor="amount">Amount</label>
+        <input id="amount" name="amount" value={amount} onChange={(e) => setAmount(e.target.value)} />
+      </div>
+      <button className="add-btn">Add</button>
+    </form>
+  );
+};
+
+export default ExpenseForm;
+```
+
+Here in input fields, say amount input field:
+`<input id="amount" name="amount" value={amount} onChange={(e) => setAmount(e.target.value)} />`
+
+This `value={amount}` -> This amount is the amount from useState and not from any id, or name.
+
+Next, we made it updated to the table when we clicked on add button, handle submit function was at work here:
+
+```jsx
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const expense = {title, category, amount, id: crypto.randomUUID()};
+    console.log(expense);
+    setFetchData((prevData) => [...prevData, expense]);
+    // Clear the form after submission
+    setTitle('');
+    setCategory('');
+    setAmount('');
+
+  };
+```
+
+Final code of ExpenseForm.jsx
+
+```jsx
+import React from "react";
+import { useState } from "react";
+
+const ExpenseForm = ({ setFetchData }) => {
+  const [title, setTitle] = useState('');
+  const [category, setCategory] = useState('');
+  const [amount, setAmount] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const expense = {title, category, amount, id: crypto.randomUUID()};
+    console.log(expense);
+    setFetchData((prevData) => [...prevData, expense]);
+    // we return an array hence used an array here
+
+    // Clear the form after submission
+    setTitle('');
+    setCategory('');
+    setAmount('');
+
+  };
+
+  return (
+    <form className="expense-form" onSubmit={handleSubmit}>
+      <div className="input-container">
+        <label htmlFor="title">Title</label>
+        {/* Fetching the data using value attribute */}
+        <input id="title" name="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+        {/* VVIMP, add the name attribute for getFormData to work in react */}
+      </div>
+      <div className="input-container">
+        <label htmlFor="category">Category</label>
+        <select id="category" name="category" value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option value="" hidden>
+            Select Category
+          </option>
+          <option value="grocery">Grocery</option>
+          <option value="clothes">Clothes</option>
+          <option value="bills">Bills</option>
+          <option value="education">Education</option>
+          <option value="medicine">Medicine</option>
+        </select>
+      </div>
+      <div className="input-container">
+        <label htmlFor="amount">Amount</label>
+        <input id="amount" name="amount" value={amount} onChange={(e) => setAmount(e.target.value)} />
+      </div>
+      <button className="add-btn">Add</button>
+    </form>
+  );
+};
+
+export default ExpenseForm;
+
+```
+
+Now we notice, we made a useState for each input field, it is not optimal. To make it more optimal, we will use a single useState
+
+```jsx
+import React from "react";
+import { useState } from "react";
+
+const ExpenseForm = ({ setFetchData }) => {
+const [inputData, setInputData] = useState({title: "", category: "", amount: ""});
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(inputData);
+    setFetchData((prevState) => [...prevState, {...inputData, id: crypto.randomUUID()}]);
+
+    // clear the fields after we submit the form
+    setInputData({title: "", category: "", amount: ""});
+  };
+
+  return (
+    <form className="expense-form" onSubmit={handleSubmit}>
+      <div className="input-container">
+        <label htmlFor="title">Title</label>
+        {/* Fetching the data using value attribute */}
+        <input id="title" name="title" value={inputData.title} onChange={(e) => setInputData((prevState) => ({...prevState, title: e.target.value}))} />
+        {/* () for implicit return and {} inside the parenthesis because we are returning an object via useState updation */}
+        {/* VVIMP, add the name attribute for getFormData to work in react */}
+      </div>
+      <div className="input-container">
+        <label htmlFor="category">Category</label>
+        <select id="category" name="category" value={inputData.category} onChange={(e) => setInputData((prevState) => ({...prevState, category: e.target.value}))}>
+          <option value="" hidden>
+            Select Category
+          </option>
+          <option value="Grocery">Grocery</option>
+          <option value="Clothes">Clothes</option>
+          <option value="Bills">Bills</option>
+          <option value="Education">Education</option>
+          <option value="Medicine">Medicine</option>
+        </select>
+      </div>
+      <div className="input-container">
+        <label htmlFor="amount">Amount</label>
+        <input id="amount" name="amount" value={inputData.amount} onChange={(e) => setInputData((prevState) => ({...prevState, amount: e.target.value}))} />
+      </div>
+      <button className="add-btn">Add</button>
+    </form>
+  );
+};
+
+export default ExpenseForm;
+```
+
+Since we are using a single useState, for every state change, we need to consider the previous states also, hence we use prevState in every state change.
+
+This is how code works in industry for extracting form data from inputs. Not like the ones we looked before.
+
+`const totalAmtSum = fetchData.reduce((acc, curr) => acc + Number(curr.amount), 0);` => If you want to show the sum of all amounts in the Expense table, do this before return in ExpenseTable.jsx
+
+---
+
+# [useRef Hook Explained in Hindi | The Complete React Course | Ep.34](https://www.youtube.com/watch?v=PiHMQWiqUpU&list=PLfEr2kn3s-brb-vHE-c-QCUq-nFwDYtWu&index=35)
+
