@@ -1412,12 +1412,12 @@ const handleChange = (e) => {
   console.log(e.target);
   const { name, value } = e.target;
   setInputData((prevState) => ({ ...prevState, [name]: value }));
+  // [] means wildcard, it can be name, category or amount
   setErrors({});
 };
 ```
 
 Also once we have started typing, we made sure the error messages go away
-
 
 ```jsx
 const handleSubmit = (e) => {
@@ -1445,4 +1445,388 @@ Also in UI, we made some `p` tags to show messages as to which fields are missin
 
 ---
 
-# []()
+# [Create Custom Form Fields in React | Advanced Form Validation | The Complete React Course | Ep.36](https://www.youtube.com/watch?v=w2ebVv_Rp7M&list=PLfEr2kn3s-brb-vHE-c-QCUq-nFwDYtWu&index=37)
+
+In major projects, people usually make custom input fields as the normal input fields do not provide that much functionality, so we will also do it here.
+
+We will make this whole thing custom ie. label, input and error message.
+
+```jsx
+<div className="input-container">
+  <label htmlFor="title">Title</label>
+  {/* Fetching the data using value attribute */}
+  <input
+    id="title"
+    name="title"
+    value={inputData.title}
+    onChange={handleChange}
+  />
+  <p className="error">{errors.title}</p>
+</div>
+```
+
+First we will make components for input type text and input type select, so we can reuse them in future
+
+ExpenseForm
+```jsx
+import React from "react";
+import { useState } from "react";
+import Input from "./Input";
+import Select from "./Select";
+
+const ExpenseForm = ({ setFetchData }) => {
+  const [inputData, setInputData] = useState({
+    title: "",
+    category: "",
+    amount: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const validate = (formData) => {
+    const errorData = {};
+
+    if (!formData.title) {
+      errorData.title = "Title is required";
+    }
+
+    if (!formData.category) {
+      errorData.category = "Please Select a Category";
+    }
+
+    if (!formData.amount) {
+      errorData.amount = "Amount is required";
+    }
+
+    setErrors(errorData);
+
+    return errorData;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validateForm = validate(inputData);
+
+    if (Object.keys(validateForm).length) return
+    // if there is some data in validateForm, it means there are unfilled fields,
+    //  hence return and break the flow and do not allow to submit
+
+    setFetchData((prevState) => [
+      ...prevState,
+      { ...inputData, id: crypto.randomUUID() },
+    ]);
+    // clear the fields after we submit the form
+    setInputData({ title: "", category: "", amount: "" });
+  };
+
+
+  const handleChange = (e) => {
+    console.log(e.target);
+    const { name, value } = e.target;
+    setInputData((prevState) => ({ ...prevState, [name]: value }));
+    // [] means wildcard, it can be name, category or amount
+    setErrors({})
+  };
+
+  return (
+    <>
+      <form className="expense-form" onSubmit={handleSubmit}>
+        <Input 
+        className='input-container'
+        label='Title'
+        id='title'
+        name='title'
+        value={inputData.title}
+        onChange={handleChange}
+        error={errors.title}
+        />
+        <Select
+        id='category'
+        name='category'
+        value={inputData.category}
+        onChange={handleChange}
+        error={errors.category}
+        defaultValue='Select a Category'
+        label='Category'
+        optionArrays={['Bills', 'Clothes', 'Groceries', 'Education', 'Medicine']}
+
+        />
+        <Input
+        className='input-container'
+        label='Amount'
+        id='amount'
+        name='amount'
+        value={inputData.amount}
+        onChange={handleChange}
+        error={errors.amount}
+        />
+        <button className="add-btn">Add</button>
+      </form>
+    </>
+  );
+};
+
+export default ExpenseForm;
+```
+
+Input.jsx
+
+```jsx
+import React from "react";
+
+const Input = ({className, id, name, value, onChange, error, label}) => {
+  return (
+    <div className={className}>
+      <label htmlFor={id}>{label}</label>
+      {/* Fetching the data using value attribute */}
+      <input
+        id={id}
+        name={name}
+        value={value}
+        onChange={onChange}
+      />
+      <p className='error'>{error}</p>
+    </div>
+  );
+};
+
+export default Input;
+```
+
+Select.jsx
+
+```jsx
+import React from "react";
+
+const Select = ({
+  id,
+  name,
+  value,
+  onChange,
+  label,
+  defaultValue,
+  error,
+  optionArrays,
+}) => {
+  const allOptions = (options) => {
+    return options.map((el) => {
+      return (
+        <option key={el} value={el}>
+          {el}
+        </option>
+      );
+    });
+  };
+
+  //   use map instead of forEach as for each does not return anything whereas map returns an array
+  // also keep in mind how we are using return here
+
+  return (
+    <div className="input-container">
+      <label htmlFor="category">{label}</label>
+      <select id={id} name={name} value={value} onChange={onChange}>
+        {defaultValue && (
+          <option value="" hidden>
+            {defaultValue}
+          </option>
+        )}
+        {/* only show this default value option if it is given in Select form in ExpenseForm.jsx, else it will not show anything */}
+        {allOptions(optionArrays)}
+      </select>
+      <p className="error">{error}</p>
+    </div>
+  );
+};
+
+export default Select;
+```
+
+Now we will improve our validation logic. Earlier we could only implement one validation, say if field is empty, we cannot submit that data, but what if we have other cases like minlength. Also suppose we add an email field and that email validation needed to be checked. For this we will use an efficient method replacing the outdated method (commented out)
+
+For that we will use this:
+
+```jsx
+import React from "react";
+import { useState } from "react";
+import Input from "./Input";
+import Select from "./Select";
+
+const ExpenseForm = ({ setFetchData }) => {
+  const [inputData, setInputData] = useState({
+    title: "",
+    category: "",
+    amount: "",
+    email: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const validateConfig = {
+    title: [
+      {
+        required: true,
+        message: "Please enter a title",
+      },
+      {
+        minLength: 5,
+        message: "Title should be atleast 5 characters long",
+      },
+    ],
+    category: [
+      {
+        required: true,
+        message: "Please select a category",
+      },
+    ],
+    amount: [
+      {
+        required: true,
+        message: "Please enter an amount",
+      },
+    ],
+    email: [
+      {
+        required: true,
+        message: "Please enter an email",
+      },
+      {
+        pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+        message: "Please enter a valid email",
+      },
+    ],
+  };
+
+  const validate = (formData) => {
+    const errorData = {};
+
+    // since formData is an object, we have to loop through its keys, we can use Object.keys or Object.entries
+    // console.log(Object.entries(formData)) // this is an array of arrays
+    Object.entries(formData).forEach(([key, value]) => {
+      // console.log(key, value);
+      // console.log(validateConfig[key]);
+      validateConfig[key].some((errorRule) => {
+        console.log(errorRule);
+        if (errorRule.required && !value) {
+          // if required is true then display the message
+          errorData[key] = errorRule.message;
+          // with this we can overcome our multiple ifs as commented below
+          return true;
+        }
+
+        if (errorRule.minLength && value.length < 5) {
+          errorData[key] = errorRule.message;
+          return true;
+        }
+
+        if (errorRule.pattern && !errorRule.pattern.test(value)) {
+          errorData[key] = errorRule.message;
+          return true;
+        }
+      });
+    });
+
+    // We used some instead of forEach because if we use return true in some(), it breaks out of the loop, which is not possible in forEach
+
+    // if (!formData.title) {
+    //   errorData.title = "Title is required";
+    // }
+
+    // if (!formData.category) {
+    //   errorData.category = "Please Select a Category";
+    // }
+
+    // if (!formData.amount) {
+    //   errorData.amount = "Amount is required";
+    // }
+
+    setErrors(errorData);
+
+    return errorData;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validateForm = validate(inputData);
+
+    if (Object.keys(validateForm).length) return;
+    // if there is some data in validateForm, it means there are unfilled fields,
+    //  hence return and break the flow and do not allow to submit
+
+    setFetchData((prevState) => [
+      ...prevState,
+      { ...inputData, id: crypto.randomUUID() },
+    ]);
+    // clear the fields after we submit the form
+    setInputData({ title: "", category: "", amount: "" });
+  };
+
+  const handleChange = (e) => {
+    console.log(e.target);
+    const { name, value } = e.target;
+    setInputData((prevState) => ({ ...prevState, [name]: value }));
+    // [] means wildcard, it can be name, category or amount
+    setErrors({});
+  };
+
+  return (
+    <>
+      <form className="expense-form" onSubmit={handleSubmit}>
+        <Input
+          className="input-container"
+          label="Title"
+          id="title"
+          name="title"
+          value={inputData.title}
+          onChange={handleChange}
+          error={errors.title}
+        />
+        <Select
+          id="category"
+          name="category"
+          value={inputData.category}
+          onChange={handleChange}
+          error={errors.category}
+          defaultValue="Select a Category"
+          label="Category"
+          optionArrays={[
+            "Bills",
+            "Clothes",
+            "Groceries",
+            "Education",
+            "Medicine",
+          ]}
+        />
+        <Input
+          className="input-container"
+          label="Amount"
+          id="amount"
+          name="amount"
+          value={inputData.amount}
+          onChange={handleChange}
+          error={errors.amount}
+        />
+        <Input
+          className="input-container"
+          label="Email"
+          id="email"
+          name="email"
+          value={inputData.email}
+          onChange={handleChange}
+          error={errors.email}
+        />
+        <button className="add-btn">Add</button>
+      </form>
+    </>
+  );
+};
+
+export default ExpenseForm;
+
+```
+
+This is the best way to use validation which covers multiple error cases on a single input element. One more benefit of using custom input fields.
+
+---
+
+# [Filter Data Using Custom Hooks | The Complete React Course | Ep.37](https://www.youtube.com/watch?v=QaYWYJ9OuQE&list=PLfEr2kn3s-brb-vHE-c-QCUq-nFwDYtWu&index=38)
+
