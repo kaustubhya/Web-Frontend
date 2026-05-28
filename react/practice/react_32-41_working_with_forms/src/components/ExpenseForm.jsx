@@ -3,14 +3,13 @@ import { useState } from "react";
 import Input from "./Input";
 import Select from "./Select";
 
-const ExpenseForm = ({ setFetchData }) => {
-  const [inputData, setInputData] = useState({
-    title: "",
-    category: "",
-    amount: "",
-    email: "",
-  });
-
+const ExpenseForm = ({
+  setFetchData,
+  inputData,
+  setInputData,
+  editingRowId,
+  setEditingRowId,
+}) => {
   const [errors, setErrors] = useState({});
 
   const validateConfig = {
@@ -20,8 +19,8 @@ const ExpenseForm = ({ setFetchData }) => {
         message: "Please enter a title",
       },
       {
-        minLength: 5,
-        message: "Title should be atleast 5 characters long",
+        minLength: 2,
+        message: "Title should be atleast 2 characters long",
       },
     ],
     category: [
@@ -34,6 +33,10 @@ const ExpenseForm = ({ setFetchData }) => {
       {
         required: true,
         message: "Please enter an amount",
+      },
+      {
+        pattern: /^(0|[1-9]\d*)(\.\d+)?$/,
+        message: "Please Enter a Number",
       },
     ],
     email: [
@@ -57,6 +60,7 @@ const ExpenseForm = ({ setFetchData }) => {
       // console.log(key, value);
       // console.log(validateConfig[key]);
       validateConfig[key].some((errorRule) => {
+        // We used some instead of forEach because if we use return true in some(), it breaks out of the loop, which is not possible in forEach
         console.log(errorRule);
         if (errorRule.required && !value) {
           // if required is true then display the message
@@ -65,7 +69,7 @@ const ExpenseForm = ({ setFetchData }) => {
           return true;
         }
 
-        if (errorRule.minLength && value.length < 5) {
+        if (errorRule.minLength && value.length < errorRule.minLength) {
           errorData[key] = errorRule.message;
           return true;
         }
@@ -76,8 +80,6 @@ const ExpenseForm = ({ setFetchData }) => {
         }
       });
     });
-
-    // We used some instead of forEach because if we use return true in some(), it breaks out of the loop, which is not possible in forEach
 
     // if (!formData.title) {
     //   errorData.title = "Title is required";
@@ -104,12 +106,32 @@ const ExpenseForm = ({ setFetchData }) => {
     // if there is some data in validateForm, it means there are unfilled fields,
     //  hence return and break the flow and do not allow to submit
 
+    // editing form logic
+    if (editingRowId) {
+      setFetchData((prevState) =>
+        prevState.map((prevExpense) => {
+          if (prevExpense.id === editingRowId) {
+            return { ...inputData, id: editingRowId };
+            // in input data we have title, category and amount, we just need to add the id to it, which is same as editingRowId
+          }
+          return prevExpense;
+        }),
+      );
+      // clear the fields after we save the edit changes
+      setInputData({ title: "", category: "", amount: "", email: "" });
+
+      setEditingRowId("");
+      return;
+      // this return will allow us to edit and exit the function.
+      // Earlier it was doing edit and add, but after return, only edit will work
+    }
+
     setFetchData((prevState) => [
       ...prevState,
       { ...inputData, id: crypto.randomUUID() },
     ]);
     // clear the fields after we submit the form
-    setInputData({ title: "", category: "", amount: "" });
+    setInputData({ title: "", category: "", amount: "", email: "" });
   };
 
   const handleChange = (e) => {
@@ -166,7 +188,7 @@ const ExpenseForm = ({ setFetchData }) => {
           onChange={handleChange}
           error={errors.email}
         />
-        <button className="add-btn">Add</button>
+        <button className="add-btn">{editingRowId ? "Save" : "Add"}</button>
       </form>
     </>
   );

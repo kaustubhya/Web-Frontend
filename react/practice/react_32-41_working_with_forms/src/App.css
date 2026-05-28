@@ -1,12 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Nunito:wght@300;400;600;700;800;900&family=Russo+One&family=Spartan:wght@700;800;900&display=swap");
 
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 
 body {
   width: 100%;
@@ -17,7 +15,6 @@ body {
 main {
   max-width: 900px;
   margin: 30px auto 0;
-
 }
 
 .expense-tracker {
@@ -29,10 +26,12 @@ main {
   width: 100%;
 }
 
-
 .expense-table {
   width: 100%;
   border-collapse: collapse;
+
+  align-self: flex-start;
+  /* used to make the table smaller when only few values are there */
 }
 
 .expense-table select {
@@ -89,7 +88,8 @@ main {
   font-size: 14px;
 }
 
-.input-container input, #category {
+.input-container input,
+#category {
   height: 28px;
   font-family: inherit;
 }
@@ -106,7 +106,6 @@ main {
   background-color: white;
   border: 1px solid;
   position: absolute;
-  display: none;
   border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
@@ -128,6 +127,10 @@ main {
   font-size: 12px;
   color: red;
   margin: 0;
+}
+
+.clear-sort {
+  cursor: pointer;
 }
 
 @media (max-width: 900px) {

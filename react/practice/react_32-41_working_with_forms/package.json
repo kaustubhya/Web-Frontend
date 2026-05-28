@@ -1,12 +1,11 @@
 {
-  "name": "react_32_working_with_forms",
+  "name": "react_32-41_working_with_forms",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -23,9 +22,6 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.22",
     "globals": "^16.4.0",
-    "vite": "npm:rolldown-vite@7.1.14"
-  },
-  "overrides": {
     "vite": "npm:rolldown-vite@7.1.14"
   }
 }

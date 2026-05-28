@@ -1468,6 +1468,7 @@ We will make this whole thing custom ie. label, input and error message.
 First we will make components for input type text and input type select, so we can reuse them in future
 
 ExpenseForm
+
 ```jsx
 import React from "react";
 import { useState } from "react";
@@ -1507,7 +1508,7 @@ const ExpenseForm = ({ setFetchData }) => {
     e.preventDefault();
     const validateForm = validate(inputData);
 
-    if (Object.keys(validateForm).length) return
+    if (Object.keys(validateForm).length) return;
     // if there is some data in validateForm, it means there are unfilled fields,
     //  hence return and break the flow and do not allow to submit
 
@@ -1519,46 +1520,50 @@ const ExpenseForm = ({ setFetchData }) => {
     setInputData({ title: "", category: "", amount: "" });
   };
 
-
   const handleChange = (e) => {
     console.log(e.target);
     const { name, value } = e.target;
     setInputData((prevState) => ({ ...prevState, [name]: value }));
     // [] means wildcard, it can be name, category or amount
-    setErrors({})
+    setErrors({});
   };
 
   return (
     <>
       <form className="expense-form" onSubmit={handleSubmit}>
-        <Input 
-        className='input-container'
-        label='Title'
-        id='title'
-        name='title'
-        value={inputData.title}
-        onChange={handleChange}
-        error={errors.title}
+        <Input
+          className="input-container"
+          label="Title"
+          id="title"
+          name="title"
+          value={inputData.title}
+          onChange={handleChange}
+          error={errors.title}
         />
         <Select
-        id='category'
-        name='category'
-        value={inputData.category}
-        onChange={handleChange}
-        error={errors.category}
-        defaultValue='Select a Category'
-        label='Category'
-        optionArrays={['Bills', 'Clothes', 'Groceries', 'Education', 'Medicine']}
-
+          id="category"
+          name="category"
+          value={inputData.category}
+          onChange={handleChange}
+          error={errors.category}
+          defaultValue="Select a Category"
+          label="Category"
+          optionArrays={[
+            "Bills",
+            "Clothes",
+            "Groceries",
+            "Education",
+            "Medicine",
+          ]}
         />
         <Input
-        className='input-container'
-        label='Amount'
-        id='amount'
-        name='amount'
-        value={inputData.amount}
-        onChange={handleChange}
-        error={errors.amount}
+          className="input-container"
+          label="Amount"
+          id="amount"
+          name="amount"
+          value={inputData.amount}
+          onChange={handleChange}
+          error={errors.amount}
         />
         <button className="add-btn">Add</button>
       </form>
@@ -1574,18 +1579,13 @@ Input.jsx
 ```jsx
 import React from "react";
 
-const Input = ({className, id, name, value, onChange, error, label}) => {
+const Input = ({ className, id, name, value, onChange, error, label }) => {
   return (
     <div className={className}>
       <label htmlFor={id}>{label}</label>
       {/* Fetching the data using value attribute */}
-      <input
-        id={id}
-        name={name}
-        value={value}
-        onChange={onChange}
-      />
-      <p className='error'>{error}</p>
+      <input id={id} name={name} value={value} onChange={onChange} />
+      <p className="error">{error}</p>
     </div>
   );
 };
@@ -1821,7 +1821,6 @@ const ExpenseForm = ({ setFetchData }) => {
 };
 
 export default ExpenseForm;
-
 ```
 
 This is the best way to use validation which covers multiple error cases on a single input element. One more benefit of using custom input fields.
@@ -1829,4 +1828,924 @@ This is the best way to use validation which covers multiple error cases on a si
 ---
 
 # [Filter Data Using Custom Hooks | The Complete React Course | Ep.37](https://www.youtube.com/watch?v=QaYWYJ9OuQE&list=PLfEr2kn3s-brb-vHE-c-QCUq-nFwDYtWu&index=38)
+
+Before beginning, we add another validation in amount input where we check if the input is a number or not
+
+```jsx
+import React from "react";
+import { useState } from "react";
+import Input from "./Input";
+import Select from "./Select";
+
+const ExpenseForm = ({ setFetchData }) => {
+  const [inputData, setInputData] = useState({
+    title: "",
+    category: "",
+    amount: "",
+    email: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const validateConfig = {
+    title: [
+      {
+        required: true,
+        message: "Please enter a title",
+      },
+      {
+        minLength: 5,
+        message: "Title should be atleast 5 characters long",
+      },
+    ],
+    category: [
+      {
+        required: true,
+        message: "Please select a category",
+      },
+    ],
+    amount: [
+      {
+        required: true,
+        message: "Please enter an amount",
+      },
+      {
+        pattern: /^[0-9]+$/,
+        message: "Please Enter a Number",
+      },
+    ],
+    email: [
+      {
+        required: true,
+        message: "Please enter an email",
+      },
+      {
+        pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+        message: "Please enter a valid email",
+      },
+    ],
+  };
+
+  const validate = (formData) => {
+    const errorData = {};
+
+    // since formData is an object, we have to loop through its keys, we can use Object.keys or Object.entries
+    // console.log(Object.entries(formData)) // this is an array of arrays
+    Object.entries(formData).forEach(([key, value]) => {
+      // console.log(key, value);
+      // console.log(validateConfig[key]);
+      validateConfig[key].some((errorRule) => {
+        console.log(errorRule);
+        if (errorRule.required && !value) {
+          // if required is true then display the message
+          errorData[key] = errorRule.message;
+          // with this we can overcome our multiple ifs as commented below
+          return true;
+        }
+
+        if (errorRule.minLength && value.length < 5) {
+          errorData[key] = errorRule.message;
+          return true;
+        }
+
+        if (errorRule.pattern && !errorRule.pattern.test(value)) {
+          errorData[key] = errorRule.message;
+          return true;
+        }
+      });
+    });
+
+    // We used some instead of forEach because if we use return true in some(), it breaks out of the loop, which is not possible in forEach
+
+    // if (!formData.title) {
+    //   errorData.title = "Title is required";
+    // }
+
+    // if (!formData.category) {
+    //   errorData.category = "Please Select a Category";
+    // }
+
+    // if (!formData.amount) {
+    //   errorData.amount = "Amount is required";
+    // }
+
+    setErrors(errorData);
+
+    return errorData;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validateForm = validate(inputData);
+
+    if (Object.keys(validateForm).length) return;
+    // if there is some data in validateForm, it means there are unfilled fields,
+    //  hence return and break the flow and do not allow to submit
+
+    setFetchData((prevState) => [
+      ...prevState,
+      { ...inputData, id: crypto.randomUUID() },
+    ]);
+    // clear the fields after we submit the form
+    setInputData({ title: "", category: "", amount: "", email: "" });
+  };
+
+  const handleChange = (e) => {
+    console.log(e.target);
+    const { name, value } = e.target;
+    setInputData((prevState) => ({ ...prevState, [name]: value }));
+    // [] means wildcard, it can be name, category or amount
+    setErrors({});
+  };
+
+  return (
+    <>
+      <form className="expense-form" onSubmit={handleSubmit}>
+        <Input
+          className="input-container"
+          label="Title"
+          id="title"
+          name="title"
+          value={inputData.title}
+          onChange={handleChange}
+          error={errors.title}
+        />
+        <Select
+          id="category"
+          name="category"
+          value={inputData.category}
+          onChange={handleChange}
+          error={errors.category}
+          defaultValue="Select a Category"
+          label="Category"
+          optionArrays={[
+            "Bills",
+            "Clothes",
+            "Groceries",
+            "Education",
+            "Medicine",
+          ]}
+        />
+        <Input
+          className="input-container"
+          label="Amount"
+          id="amount"
+          name="amount"
+          value={inputData.amount}
+          onChange={handleChange}
+          error={errors.amount}
+        />
+        <Input
+          className="input-container"
+          label="Email"
+          id="email"
+          name="email"
+          value={inputData.email}
+          onChange={handleChange}
+          error={errors.email}
+        />
+        <button className="add-btn">Add</button>
+      </form>
+    </>
+  );
+};
+
+export default ExpenseForm;
+```
+
+---
+
+Now for filtering, we will first use the normal filter function that we are doing in javascript and then we will implement it via. a custom hook.
+
+1. Via filter function
+
+To make the table shrink when the options are less, we can add a align-self in table in App.css
+
+```css
+.expense-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  align-self: flex-start;
+  /* used to make the table smaller when only few values are there */
+```
+
+Next we make changes in ExpenseTable.jsx
+
+```jsx
+import React, { useState } from "react";
+
+const ExpenseTable = ({ fetchData }) => {
+  const [myCategory, setMyCategory] = useState("");
+
+  // filter the details
+  const myFilteredExpenses = fetchData.filter((expense) => {
+    // return true; // if we return true then we get an array of objects seeing all details
+    // return false;
+    // console.log(expense.category.toLowerCase()); // this will give us all the categories, since we have to deal with groceries and not Groceries, we need them in lowercase
+    // console.log(expense.category.toLowerCase().includes('grocery'));
+    // return expense.category.toLowerCase().includes('grocery'); // this will only give us that object which has category grocery, console.log prints everything, return gives selective data
+
+    // using state for dynamic category selection and filtering
+    return expense.category.toLowerCase().includes(myCategory);
+  });
+  console.log(myFilteredExpenses);
+
+  // console.log(fetchData); // array of objects
+  const totalAmtSum = myFilteredExpenses.reduce(
+    (acc, curr) => acc + Number(curr.amount),
+    0,
+  );
+
+  return (
+    <>
+      <table className="expense-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>
+              <select
+                onChange={(e) => setMyCategory(e.target.value.toLowerCase())}
+              >
+                <option value="">All</option>
+                <option value="grocery">Grocery</option>
+                <option value="clothes">Clothes</option>
+                <option value="bills">Bills</option>
+                <option value="education">Education</option>
+                <option value="medicine">Medicine</option>
+              </select>
+            </th>
+            <th className="amount-column">
+              <div>
+                <span>Amount</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="10"
+                  viewBox="0 0 384 512"
+                  className="arrow up-arrow"
+                >
+                  <title>Ascending</title>
+                  <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z" />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="10"
+                  viewBox="0 0 384 512"
+                  className="arrow down-arrow"
+                >
+                  <title>Descending</title>
+                  <path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
+                </svg>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {/* fetch wrt myCategory filter */}
+          {myFilteredExpenses.map(({ id, title, category, amount }) => {
+            return (
+              <tr key={id}>
+                <td>{title}</td>
+                <td>{category}</td>
+                <td>₹{amount}</td>
+              </tr>
+            );
+          })}
+          <tr>
+            <th>Total:</th>
+            <th></th>
+            <th>₹ {totalAmtSum}</th>
+          </tr>
+        </tbody>
+      </table>
+    </>
+  );
+};
+
+export default ExpenseTable;
+```
+
+Make a myCategory using useState and we will filter it based on onChange and map it via a myFilteredExpenses.
+
+In myFiltered expenses, it will check which state of category is active and based on that return the selective data which we will map and show it.
+
+Also we adjusted the amount calculation, it now calculates by taking into account which category is active.
+
+---
+
+Now we will, show the filtering of data via a custom hook. We do it because, in many apps, there will be filtering but for different data eg. filter based upon name, filter based upon title filter based upon amount etc., so better to make a reusabe component via a custom hook.
+
+Start by making a `hooks` directory
+
+There we make a file called `useFilter.js`, not jsx as no html is needed here
+
+```js
+import { useState } from "react";
+
+export function useFilter(dataList, callbackFn) {
+  // here we are using a datalist, it is an array of objects having all the data which we will filter
+  // callback function will be used when we want to be flexible, eg. filter by category (here), or filter by title or filter by amount
+
+  const [query, setQuery] = useState("");
+  // query is the selected on which we filter
+
+  const filteredData = dataList.filter((data) =>
+    callbackFn(data).toLowerCase().includes(query),
+  );
+
+  return [filteredData, setQuery];
+}
+```
+
+Here we use no jsx as no html is needed here, we are making a resuable function, not component
+
+```jsx
+import React, { useState } from "react";
+import { useFilter } from "../hooks/useFilter";
+
+const ExpenseTable = ({ fetchData }) => {
+  // destructure the array which is returned by useFilter
+  const [filteredData, setQuery] = useFilter(
+    fetchData,
+    (data) => data.category,
+  );
+  // (data) => data.category => this is when each data is going through datalist in filter function, select their category for filtering
+  // if we do data.title, it will filter wrt title, or if we do data.amount, filter will happen wrt amount
+
+  // console.log(fetchData); // array of objects
+  const totalAmtSum = filteredData.reduce(
+    (acc, curr) => acc + Number(curr.amount),
+    0,
+  );
+
+  return (
+    <>
+      <table className="expense-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>
+              <select onChange={(e) => setQuery(e.target.value.toLowerCase())}>
+                <option value="">All</option>
+                <option value="grocery">Grocery</option>
+                <option value="clothes">Clothes</option>
+                <option value="bills">Bills</option>
+                <option value="education">Education</option>
+                <option value="medicine">Medicine</option>
+              </select>
+            </th>
+            <th className="amount-column">
+              <div>
+                <span>Amount</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="10"
+                  viewBox="0 0 384 512"
+                  className="arrow up-arrow"
+                >
+                  <title>Ascending</title>
+                  <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z" />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="10"
+                  viewBox="0 0 384 512"
+                  className="arrow down-arrow"
+                >
+                  <title>Descending</title>
+                  <path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
+                </svg>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredData.map(({ id, title, category, amount }) => {
+            return (
+              <tr key={id}>
+                <td>{title}</td>
+                <td>{category}</td>
+                <td>₹{amount}</td>
+              </tr>
+            );
+          })}
+          <tr>
+            <th>Total:</th>
+            <th></th>
+            <th>₹ {totalAmtSum}</th>
+          </tr>
+        </tbody>
+      </table>
+    </>
+  );
+};
+
+export default ExpenseTable;
+```
+
+Integrated with Expense Table, this is how we implement filter functionality via a custom hook.
+
+---
+
+# [Create Custom Context Menu in React | The Complete React Course | Ep.38](https://www.youtube.com/watch?v=oBwE5XTry1k&list=PLfEr2kn3s-brb-vHE-c-QCUq-nFwDYtWu&index=39)
+
+A context menu is the menu which comes when we press right click, here we will make our own right click custom context menu and disable the browser's context menu.
+
+Let us insert a context menu here on the expense table with 2 options: Edit and Delete.
+
+First, we will make a component for our custom menu `ContextMenu.jsx`
+
+```jsx
+import React from "react";
+
+const ContextMenu = ({ menuPosition }) => {
+  return (
+    <div className="context-menu" style={menuPosition}>
+      <div>Edit</div>
+      <div>Delete</div>
+    </div>
+  );
+};
+
+export default ContextMenu;
+```
+
+In the props, we passed menu position as style, it will be used to get the top and left positions as to where we click, the menu will popup there
+
+For contextMenu, there is an event listener called `contextmenu` that we use.
+
+CSS related to context menu.
+
+```css
+.context-menu {
+  background-color: white;
+  border: 1px solid;
+  position: absolute;
+  display: none;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+.context-menu div {
+  padding: 2px 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.context-menu div:hover {
+  background-color: #ddd;
+}
+```
+
+---
+
+# [Edit Functionality in React | The Complete React Course | Ep.39](https://www.youtube.com/watch?v=heNvLg2B7mQ&list=PLfEr2kn3s-bqpPUbeTZP6iRXTxTLwNB7F&index=40)
+
+Now we have made our custom context menu in react, they give us edit and delete functionality.
+
+So now we have already worked on delete where in when we right click on a row, click on delete, that row gets deleted from the table.
+
+Now we will be working on the Edit feature
+
+Our goal is: when we will right click on a row, and press Edit, the entire data from the form should be populated in the Expense Form from where we are allowed to edit.
+
+Now for that to happen, we have to bring this state out from the child to the parent
+
+```jsx
+const [inputData, setInputData] = useState({
+  title: "",
+  category: "",
+  amount: "",
+  email: "",
+});
+```
+
+Currently this input is inside the expenseTable only, we need to bring it out of it, so that it is accessible in forms too.
+
+So if we find a way to set the Input data state when we click on Edit option, we will be able to fill the form fields with that value when we click on edit.
+
+So we lift the state of the above code block.
+
+So once we put it in App.jsx, we keep calling it in ExpenseTable.jsx, then ContextMenu.jsx
+
+There, in Edit button onClick, we do this for now
+
+```jsx
+setInputData({
+  title: "Hi",
+  category: "Bills",
+  amount: "200",
+  email: "saksham@gmail.com",
+});
+```
+
+Now whenever we click on edit, the entire form will be populated with this same value everytime
+
+But we do not want like this:
+
+So what we need now is the rowId, and the expenses too
+
+For rowId, it is there in ContextMenu, but for expenses, we need to import it in ContextMenu. So we will import fetchData from expense table into ContextMenu
+
+This will give us a list of all expenses, so we will use `find()` method here.
+
+This find method is used to find anything from an array.
+
+Part 2:
+
+Now that we are set by filling the form fields when the Edit button is pressed, we will now work on editing the form field, and then updating it to the table, also we will make sure the `Add` button turns to `Save` button when we are editing.
+
+Now we need to know when to keep the button in add mode or in save mode. For that we will maintain a state in the form which will tell us whether the button should be in editing mode or in adding mode.
+
+Plus when we click on the save button, we need to specify which row we are updating.
+
+So we will make it in App.js because via this, we can take it inside the form and in the context menu
+
+So after App.jsx, we will go to ExpenseForm.jsx, there we work with editingRowId.
+
+Now as for setEditingRowId, we will go to ExpenseTable.jsx, from there it will go to ContextMenu.jsx
+
+Now when you go to the ContextMenu.jsx, and then put the setEditingRowId there, we will be able to see the form submit button change from `Add` to `Edit` when we click on the Edit button in context menu.
+
+Now when we worked on ContextMenu.jsx, we are able to edit the current item in the form and then save it, but one problem. When we click on save, instead of getting replaced, it is appending as a new row and getting treated as a new entry.
+
+Also the `Save` button is also not getting converted back to `Add`
+
+To fix this we will go to the ExpenseForm section where we submit the form. We will make changes AFTER validation part because we need the validation to work for Edit functionality too!
+
+---
+
+# [Sorting in React | Ascending/Descending and Alphabetically | The Complete React Course | Ep.40](https://www.youtube.com/watch?v=Y2VX9aL9N8M&list=PLfEr2kn3s-brb-vHE-c-QCUq-nFwDYtWu&index=41)
+
+Normally if we have an array
+
+`[1, 3, 10, 2, 5]` and do `[1, 3, 10, 2, 5].sort()`, we will get `[1, 10, 2, 3, 5]`
+
+It will not sort wrt increasing order of numbers, rather it performs dictionary sorting.
+
+To make it sort in ascending order, we will do:
+
+```jsx
+[1, 3, 10, 2, 5].sort((a, b) => a - b)
+
+/*
+a is first number
+b is second number
+
+sort in a way that first number is smaller than second number ie. ascending
+/*
+```
+
+To make it sort in descending order:
+
+```jsx
+[1, 3, 10, 2, 5].sort((a, b) => b - a)
+
+/*
+a is first number
+b is second number
+
+sort in a way that second number is smaller than first number ie. descending
+/*
+```
+
+Now we will sort an Array of Objects
+
+```jsx
+export const expenseData = [
+  {
+    id: crypto.randomUUID(),
+    title: "Milk",
+    category: "Grocery",
+    amount: 40,
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Shirt",
+    category: "Clothes",
+    amount: 600,
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Electricity Bill",
+    category: "Bills",
+    amount: 1100,
+  },
+];
+```
+
+Now if just try to do the normal `b - a` or `a - b`, we will not get anywhere.
+
+It is because a and b are objects here
+
+So we will do something different here, i.e. going inside object to amount, and using that we will sort
+
+```jsx
+let expenseData = [
+  {
+    id: crypto.randomUUID(),
+    title: "Milk",
+    category: "Grocery",
+    amount: 40,
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Shirt",
+    category: "Clothes",
+    amount: 6000,
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Electricity Bill",
+    category: "Bills",
+    amount: 1100,
+  },
+];
+
+let ans = expenseData.sort((a, b) => a.amount - b.amount);
+
+console.log(ans);
+```
+
+```
+[
+  {
+    id: '4a633685-04db-4bd2-ba5c-4af9f9235ebc',
+    title: 'Milk',
+    category: 'Grocery',
+    amount: 40
+  },
+  {
+    id: 'ac8c0904-8b0d-467a-833b-fd9a33a2dd2d',
+    title: 'Electricity Bill',
+    category: 'Bills',
+    amount: 1100
+  },
+  {
+    id: '87ac05f5-8703-4677-8abc-01fa259c4986',
+    title: 'Shirt',
+    category: 'Clothes',
+    amount: 6000
+  }
+]
+```
+
+This was ascending
+
+For descending
+
+```jsx
+let ans = expenseData.sort((a, b) => b.amount - a.amount);
+
+console.log(ans);
+```
+
+### Sort function does not create a new array and sort, it modifies the original array.
+
+Now in our code, we will go to expenseTable.jsx, towards the sort icons, first ascending one
+
+```jsx
+onClick={() => setFetchData((prevState) =>
+  prevState.sort((a, b) => a.amount - b.amount)
+)}
+```
+
+This is what we have written.
+
+Now one thing to keep in mind is that, the array is updating itself in the backend regardless of the old value that is being set here. Because we know sort function does not create a new array, it modifies array. 
+
+Due to this, we are not able to see the sorting happen because the state does not change as the array is the same. It has just rearranged itself.
+
+To see the sorting happen, we need to make a new array so state can see changes and thus update it and we can see it in ui.
+
+Now but we have added also, an event listener on the table, `onClick={() => setMenuPosition({})}`, this is allowing us to click the table and see the setContext Menu position, so in reality this is being clicked but we are under the assumption that the sort button is being clicked.
+
+So in devtools, we can see clicked but the sort icon is not clicked, the table is clicked.
+
+```jsx
+onClick={() => setFetchData((prevState) => 
+  [...prevState.sort((a, b) => a.amount - b.amount)]
+)}
+```
+
+Now see we have made a new array and the sort functionality is working.
+
+So always a good practice:
+- copy the array
+- then sort the array
+
+Now, we can eliminate the unnecessary Context Menu calling by using an if with this setMenuPosition
+
+After this, we can write the logic for descending order too.
+
+---
+
+Now, we make a functionality for clear sort.
+
+But our current way of sorting logic would not fit here.
+
+So callback function way needs to be updated.
+
+For a new way, 
+
+1. 
+```jsx
+  const [sortCallback, setSortCallback] = useState(() => () => {});
+```
+
+It is important that we return a callback function, because, if we do not, we will get the return value of the function and not the function.
+
+`() => {}` => ✅
+
+`() => {}` ❌ this is only read the return value of the function, which is not useful in sorting
+
+```jsx
+setSortCallback(() => (a, b) => a.amount - b.amount)
+```
+
+This is the new way, which can now allow us to use clear sort
+
+---
+
+Finally we will see how to sort title alphabetically:
+
+```jsx
+setSortCallback(() => (a, b) => a.title.localeCompare(b.title))
+```
+
+```jsx
+setSortCallback(() => (a, b) => b.title.localeCompare(a.title))
+```
+
+This is how we sort in ascending and descending order alphabetically.
+
+---
+
+# [LocalStorage in React Using Custom Hook | The Complete React Course | Ep.41](https://www.youtube.com/watch?v=5uHikv1oBEI&list=PLfEr2kn3s-bqpPUbeTZP6iRXTxTLwNB7F&index=42)
+
+Normally we have used localstorage before, but we will use it here with a hook, custom hook.
+
+So our local storage hook will be such that it will be connected to the state automatically.
+
+So make a file called useLocalStorage.js inside the hooks folder.
+
+Here is the code:
+
+```jsx
+import React, { useState, useEffect } from "react";
+
+export function useLocalStorage(key, initialData) {
+  const [data, setData] = useState(initialData);
+
+  useEffect(() => {
+    const existingData = JSON.parse(localStorage.getItem(key));
+    // if there is some existing data in local storage, then we will use that, otherwise we will use the initial data
+    if (existingData) {
+      setData(existingData);
+      // there was already some data in local storage, so we will set that data to our state
+    } else {
+      localStorage.setItem(key, JSON.stringify(initialData));
+      // there was no data in local storage, so we will set the initial data to local storage
+    }
+  }, []);
+  // we used useEffect here because we want to run this code only once when the component mounts, we don't want to run this code every time the component re-renders, so we used an empty dependency array here
+  // using it without useEffect will cause an infinite loop because we are setting the state inside the component, which will cause the component to re-render, and then it will set the state again, and this will go on indefinitely, so we need to use useEffect here to avoid that infinite loop
+
+  // now we need to update the local storage whenever there is a change in data, so we will create a function for that
+
+  const updateLocalStorage = (newData) => {
+    // set the localStorage with new data
+    localStorage.setItem(key, JSON.stringify(newData));
+
+    // also update the state with new data
+    setData(newData);
+  };
+
+  return [data, updateLocalStorage];
+}
+
+```
+
+Now this code is for when we did:
+
+```jsx
+<h1 onClick={() => {
+        setLocalStorageData([4, 5, 6])
+      }}>Track Your Expense</h1>
+```
+
+But if we do:
+
+```jsx
+<h1 onClick={() => {
+  setLocalStorageData((prevState) => [...prevState, 4, 5, 6])
+  }}>Track Your Expense
+</h1>
+```
+
+Here we have used a prev State and passed a call back function.
+
+So we need to make some modifications if the callback data is a function in useLocalStorage.js
+
+Updated code:
+
+```jsx
+import React, { useState, useEffect } from "react";
+
+export function useLocalStorage(key, initialData) {
+  const [data, setData] = useState(initialData);
+
+  useEffect(() => {
+    const existingData = JSON.parse(localStorage.getItem(key));
+    // if there is some existing data in local storage, then we will use that, otherwise we will use the initial data
+    if (existingData) {
+      setData(existingData);
+      // there was already some data in local storage, so we will set that data to our state
+    } else {
+      localStorage.setItem(key, JSON.stringify(initialData));
+      // there was no data in local storage, so we will set the initial data to local storage
+    }
+  }, []);
+  // we used useEffect here because we want to run this code only once when the component mounts, we don't want to run this code every time the component re-renders, so we used an empty dependency array here
+  // using it without useEffect will cause an infinite loop because we are setting the state inside the component, which will cause the component to re-render, and then it will set the state again, and this will go on indefinitely, so we need to use useEffect here to avoid that infinite loop
+
+  // now we need to update the local storage whenever there is a change in data, so we will create a function for that
+
+  const updateLocalStorage = (newData) => {
+    if (typeof newData === "function") {
+      localStorage.setItem(key, JSON.stringify(newData(data)));
+    } else {
+      // set the localStorage with new data
+      localStorage.setItem(key, JSON.stringify(newData));
+    }
+
+    // also update the state with new data
+    setData(newData);
+  };
+
+  return [data, updateLocalStorage];
+}
+
+```
+
+Practice app.jsx for local Storage code
+
+```jsx
+import { useState } from "react";
+import "./App.css";
+import ContextMenu from "./components/ContextMenu";
+import ExpenseForm from "./components/ExpenseForm";
+import ExpenseTable from "./components/ExpenseTable";
+import { expenseData } from "../expenseData";
+import { useLocalStorage } from "./hooks/useLocalStorage";
+
+function App() {
+  const [fetchData, setFetchData] = useState(expenseData);
+  // initially, we have some values from expense data,
+  // so you first show that in the table, we will add some more in the future
+
+  const [editingRowId, setEditingRowId] = useState("");
+
+  const [inputData, setInputData] = useState({
+    title: "",
+    category: "",
+    amount: "",
+    email: "",
+  });
+
+  const [localStorageData, setLocalStorageData] = useLocalStorage('key', [1, 2, 3]);
+  console.log(localStorageData);
+
+  return (
+    <main>
+      <h1 onClick={() => {
+        setLocalStorageData((prevState) => [...prevState, 4, 5, 6])
+      }}>Track Your Expense</h1>
+      <div className="expense-tracker">
+        <ExpenseForm
+          setFetchData={setFetchData}
+          inputData={inputData}
+          setInputData={setInputData}
+          editingRowId={editingRowId}
+          setEditingRowId={setEditingRowId}
+        />
+        {/* send this fetched in the table to display*/}
+        <ExpenseTable
+          fetchData={fetchData}
+          setFetchData={setFetchData}
+          setInputData={setInputData}
+          setEditingRowId={setEditingRowId}
+        />
+        {/* the setFetchedData inside the table will take care of deletion */}
+      </div>
+    </main>
+  );
+}
+
+export default App;
+
+```
+
+Now we can use useLocalStorage inplace of useState in many places.
 
