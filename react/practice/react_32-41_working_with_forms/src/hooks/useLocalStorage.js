@@ -20,16 +20,14 @@ export function useLocalStorage(key, initialData) {
   // now we need to update the local storage whenever there is a change in data, so we will create a function for that
 
   const updateLocalStorage = (newData) => {
-    if (typeof newData === "function") {
-      localStorage.setItem(key, JSON.stringify(newData(data)));
-    } else {
-      // set the localStorage with new data
-      localStorage.setItem(key, JSON.stringify(newData));
-    }
+  const value =
+    typeof newData === "function" ? newData(data) : newData;
+      // set the localStorage with new data, if is is a function, then we will call that function with the current data to get the new data, otherwise we will use the new data directly
 
-    // also update the state with new data
-    setData(newData);
-  };
 
+  localStorage.setItem(key, JSON.stringify(value));
+  setData(value);
+  // update the state with the value
+};
   return [data, updateLocalStorage];
 }

@@ -25,10 +25,11 @@ const ExpenseTable = ({
   }
 
   // custom hook
-  const [filteredData, setQuery] = useFilter(
+  const [filteredData, query, setQuery] = useFilter(
     fetchData,
     (data) => data.category,
   );
+  // query is needed to update the table header value
   const totalAmtSum = filteredData.reduce(
     (acc, curr) => acc + Number(curr.amount),
     0,
@@ -89,7 +90,8 @@ const ExpenseTable = ({
               </div>
             </th>
             <th>
-              <select onChange={(e) => setQuery(e.target.value.toLowerCase())}>
+              <select value={query} onChange={(e) => setQuery(e.target.value.toLowerCase())}> 
+              {/* here we update the query state */}
                 <option value="">All</option>
                 <option value="grocery">Grocery</option>
                 <option value="clothes">Clothes</option>
